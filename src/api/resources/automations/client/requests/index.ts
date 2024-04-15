@@ -1,0 +1,1 @@
+export { AutomationsGetPublicationsPublicationIdAutomationsRequest } from "./AutomationsGetPublicationsPublicationIdAutomationsRequest";

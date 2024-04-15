@@ -3,11 +3,11 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { AutomationStatus } from "./AutomationStatus";
 
-export const Automation: core.serialization.ObjectSchema<serializers.Automation.Raw, beehiiv.Automation> =
+export const Automation: core.serialization.ObjectSchema<serializers.Automation.Raw, Beehiiv.Automation> =
     core.serialization.object({
         id: core.serialization.string(),
         status: AutomationStatus,

@@ -4,14 +4,14 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as beehiiv from "../../..";
+import * as Beehiiv from "../../..";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
 
 export declare namespace AutomationJourneys {
     interface Options {
-        environment?: core.Supplier<environments.beehiivEnvironment | string>;
+        environment?: core.Supplier<environments.BeehiivEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         fetcher?: core.FetchFunction;
     }
@@ -26,91 +26,52 @@ export class AutomationJourneys {
     constructor(protected readonly _options: AutomationJourneys.Options) {}
 
     /**
-     * Retrieve all automation journeys associated with an automation that belongs to a specific publication
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomationIdJourneys("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", {
-     *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000",
-     *         email: "clark@dailyplanet.com"
-     *     })
-     *
-     * @example
-     *     await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomationIdJourneys("string", "string", {
-     *         status: beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysRequestStatus.InProgress,
-     *         limit: 1,
-     *         page: 1,
-     *         subscriptionId: "string",
-     *         email: "string"
-     *     })
+     *     await beehiiv.automationJourneys.get("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", "aj_00000000-0000-0000-0000-000000000000")
      */
-    public async getPublicationsPublicationIdAutomationsAutomationIdJourneys(
+    public async get(
         publicationId: string,
         automationId: string,
-        request: beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysRequest = {},
+        automationJourneyId: string,
         requestOptions?: AutomationJourneys.RequestOptions
-    ): Promise<beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysResponse> {
-        const { status, limit, page, subscriptionId, email } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (status != null) {
-            _queryParams["status"] = status;
-        }
-
-        if (limit != null) {
-            _queryParams["limit"] = limit.toString();
-        }
-
-        if (page != null) {
-            _queryParams["page"] = page.toString();
-        }
-
-        if (subscriptionId != null) {
-            _queryParams["subscription_id"] = subscriptionId;
-        }
-
-        if (email != null) {
-            _queryParams["email"] = email;
-        }
-
+    ): Promise<Beehiiv.AutomationJourneysGetResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
-                `publications/${publicationId}/automations/${automationId}/journeys`
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
+                `publications/${publicationId}/automations/${automationId}/journeys/${automationJourneyId}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
+                "X-Fern-SDK-Version": "0.1.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
+            return await serializers.AutomationJourneysGetResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new beehiiv.BadRequestError(
+                    throw new Beehiiv.BadRequestError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -120,7 +81,7 @@ export class AutomationJourneys {
                         })
                     );
                 case 404:
-                    throw new beehiiv.NotFoundError(
+                    throw new Beehiiv.NotFoundError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -130,7 +91,7 @@ export class AutomationJourneys {
                         })
                     );
                 case 429:
-                    throw new beehiiv.TooManyRequestsError(
+                    throw new Beehiiv.TooManyRequestsError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -140,7 +101,7 @@ export class AutomationJourneys {
                         })
                     );
                 case 500:
-                    throw new beehiiv.InternalServerError(
+                    throw new Beehiiv.InternalServerError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -150,7 +111,7 @@ export class AutomationJourneys {
                         })
                     );
                 default:
-                    throw new errors.beehiivError({
+                    throw new errors.BeehiivError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
@@ -159,14 +120,14 @@ export class AutomationJourneys {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.beehiivTimeoutError();
+                throw new errors.BeehiivTimeoutError();
             case "unknown":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     message: _response.error.errorMessage,
                 });
         }
@@ -179,32 +140,26 @@ export class AutomationJourneys {
      * If an existing subscriber is found, they will be enrolled immediately.
      *
      * Looking to enroll new subscribers? Use the **[Subscriptions Create](https://beehiiv.stoplight.io/docs/v2/1a77a563675ee-create)** endpoint instead and specify the `automation_ids` param.
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomationIdJourneys("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", {
-     *         email: "example@example.com",
-     *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
-     *     })
-     *
-     * @example
-     *     await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomationIdJourneys("string", "string", {
+     *     await beehiiv.automationJourneys.create("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", {
      *         email: "example@example.com",
      *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
      *     })
      */
-    public async postPublicationsPublicationIdAutomationsAutomationIdJourneys(
+    public async create(
         publicationId: string,
         automationId: string,
-        request: beehiiv.AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysRequest = {},
+        request: Beehiiv.AutomationJourneysCreateRequest = {},
         requestOptions?: AutomationJourneys.RequestOptions
-    ): Promise<beehiiv.AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysResponse> {
+    ): Promise<Beehiiv.AutomationJourneysCreateResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
                 `publications/${publicationId}/automations/${automationId}/journeys`
             ),
             method: "POST",
@@ -212,35 +167,31 @@ export class AutomationJourneys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
+                "X-Fern-SDK-Version": "0.1.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysRequest.jsonOrThrow(
-                request,
-                { unrecognizedObjectKeys: "strip" }
-            ),
+            body: await serializers.AutomationJourneysCreateRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
+            return await serializers.AutomationJourneysCreateResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new beehiiv.BadRequestError(
+                    throw new Beehiiv.BadRequestError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -250,7 +201,7 @@ export class AutomationJourneys {
                         })
                     );
                 case 404:
-                    throw new beehiiv.NotFoundError(
+                    throw new Beehiiv.NotFoundError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -260,7 +211,7 @@ export class AutomationJourneys {
                         })
                     );
                 case 429:
-                    throw new beehiiv.TooManyRequestsError(
+                    throw new Beehiiv.TooManyRequestsError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -270,7 +221,7 @@ export class AutomationJourneys {
                         })
                     );
                 case 500:
-                    throw new beehiiv.InternalServerError(
+                    throw new Beehiiv.InternalServerError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -280,7 +231,7 @@ export class AutomationJourneys {
                         })
                     );
                 default:
-                    throw new errors.beehiivError({
+                    throw new errors.BeehiivError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
@@ -289,128 +240,14 @@ export class AutomationJourneys {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.beehiivTimeoutError();
+                throw new errors.BeehiivTimeoutError();
             case "unknown":
-                throw new errors.beehiivError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
-     *
-     * @example
-     *     await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyId("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", "aj_00000000-0000-0000-0000-000000000000")
-     *
-     * @example
-     *     await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyId("string", "string", "string")
-     */
-    public async getPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyId(
-        publicationId: string,
-        automationId: string,
-        automationJourneyId: string,
-        requestOptions?: AutomationJourneys.RequestOptions
-    ): Promise<beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyIdResponse> {
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
-                `publications/${publicationId}/automations/${automationId}/journeys/${automationJourneyId}`
-            ),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-            },
-            contentType: "application/json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-        });
-        if (_response.ok) {
-            return await serializers.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyIdResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 404:
-                    throw new beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 429:
-                    throw new beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 500:
-                    throw new beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.beehiivError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.beehiivError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.beehiivTimeoutError();
-            case "unknown":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     message: _response.error.errorMessage,
                 });
         }

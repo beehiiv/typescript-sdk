@@ -1,6 +1,8 @@
+
 ## Publications
 
-<details><summary> <code>beehiiv.publications.<a href="./src/api/resources/publications/client/Client.ts">getPublications</a>({ ...params }) -> beehiiv.PublicationsGetPublicationsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.publications.<a href="./src/api/resources/publications/client/Client.ts">list</a>({ ...params }) -> Beehiiv.PublicationsListResponse</code> </summary>
 
 <dl>
 
@@ -37,7 +39,7 @@ Retrieve all publications associated with your API key.
 <dd>
 
 ```ts
-await beehiiv.publications.getPublications();
+await beehiiv.publications.list();
 ```
 
 </dd>
@@ -58,7 +60,9 @@ await beehiiv.publications.getPublications();
 
 <dd>
 
-**request: `beehiiv.PublicationsGetPublicationsRequest`**
+
+**request: `Beehiiv.PublicationsListRequest`** 
+
 
 </dd>
 
@@ -68,7 +72,9 @@ await beehiiv.publications.getPublications();
 
 <dd>
 
-**requestOptions: `Publications.RequestOptions`**
+
+**requestOptions: `Publications.RequestOptions`** 
+
 
 </dd>
 
@@ -77,13 +83,16 @@ await beehiiv.publications.getPublications();
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.publications.<a href="./src/api/resources/publications/client/Client.ts">getPublicationsPublicationId</a>(publicationId, { ...params }) -> beehiiv.PublicationsGetPublicationsPublicationIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.publications.<a href="./src/api/resources/publications/client/Client.ts">get</a>(publicationId, { ...params }) -> Beehiiv.PublicationsGetResponse</code> </summary>
 
 <dl>
 
@@ -120,7 +129,7 @@ Retrieve a single publication
 <dd>
 
 ```ts
-await beehiiv.publications.getPublicationsPublicationId("pub_00000000-0000-0000-0000-000000000000");
+await beehiiv.publications.get("pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -141,17 +150,9 @@ await beehiiv.publications.getPublicationsPublicationId("pub_00000000-0000-0000-
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.PublicationsGetPublicationsPublicationIdRequest`**
 
 </dd>
 
@@ -161,7 +162,21 @@ await beehiiv.publications.getPublicationsPublicationId("pub_00000000-0000-0000-
 
 <dd>
 
-**requestOptions: `Publications.RequestOptions`**
+
+**request: `Beehiiv.PublicationsGetRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Publications.RequestOptions`** 
+
 
 </dd>
 
@@ -170,15 +185,21 @@ await beehiiv.publications.getPublicationsPublicationId("pub_00000000-0000-0000-
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+
+
 ## Posts
 
-<details><summary> <code>beehiiv.posts.<a href="./src/api/resources/posts/client/Client.ts">getPosts</a>(publicationId, { ...params }) -> beehiiv.PostsGetPostsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.posts.<a href="./src/api/resources/posts/client/Client.ts">list</a>(publicationId, { ...params }) -> Beehiiv.PostsListResponse</code> </summary>
 
 <dl>
 
@@ -215,7 +236,7 @@ Retrieve all posts belonging to a specific publication
 <dd>
 
 ```ts
-await beehiiv.posts.getPosts("pub_00000000-0000-0000-0000-000000000000");
+await beehiiv.posts.list("pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -236,17 +257,9 @@ await beehiiv.posts.getPosts("pub_00000000-0000-0000-0000-000000000000");
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.PostsGetPostsRequest`**
 
 </dd>
 
@@ -256,7 +269,21 @@ await beehiiv.posts.getPosts("pub_00000000-0000-0000-0000-000000000000");
 
 <dd>
 
-**requestOptions: `Posts.RequestOptions`**
+
+**request: `Beehiiv.PostsListRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Posts.RequestOptions`** 
+
 
 </dd>
 
@@ -265,13 +292,16 @@ await beehiiv.posts.getPosts("pub_00000000-0000-0000-0000-000000000000");
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.posts.<a href="./src/api/resources/posts/client/Client.ts">getPostsPostId</a>(postId, publicationId, { ...params }) -> beehiiv.PostsGetPostsPostIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.posts.<a href="./src/api/resources/posts/client/Client.ts">get</a>(postId, publicationId, { ...params }) -> Beehiiv.PostsGetResponse</code> </summary>
 
 <dl>
 
@@ -308,10 +338,7 @@ Retreive a single Post belonging to a specific publication
 <dd>
 
 ```ts
-await beehiiv.posts.getPostsPostId(
-    "post_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.posts.get("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -332,7 +359,9 @@ await beehiiv.posts.getPostsPostId(
 
 <dd>
 
+
 **postId: `string`** — The prefixed ID of the post object
+
 
 </dd>
 
@@ -341,18 +370,10 @@ await beehiiv.posts.getPostsPostId(
 <dl>
 
 <dd>
+
 
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.PostsGetPostsPostIdRequest`**
 
 </dd>
 
@@ -362,7 +383,21 @@ await beehiiv.posts.getPostsPostId(
 
 <dd>
 
-**requestOptions: `Posts.RequestOptions`**
+
+**request: `Beehiiv.PostsGetRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Posts.RequestOptions`** 
+
 
 </dd>
 
@@ -371,13 +406,16 @@ await beehiiv.posts.getPostsPostId(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.posts.<a href="./src/api/resources/posts/client/Client.ts">deletePostsPostId</a>(postId, publicationId) -> beehiiv.PostsDeletePostsPostIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.posts.<a href="./src/api/resources/posts/client/Client.ts">delete</a>(postId, publicationId) -> Beehiiv.PostsDeleteResponse</code> </summary>
 
 <dl>
 
@@ -414,10 +452,7 @@ Delete or Archive a post. Any post that has been confirmed will have it's status
 <dd>
 
 ```ts
-await beehiiv.posts.deletePostsPostId(
-    "post_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -438,7 +473,9 @@ await beehiiv.posts.deletePostsPostId(
 
 <dd>
 
+
 **postId: `string`** — The prefixed ID of the post object
+
 
 </dd>
 
@@ -447,9 +484,11 @@ await beehiiv.posts.deletePostsPostId(
 <dl>
 
 <dd>
+
 
 **publicationId: `string`** — The prefixed ID of the publication object
 
+
 </dd>
 
 </dl>
@@ -458,7 +497,9 @@ await beehiiv.posts.deletePostsPostId(
 
 <dd>
 
-**requestOptions: `Posts.RequestOptions`**
+
+**requestOptions: `Posts.RequestOptions`** 
+
 
 </dd>
 
@@ -467,15 +508,21 @@ await beehiiv.posts.deletePostsPostId(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+
+
 ## Subscriptions
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">getSubscriptions</a>(publicationId, { ...params }) -> beehiiv.SubscriptionsGetSubscriptionsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">list</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionsListResponse</code> </summary>
 
 <dl>
 
@@ -512,8 +559,8 @@ Retrieve all subscriptions belonging to a specific publication
 <dd>
 
 ```ts
-await beehiiv.subscriptions.getSubscriptions("pub_00000000-0000-0000-0000-000000000000", {
-    email: "clark@dailyplanet.com",
+await beehiiv.subscriptions.list("pub_00000000-0000-0000-0000-000000000000", {
+    email: "clark@dailyplanet.com"
 });
 ```
 
@@ -535,17 +582,9 @@ await beehiiv.subscriptions.getSubscriptions("pub_00000000-0000-0000-0000-000000
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsGetSubscriptionsRequest`**
 
 </dd>
 
@@ -555,7 +594,21 @@ await beehiiv.subscriptions.getSubscriptions("pub_00000000-0000-0000-0000-000000
 
 <dd>
 
-**requestOptions: `Subscriptions.RequestOptions`**
+
+**request: `Beehiiv.SubscriptionsListRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Subscriptions.RequestOptions`** 
+
 
 </dd>
 
@@ -564,13 +617,16 @@ await beehiiv.subscriptions.getSubscriptions("pub_00000000-0000-0000-0000-000000
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">postSubscriptions</a>(publicationId, { ...params }) -> beehiiv.SubscriptionsPostSubscriptionsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">post</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionsPostResponse</code> </summary>
 
 <dl>
 
@@ -607,7 +663,7 @@ Create new subscriptions for a publication.
 <dd>
 
 ```ts
-await beehiiv.subscriptions.postSubscriptions("pub_00000000-0000-0000-0000-000000000000", {
+await beehiiv.subscriptions.post("pub_00000000-0000-0000-0000-000000000000", {
     email: "bruce.wayne@wayneenterprise.com",
     reactivateExisting: false,
     sendWelcomeEmail: false,
@@ -615,17 +671,14 @@ await beehiiv.subscriptions.postSubscriptions("pub_00000000-0000-0000-0000-00000
     utmMedium: "organic",
     utmCampaign: "fall_2022_promotion",
     referringSite: "www.wayneenterprise.com/blog",
-    customFields: [
-        {
+    customFields: [{
             name: "First Name",
-            value: "Bruce",
-        },
-        {
+            value: "Bruce"
+        }, {
             name: "Last Name",
-            value: "Wayne",
-        },
-    ],
-    automationIds: ["aut_00000000-0000-0000-0000-000000000000"],
+            value: "Wayne"
+        }],
+    automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
 });
 ```
 
@@ -647,17 +700,9 @@ await beehiiv.subscriptions.postSubscriptions("pub_00000000-0000-0000-0000-00000
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsPostSubscriptionsRequest`**
 
 </dd>
 
@@ -667,7 +712,21 @@ await beehiiv.subscriptions.postSubscriptions("pub_00000000-0000-0000-0000-00000
 
 <dd>
 
-**requestOptions: `Subscriptions.RequestOptions`**
+
+**request: `Beehiiv.SubscriptionsPostRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Subscriptions.RequestOptions`** 
+
 
 </dd>
 
@@ -676,13 +735,16 @@ await beehiiv.subscriptions.postSubscriptions("pub_00000000-0000-0000-0000-00000
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">putSubscriptionsBulkUpdateStatus</a>(publicationId, { ...params }) -> beehiiv.SubscriptionsPutSubscriptionsBulkUpdateStatusResponse</code> </summary>
+
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">put</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionsPutResponse</code> </summary>
 
 <dl>
 
@@ -698,7 +760,7 @@ await beehiiv.subscriptions.postSubscriptions("pub_00000000-0000-0000-0000-00000
 
 <dd>
 
-Bulk update subscriptions' Status value
+Bulk update subscriptions' field values (standard fields and custom fields)
 
 </dd>
 
@@ -719,10 +781,7 @@ Bulk update subscriptions' Status value
 <dd>
 
 ```ts
-await beehiiv.subscriptions.putSubscriptionsBulkUpdateStatus("pub_00000000-0000-0000-0000-000000000000", {
-    subscriptionIds: ["subscription_ids"],
-    newStatus: beehiiv.SubscriptionsPutSubscriptionsBulkUpdateStatusRequestNewStatus.Active,
-});
+await beehiiv.subscriptions.put("publicationId");
 ```
 
 </dd>
@@ -743,17 +802,9 @@ await beehiiv.subscriptions.putSubscriptionsBulkUpdateStatus("pub_00000000-0000-
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsPutSubscriptionsBulkUpdateStatusRequest`**
 
 </dd>
 
@@ -763,7 +814,21 @@ await beehiiv.subscriptions.putSubscriptionsBulkUpdateStatus("pub_00000000-0000-
 
 <dd>
 
-**requestOptions: `Subscriptions.RequestOptions`**
+
+**request: `Beehiiv.SubscriptionsPutRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Subscriptions.RequestOptions`** 
+
 
 </dd>
 
@@ -772,13 +837,16 @@ await beehiiv.subscriptions.putSubscriptionsBulkUpdateStatus("pub_00000000-0000-
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">patchSubscriptionsBulkUpdateStatus</a>(publicationId, { ...params }) -> beehiiv.SubscriptionsPatchSubscriptionsBulkUpdateStatusResponse</code> </summary>
+
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">patch</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionsPatchResponse</code> </summary>
 
 <dl>
 
@@ -794,7 +862,7 @@ await beehiiv.subscriptions.putSubscriptionsBulkUpdateStatus("pub_00000000-0000-
 
 <dd>
 
-Bulk update subscriptions' Status value
+Bulk update subscriptions' field values (standard fields and custom fields)
 
 </dd>
 
@@ -815,10 +883,7 @@ Bulk update subscriptions' Status value
 <dd>
 
 ```ts
-await beehiiv.subscriptions.patchSubscriptionsBulkUpdateStatus("pub_00000000-0000-0000-0000-000000000000", {
-    subscriptionIds: ["subscription_ids"],
-    newStatus: beehiiv.SubscriptionsPatchSubscriptionsBulkUpdateStatusRequestNewStatus.Active,
-});
+await beehiiv.subscriptions.patch("publicationId");
 ```
 
 </dd>
@@ -839,17 +904,9 @@ await beehiiv.subscriptions.patchSubscriptionsBulkUpdateStatus("pub_00000000-000
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsPatchSubscriptionsBulkUpdateStatusRequest`**
 
 </dd>
 
@@ -859,7 +916,21 @@ await beehiiv.subscriptions.patchSubscriptionsBulkUpdateStatus("pub_00000000-000
 
 <dd>
 
-**requestOptions: `Subscriptions.RequestOptions`**
+
+**request: `Beehiiv.SubscriptionsPatchRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Subscriptions.RequestOptions`** 
+
 
 </dd>
 
@@ -868,13 +939,16 @@ await beehiiv.subscriptions.patchSubscriptionsBulkUpdateStatus("pub_00000000-000
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">getSubscriptionsSubscriptionId</a>(subscriptionId, publicationId, { ...params }) -> beehiiv.SubscriptionsGetSubscriptionsSubscriptionIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">get</a>(publicationId, email, { ...params }) -> Beehiiv.SubscriptionsGetResponse</code> </summary>
 
 <dl>
 
@@ -890,7 +964,7 @@ await beehiiv.subscriptions.patchSubscriptionsBulkUpdateStatus("pub_00000000-000
 
 <dd>
 
-Retrieve a single subscription belonging to a specific publication
+Retrieve a single subscription belonging to a specific email address in a specific publication
 
 </dd>
 
@@ -911,10 +985,7 @@ Retrieve a single subscription belonging to a specific publication
 <dd>
 
 ```ts
-await beehiiv.subscriptions.getSubscriptionsSubscriptionId(
-    "sub_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.subscriptions.get("pub_00000000-0000-0000-0000-000000000000", "work@example.com");
 ```
 
 </dd>
@@ -935,27 +1006,9 @@ await beehiiv.subscriptions.getSubscriptionsSubscriptionId(
 
 <dd>
 
-**subscriptionId: `string`** — The prefixed ID of the subscription object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
 
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsGetSubscriptionsSubscriptionIdRequest`**
 
 </dd>
 
@@ -965,7 +1018,33 @@ await beehiiv.subscriptions.getSubscriptionsSubscriptionId(
 
 <dd>
 
-**requestOptions: `Subscriptions.RequestOptions`**
+
+**email: `string`** — The ID of the subscriber object
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**request: `Beehiiv.SubscriptionsGetRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Subscriptions.RequestOptions`** 
+
 
 </dd>
 
@@ -974,133 +1053,16 @@ await beehiiv.subscriptions.getSubscriptionsSubscriptionId(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">putSubscriptionsSubscriptionId</a>(subscriptionId, publicationId, { ...params }) -> beehiiv.SubscriptionsPutSubscriptionsSubscriptionIdResponse</code> </summary>
 
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Update a subscriber
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.subscriptions.putSubscriptionsSubscriptionId(
-    "sub_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000",
-    {
-        tier: beehiiv.SubscriptionsPutSubscriptionsSubscriptionIdRequestTier.Premium,
-        unsubscribe: false,
-        customFields: [
-            {
-                name: "First Name",
-                value: "JOHN",
-            },
-            {
-                name: "Birthday",
-                delete: true,
-            },
-        ],
-    }
-);
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**subscriptionId: `string`** — The prefixed ID of the subscription object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsPutSubscriptionsSubscriptionIdRequest`**
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Subscriptions.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">deleteSubscriptionsSubscriptionId</a>(subscriptionId, publicationId) -> Record<string, unknown></code> </summary>
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">delete</a>(subscriptionId, publicationId) -> Record<string, unknown></code> </summary>
 
 <dl>
 
@@ -1141,10 +1103,7 @@ If a premium subscription is deleted they will no longer be billed.
 <dd>
 
 ```ts
-await beehiiv.subscriptions.deleteSubscriptionsSubscriptionId(
-    "sub_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.subscriptions.delete("sub_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -1164,9 +1123,11 @@ await beehiiv.subscriptions.deleteSubscriptionsSubscriptionId(
 <dl>
 
 <dd>
+
 
 **subscriptionId: `string`** — The prefixed ID of the subscription object
 
+
 </dd>
 
 </dl>
@@ -1174,9 +1135,11 @@ await beehiiv.subscriptions.deleteSubscriptionsSubscriptionId(
 <dl>
 
 <dd>
+
 
 **publicationId: `string`** — The prefixed ID of the publication object
 
+
 </dd>
 
 </dl>
@@ -1185,7 +1148,9 @@ await beehiiv.subscriptions.deleteSubscriptionsSubscriptionId(
 
 <dd>
 
-**requestOptions: `Subscriptions.RequestOptions`**
+
+**requestOptions: `Subscriptions.RequestOptions`** 
+
 
 </dd>
 
@@ -1194,410 +1159,21 @@ await beehiiv.subscriptions.deleteSubscriptionsSubscriptionId(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">getSubscriptionsSubscriberId</a>(publicationId, subscriberId, { ...params }) -> beehiiv.SubscriptionsGetSubscriptionsSubscriberIdResponse</code> </summary>
 
-<dl>
 
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Retrieve a single subscription belonging to a specific subscriber in a specific publication
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.subscriptions.getSubscriptionsSubscriberId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "00000000-0000-0000-0000-000000000000"
-);
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**subscriberId: `string`** — The ID of the subscriber object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsGetSubscriptionsSubscriberIdRequest`**
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Subscriptions.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">getSubscriptionsEmail</a>(publicationId, email, { ...params }) -> beehiiv.SubscriptionsGetSubscriptionsEmailResponse</code> </summary>
-
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Retrieve a single subscription belonging to a specific email address in a specific publication
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.subscriptions.getSubscriptionsEmail("pub_00000000-0000-0000-0000-000000000000", "work@example.com");
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**email: `string`** — The ID of the subscriber object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsGetSubscriptionsEmailRequest`**
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Subscriptions.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">putSubscriptionsBulkActionsBulkUpdate</a>(publicationId, { ...params }) -> beehiiv.SubscriptionsPutSubscriptionsBulkActionsBulkUpdateResponse</code> </summary>
-
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Bulk update subscriptions' field values (standard fields and custom fields)
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.subscriptions.putSubscriptionsBulkActionsBulkUpdate("publicationId");
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsPutSubscriptionsBulkActionsBulkUpdateRequest`**
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Subscriptions.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">patchSubscriptionsBulkActionsBulkUpdate</a>(publicationId, { ...params }) -> beehiiv.SubscriptionsPatchSubscriptionsBulkActionsBulkUpdateResponse</code> </summary>
-
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Bulk update subscriptions' field values (standard fields and custom fields)
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.subscriptions.patchSubscriptionsBulkActionsBulkUpdate("publicationId");
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SubscriptionsPatchSubscriptionsBulkActionsBulkUpdateRequest`**
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Subscriptions.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
 
 ## Segments
 
-<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">getPublicationsPublicationIdSegments</a>(publicationId, { ...params }) -> beehiiv.SegmentsGetPublicationsPublicationIdSegmentsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">list</a>(publicationId, { ...params }) -> Beehiiv.SegmentsListResponse</code> </summary>
 
 <dl>
 
@@ -1634,7 +1210,7 @@ Retrieve information about all segments belonging to a specific publication
 <dd>
 
 ```ts
-await beehiiv.segments.getPublicationsPublicationIdSegments("pub_00000000-0000-0000-0000-000000000000");
+await beehiiv.segments.list("pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -1655,17 +1231,9 @@ await beehiiv.segments.getPublicationsPublicationIdSegments("pub_00000000-0000-0
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SegmentsGetPublicationsPublicationIdSegmentsRequest`**
 
 </dd>
 
@@ -1675,7 +1243,21 @@ await beehiiv.segments.getPublicationsPublicationIdSegments("pub_00000000-0000-0
 
 <dd>
 
-**requestOptions: `Segments.RequestOptions`**
+
+**request: `Beehiiv.SegmentsListRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Segments.RequestOptions`** 
+
 
 </dd>
 
@@ -1684,205 +1266,16 @@ await beehiiv.segments.getPublicationsPublicationIdSegments("pub_00000000-0000-0
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">getPublicationsPublicationIdSegmentsSegmentId</a>(publicationId, segmentId) -> beehiiv.SegmentsGetPublicationsPublicationIdSegmentsSegmentIdResponse</code> </summary>
 
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Retrieve a single segment belonging to a specific publication
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.segments.getPublicationsPublicationIdSegmentsSegmentId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000"
-);
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**segmentId: `string`** — The prefixed ID of the segment object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Segments.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">deletePublicationsPublicationIdSegmentsSegmentId</a>(publicationId, segmentId) -> Record<string, unknown></code> </summary>
-
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Delete a segment. Deleting the segment does not effect the subscriptions in the segment.
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.segments.deletePublicationsPublicationIdSegmentsSegmentId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000"
-);
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**segmentId: `string`** — The prefixed ID of the segment object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `Segments.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">getPublicationsPublicationIdSegmentsSegmentIdResults</a>(publicationId, segmentId, { ...params }) -> beehiiv.SegmentsGetPublicationsPublicationIdSegmentsSegmentIdResultsResponse</code> </summary>
+<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">get</a>(publicationId, segmentId, { ...params }) -> Beehiiv.SegmentsGetResponse</code> </summary>
 
 <dl>
 
@@ -1919,10 +1312,7 @@ List the Subscriber Ids from the most recent calculation of a specific publicati
 <dd>
 
 ```ts
-await beehiiv.segments.getPublicationsPublicationIdSegmentsSegmentIdResults(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.segments.get("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -1943,7 +1333,9 @@ await beehiiv.segments.getPublicationsPublicationIdSegmentsSegmentIdResults(
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -1952,18 +1344,10 @@ await beehiiv.segments.getPublicationsPublicationIdSegmentsSegmentIdResults(
 <dl>
 
 <dd>
+
 
 **segmentId: `string`** — The prefixed ID of the segment object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.SegmentsGetPublicationsPublicationIdSegmentsSegmentIdResultsRequest`**
 
 </dd>
 
@@ -1973,7 +1357,21 @@ await beehiiv.segments.getPublicationsPublicationIdSegmentsSegmentIdResults(
 
 <dd>
 
-**requestOptions: `Segments.RequestOptions`**
+
+**request: `Beehiiv.SegmentsGetRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Segments.RequestOptions`** 
+
 
 </dd>
 
@@ -1982,15 +1380,123 @@ await beehiiv.segments.getPublicationsPublicationIdSegmentsSegmentIdResults(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+<details><summary> <code>beehiiv.segments.<a href="./src/api/resources/segments/client/Client.ts">delete</a>(publicationId, segmentId) -> Record<string, unknown></code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Delete a segment. Deleting the segment does not effect the subscriptions in the segment.
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await beehiiv.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+
+**publicationId: `string`** — The prefixed ID of the publication object
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**segmentId: `string`** — The prefixed ID of the segment object
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Segments.RequestOptions`** 
+
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+
+
+</dd>
+
+</dl>
+</details>
+
+
+
+
 ## Email Blasts
 
-<details><summary> <code>beehiiv.emailBlasts.<a href="./src/api/resources/emailBlasts/client/Client.ts">getPublicationsPublicationIdEmailBlasts</a>(publicationId, { ...params }) -> beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.emailBlasts.<a href="./src/api/resources/emailBlasts/client/Client.ts">list</a>(publicationId, { ...params }) -> Beehiiv.EmailBlastsListResponse</code> </summary>
 
 <dl>
 
@@ -2027,7 +1533,7 @@ Retrieve all Email Blasts
 <dd>
 
 ```ts
-await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlasts("pub_00000000-0000-0000-0000-000000000000");
+await beehiiv.emailBlasts.list("pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -2048,17 +1554,9 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlasts("pub_00000000-
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsRequest`**
 
 </dd>
 
@@ -2068,7 +1566,21 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlasts("pub_00000000-
 
 <dd>
 
-**requestOptions: `EmailBlasts.RequestOptions`**
+
+**request: `Beehiiv.EmailBlastsListRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `EmailBlasts.RequestOptions`** 
+
 
 </dd>
 
@@ -2077,13 +1589,16 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlasts("pub_00000000-
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.emailBlasts.<a href="./src/api/resources/emailBlasts/client/Client.ts">getPublicationsPublicationIdEmailBlastsEmailBlastId</a>(publicationId, emailBlastId, { ...params }) -> beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.emailBlasts.<a href="./src/api/resources/emailBlasts/client/Client.ts">get</a>(publicationId, emailBlastId, { ...params }) -> Beehiiv.EmailBlastsGetResponse</code> </summary>
 
 <dl>
 
@@ -2120,10 +1635,7 @@ Retrieve an Email Blast
 <dd>
 
 ```ts
-await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "blast_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.emailBlasts.get("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -2144,7 +1656,9 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId(
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -2153,18 +1667,10 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId(
 <dl>
 
 <dd>
+
 
 **emailBlastId: `string`** — The prefixed ID of the email blast object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdRequest`**
 
 </dd>
 
@@ -2174,7 +1680,21 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId(
 
 <dd>
 
-**requestOptions: `EmailBlasts.RequestOptions`**
+
+**request: `Beehiiv.EmailBlastsGetRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `EmailBlasts.RequestOptions`** 
+
 
 </dd>
 
@@ -2183,15 +1703,21 @@ await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+
+
 ## Referral Program
 
-<details><summary> <code>beehiiv.referralProgram.<a href="./src/api/resources/referralProgram/client/Client.ts">getPublicationsPublicReferralProgram</a>(publicationId, { ...params }) -> beehiiv.ReferralProgramGetPublicationsPublicReferralProgramResponse</code> </summary>
+
+<details><summary> <code>beehiiv.referralProgram.<a href="./src/api/resources/referralProgram/client/Client.ts">get</a>(publicationId, { ...params }) -> Beehiiv.ReferralProgramGetResponse</code> </summary>
 
 <dl>
 
@@ -2228,7 +1754,7 @@ Retrieve details about the publication's referral program, including milestones 
 <dd>
 
 ```ts
-await beehiiv.referralProgram.getPublicationsPublicReferralProgram("pub_00000000-0000-0000-0000-000000000000");
+await beehiiv.referralProgram.get("pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -2249,17 +1775,9 @@ await beehiiv.referralProgram.getPublicationsPublicReferralProgram("pub_00000000
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.ReferralProgramGetPublicationsPublicReferralProgramRequest`**
 
 </dd>
 
@@ -2269,7 +1787,21 @@ await beehiiv.referralProgram.getPublicationsPublicReferralProgram("pub_00000000
 
 <dd>
 
-**requestOptions: `ReferralProgram.RequestOptions`**
+
+**request: `Beehiiv.ReferralProgramGetRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `ReferralProgram.RequestOptions`** 
+
 
 </dd>
 
@@ -2278,194 +1810,21 @@ await beehiiv.referralProgram.getPublicationsPublicReferralProgram("pub_00000000
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
+
+
+
 
 ## Custom Fields
 
-<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">getPublicationsPublicationIdCustomFields</a>(publicationId) -> beehiiv.CustomFieldsGetPublicationsPublicationIdCustomFieldsResponse</code> </summary>
 
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Retrieve all custom fields belonging to a specific publication
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.customFields.getPublicationsPublicationIdCustomFields("publicationId");
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `CustomFields.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">postPublicationsPublicationIdCustomFields</a>(publicationId, { ...params }) -> beehiiv.CustomFieldsPostPublicationsPublicationIdCustomFieldsResponse</code> </summary>
-
-<dl>
-
-<dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Create a custom field on a publication, for use in subscriptions
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.customFields.postPublicationsPublicationIdCustomFields("publicationId", {
-    kind: beehiiv.CustomFieldsPostPublicationsPublicationIdCustomFieldsRequestKind.String,
-    display: "display",
-});
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.CustomFieldsPostPublicationsPublicationIdCustomFieldsRequest`**
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `CustomFields.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
-
-<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">getPublicationsPublicationIdCustomFieldsId</a>(publicationId, id) -> beehiiv.CustomFieldsGetPublicationsPublicationIdCustomFieldsIdResponse</code> </summary>
+<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">get</a>(publicationId, id) -> Beehiiv.CustomFieldsGetResponse</code> </summary>
 
 <dl>
 
@@ -2502,7 +1861,7 @@ View a specific custom field on a publication
 <dd>
 
 ```ts
-await beehiiv.customFields.getPublicationsPublicationIdCustomFieldsId("publicationId", "id");
+await beehiiv.customFields.get("publicationId", "id");
 ```
 
 </dd>
@@ -2523,7 +1882,9 @@ await beehiiv.customFields.getPublicationsPublicationIdCustomFieldsId("publicati
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -2532,9 +1893,11 @@ await beehiiv.customFields.getPublicationsPublicationIdCustomFieldsId("publicati
 <dl>
 
 <dd>
+
 
 **id: `string`** — The ID of the Custom Fields object
 
+
 </dd>
 
 </dl>
@@ -2543,7 +1906,9 @@ await beehiiv.customFields.getPublicationsPublicationIdCustomFieldsId("publicati
 
 <dd>
 
-**requestOptions: `CustomFields.RequestOptions`**
+
+**requestOptions: `CustomFields.RequestOptions`** 
+
 
 </dd>
 
@@ -2552,13 +1917,121 @@ await beehiiv.customFields.getPublicationsPublicationIdCustomFieldsId("publicati
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">putPublicationsPublicationIdCustomFieldsId</a>(publicationId, id, { ...params }) -> beehiiv.CustomFieldsPutPublicationsPublicationIdCustomFieldsIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.CustomFieldsCreateResponse</code> </summary>
+
+<dl>
+
+<dd>
+
+#### 📝 Description
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+Create a custom field on a publication, for use in subscriptions
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+```ts
+await beehiiv.customFields.create("publicationId", {
+    kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+    display: "display"
+});
+```
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+
+<dd>
+
+<dl>
+
+<dd>
+
+
+**publicationId: `string`** — The prefixed ID of the publication object
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**request: `Beehiiv.CustomFieldsCreateRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `CustomFields.RequestOptions`** 
+
+
+</dd>
+
+</dl>
+
+</dd>
+
+</dl>
+
+
+
+</dd>
+
+</dl>
+</details>
+
+
+<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">put</a>(publicationId, id, { ...params }) -> Beehiiv.CustomFieldsPutResponse</code> </summary>
 
 <dl>
 
@@ -2595,7 +2068,7 @@ Update a custom field on a publication
 <dd>
 
 ```ts
-await beehiiv.customFields.putPublicationsPublicationIdCustomFieldsId("publicationId", "id");
+await beehiiv.customFields.put("publicationId", "id");
 ```
 
 </dd>
@@ -2616,7 +2089,9 @@ await beehiiv.customFields.putPublicationsPublicationIdCustomFieldsId("publicati
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -2625,18 +2100,10 @@ await beehiiv.customFields.putPublicationsPublicationIdCustomFieldsId("publicati
 <dl>
 
 <dd>
+
 
 **id: `string`** — The ID of the Custom Fields object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.CustomFieldsPutPublicationsPublicationIdCustomFieldsIdRequest`**
 
 </dd>
 
@@ -2646,7 +2113,21 @@ await beehiiv.customFields.putPublicationsPublicationIdCustomFieldsId("publicati
 
 <dd>
 
-**requestOptions: `CustomFields.RequestOptions`**
+
+**request: `Beehiiv.CustomFieldsPutRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `CustomFields.RequestOptions`** 
+
 
 </dd>
 
@@ -2655,13 +2136,16 @@ await beehiiv.customFields.putPublicationsPublicationIdCustomFieldsId("publicati
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">deletePublicationsPublicationIdCustomFields</a>(publicationId, id) -> beehiiv.CustomFieldsDeletePublicationsPublicationIdCustomFieldsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">delete</a>(publicationId, id) -> Beehiiv.CustomFieldsDeleteResponse</code> </summary>
 
 <dl>
 
@@ -2698,7 +2182,7 @@ Delete a custom field from a publication
 <dd>
 
 ```ts
-await beehiiv.customFields.deletePublicationsPublicationIdCustomFields("publicationId", "id");
+await beehiiv.customFields.delete("publicationId", "id");
 ```
 
 </dd>
@@ -2719,7 +2203,9 @@ await beehiiv.customFields.deletePublicationsPublicationIdCustomFields("publicat
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -2728,9 +2214,11 @@ await beehiiv.customFields.deletePublicationsPublicationIdCustomFields("publicat
 <dl>
 
 <dd>
+
 
 **id: `string`** — The ID of the Custom Fields object
 
+
 </dd>
 
 </dl>
@@ -2739,7 +2227,9 @@ await beehiiv.customFields.deletePublicationsPublicationIdCustomFields("publicat
 
 <dd>
 
-**requestOptions: `CustomFields.RequestOptions`**
+
+**requestOptions: `CustomFields.RequestOptions`** 
+
 
 </dd>
 
@@ -2748,13 +2238,16 @@ await beehiiv.customFields.deletePublicationsPublicationIdCustomFields("publicat
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">patchPublicationsPublicationIdCustomFieldsId</a>(publicationId, id, { ...params }) -> beehiiv.CustomFieldsPatchPublicationsPublicationIdCustomFieldsIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.customFields.<a href="./src/api/resources/customFields/client/Client.ts">patch</a>(publicationId, id, { ...params }) -> Beehiiv.CustomFieldsPatchResponse</code> </summary>
 
 <dl>
 
@@ -2791,7 +2284,7 @@ Update a custom field on a publication
 <dd>
 
 ```ts
-await beehiiv.customFields.patchPublicationsPublicationIdCustomFieldsId("publicationId", "id");
+await beehiiv.customFields.patch("publicationId", "id");
 ```
 
 </dd>
@@ -2812,7 +2305,9 @@ await beehiiv.customFields.patchPublicationsPublicationIdCustomFieldsId("publica
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -2821,18 +2316,10 @@ await beehiiv.customFields.patchPublicationsPublicationIdCustomFieldsId("publica
 <dl>
 
 <dd>
+
 
 **id: `string`** — The ID of the Custom Fields object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.CustomFieldsPatchPublicationsPublicationIdCustomFieldsIdRequest`**
 
 </dd>
 
@@ -2842,7 +2329,21 @@ await beehiiv.customFields.patchPublicationsPublicationIdCustomFieldsId("publica
 
 <dd>
 
-**requestOptions: `CustomFields.RequestOptions`**
+
+**request: `Beehiiv.CustomFieldsPatchRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `CustomFields.RequestOptions`** 
+
 
 </dd>
 
@@ -2851,15 +2352,21 @@ await beehiiv.customFields.patchPublicationsPublicationIdCustomFieldsId("publica
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+
+
 ## Bulk Subscription Updates
 
-<details><summary> <code>beehiiv.bulkSubscriptionUpdates.<a href="./src/api/resources/bulkSubscriptionUpdates/client/Client.ts">getPublicationsPublicationIdSubcriptionUpdates</a>(publicationId) -> beehiiv.BulkSubscriptionUpdatesGetPublicationsPublicationIdSubcriptionUpdatesResponse</code> </summary>
+
+<details><summary> <code>beehiiv.bulkSubscriptionUpdates.<a href="./src/api/resources/bulkSubscriptionUpdates/client/Client.ts">list</a>(publicationId) -> Beehiiv.BulkSubscriptionUpdatesListResponse</code> </summary>
 
 <dl>
 
@@ -2896,7 +2403,7 @@ Returns a list of Subscription Update objects for a publication
 <dd>
 
 ```ts
-await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpdates("publicationId");
+await beehiiv.bulkSubscriptionUpdates.list("publicationId");
 ```
 
 </dd>
@@ -2917,7 +2424,9 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -2927,7 +2436,9 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 
 <dd>
 
-**requestOptions: `BulkSubscriptionUpdates.RequestOptions`**
+
+**requestOptions: `BulkSubscriptionUpdates.RequestOptions`** 
+
 
 </dd>
 
@@ -2936,13 +2447,16 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.bulkSubscriptionUpdates.<a href="./src/api/resources/bulkSubscriptionUpdates/client/Client.ts">getPublicationsPublicationIdSubcriptionUpdatesId</a>(publicationId, id) -> beehiiv.BulkSubscriptionUpdatesGetPublicationsPublicationIdSubcriptionUpdatesIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.bulkSubscriptionUpdates.<a href="./src/api/resources/bulkSubscriptionUpdates/client/Client.ts">get</a>(publicationId, id) -> Beehiiv.BulkSubscriptionUpdatesGetResponse</code> </summary>
 
 <dl>
 
@@ -2979,7 +2493,7 @@ Returns a single Subscription Update object for a publication
 <dd>
 
 ```ts
-await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpdatesId("publicationId", "id");
+await beehiiv.bulkSubscriptionUpdates.get("publicationId", "id");
 ```
 
 </dd>
@@ -3000,7 +2514,9 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -3009,9 +2525,11 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 <dl>
 
 <dd>
+
 
 **id: `string`** — The ID of the Subscription Update object
 
+
 </dd>
 
 </dl>
@@ -3020,7 +2538,9 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 
 <dd>
 
-**requestOptions: `BulkSubscriptionUpdates.RequestOptions`**
+
+**requestOptions: `BulkSubscriptionUpdates.RequestOptions`** 
+
 
 </dd>
 
@@ -3029,39 +2549,25 @@ await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpd
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+
+
 ## Automation Journeys
 
-<details><summary> <code>beehiiv.automationJourneys.<a href="./src/api/resources/automationJourneys/client/Client.ts">getPublicationsPublicationIdAutomationsAutomationIdJourneys</a>(publicationId, automationId, { ...params }) -> beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysResponse</code> </summary>
+
+<details><summary> <code>beehiiv.automationJourneys.<a href="./src/api/resources/automationJourneys/client/Client.ts">get</a>(publicationId, automationId, automationJourneyId) -> Beehiiv.AutomationJourneysGetResponse</code> </summary>
 
 <dl>
 
 <dd>
-
-#### 📝 Description
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-Retrieve all automation journeys associated with an automation that belongs to a specific publication
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
 
 #### 🔌 Usage
 
@@ -3074,14 +2580,7 @@ Retrieve all automation journeys associated with an automation that belongs to a
 <dd>
 
 ```ts
-await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomationIdJourneys(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000",
-    {
-        subscriptionId: "sub_00000000-0000-0000-0000-000000000000",
-        email: "clark@dailyplanet.com",
-    }
-);
+await beehiiv.automationJourneys.get("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", "aj_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -3102,7 +2601,9 @@ await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomati
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -3111,18 +2612,10 @@ await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomati
 <dl>
 
 <dd>
+
 
 **automationId: `string`** — The prefixed ID of the automation object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysRequest`**
 
 </dd>
 
@@ -3132,7 +2625,21 @@ await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomati
 
 <dd>
 
-**requestOptions: `AutomationJourneys.RequestOptions`**
+
+**automationJourneyId: `string`** — The prefixed automation journey id
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `AutomationJourneys.RequestOptions`** 
+
 
 </dd>
 
@@ -3141,13 +2648,16 @@ await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomati
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.automationJourneys.<a href="./src/api/resources/automationJourneys/client/Client.ts">postPublicationsPublicationIdAutomationsAutomationIdJourneys</a>(publicationId, automationId, { ...params }) -> beehiiv.AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysResponse</code> </summary>
+
+<details><summary> <code>beehiiv.automationJourneys.<a href="./src/api/resources/automationJourneys/client/Client.ts">create</a>(publicationId, automationId, { ...params }) -> Beehiiv.AutomationJourneysCreateResponse</code> </summary>
 
 <dl>
 
@@ -3189,14 +2699,10 @@ Looking to enroll new subscribers? Use the **[Subscriptions Create](https://beeh
 <dd>
 
 ```ts
-await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomationIdJourneys(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000",
-    {
-        email: "example@example.com",
-        subscriptionId: "sub_00000000-0000-0000-0000-000000000000",
-    }
-);
+await beehiiv.automationJourneys.create("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", {
+    email: "example@example.com",
+    subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
+});
 ```
 
 </dd>
@@ -3217,7 +2723,9 @@ await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomat
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -3226,18 +2734,10 @@ await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomat
 <dl>
 
 <dd>
+
 
 **automationId: `string`** — The prefixed ID of the automation object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysRequest`**
 
 </dd>
 
@@ -3247,7 +2747,21 @@ await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomat
 
 <dd>
 
-**requestOptions: `AutomationJourneys.RequestOptions`**
+
+**request: `Beehiiv.AutomationJourneysCreateRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `AutomationJourneys.RequestOptions`** 
+
 
 </dd>
 
@@ -3256,102 +2770,21 @@ await beehiiv.automationJourneys.postPublicationsPublicationIdAutomationsAutomat
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.automationJourneys.<a href="./src/api/resources/automationJourneys/client/Client.ts">getPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyId</a>(publicationId, automationId, automationJourneyId) -> beehiiv.AutomationJourneysGetPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyIdResponse</code> </summary>
 
-<dl>
 
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-```ts
-await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomationIdJourneysAutomationJourneyId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000",
-    "aj_00000000-0000-0000-0000-000000000000"
-);
-```
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-
-<dd>
-
-<dl>
-
-<dd>
-
-**publicationId: `string`** — The prefixed ID of the publication object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**automationId: `string`** — The prefixed ID of the automation object
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**automationJourneyId: `string`** — The prefixed automation journey id
-
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**requestOptions: `AutomationJourneys.RequestOptions`**
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-
-</dd>
-
-</dl>
-</details>
 
 ## Automations
 
-<details><summary> <code>beehiiv.automations.<a href="./src/api/resources/automations/client/Client.ts">getPublicationsPublicationIdAutomations</a>(publicationId, { ...params }) -> beehiiv.AutomationsGetPublicationsPublicationIdAutomationsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.automations.<a href="./src/api/resources/automations/client/Client.ts">list</a>(publicationId, { ...params }) -> Beehiiv.AutomationsListResponse</code> </summary>
 
 <dl>
 
@@ -3368,7 +2801,7 @@ await beehiiv.automationJourneys.getPublicationsPublicationIdAutomationsAutomati
 <dd>
 
 ```ts
-await beehiiv.automations.getPublicationsPublicationIdAutomations("pub_00000000-0000-0000-0000-000000000000");
+await beehiiv.automations.list("pub_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -3389,17 +2822,9 @@ await beehiiv.automations.getPublicationsPublicationIdAutomations("pub_00000000-
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
 
-</dd>
-
-</dl>
-
-<dl>
-
-<dd>
-
-**request: `beehiiv.AutomationsGetPublicationsPublicationIdAutomationsRequest`**
 
 </dd>
 
@@ -3409,7 +2834,21 @@ await beehiiv.automations.getPublicationsPublicationIdAutomations("pub_00000000-
 
 <dd>
 
-**requestOptions: `Automations.RequestOptions`**
+
+**request: `Beehiiv.AutomationsListRequest`** 
+
+
+</dd>
+
+</dl>
+
+<dl>
+
+<dd>
+
+
+**requestOptions: `Automations.RequestOptions`** 
+
 
 </dd>
 
@@ -3418,13 +2857,16 @@ await beehiiv.automations.getPublicationsPublicationIdAutomations("pub_00000000-
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
-<details><summary> <code>beehiiv.automations.<a href="./src/api/resources/automations/client/Client.ts">getPublicationsPublicationIdAutomationsAutomationId</a>(publicationId, automationId) -> beehiiv.AutomationsGetPublicationsPublicationIdAutomationsAutomationIdResponse</code> </summary>
+
+<details><summary> <code>beehiiv.automations.<a href="./src/api/resources/automations/client/Client.ts">get</a>(publicationId, automationId) -> Beehiiv.AutomationsGetResponse</code> </summary>
 
 <dl>
 
@@ -3441,10 +2883,7 @@ await beehiiv.automations.getPublicationsPublicationIdAutomations("pub_00000000-
 <dd>
 
 ```ts
-await beehiiv.automations.getPublicationsPublicationIdAutomationsAutomationId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000"
-);
+await beehiiv.automations.get("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000");
 ```
 
 </dd>
@@ -3465,7 +2904,9 @@ await beehiiv.automations.getPublicationsPublicationIdAutomationsAutomationId(
 
 <dd>
 
+
 **publicationId: `string`** — The prefixed ID of the publication object
+
 
 </dd>
 
@@ -3474,9 +2915,11 @@ await beehiiv.automations.getPublicationsPublicationIdAutomationsAutomationId(
 <dl>
 
 <dd>
+
 
 **automationId: `string`** — The prefixed ID of the automation object
 
+
 </dd>
 
 </dl>
@@ -3485,7 +2928,9 @@ await beehiiv.automations.getPublicationsPublicationIdAutomationsAutomationId(
 
 <dd>
 
-**requestOptions: `Automations.RequestOptions`**
+
+**requestOptions: `Automations.RequestOptions`** 
+
 
 </dd>
 
@@ -3494,15 +2939,21 @@ await beehiiv.automations.getPublicationsPublicationIdAutomationsAutomationId(
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
 
+
+
+
 ## Subscription Tags
 
-<details><summary> <code>beehiiv.subscriptionTags.<a href="./src/api/resources/subscriptionTags/client/Client.ts">postPublicationsPublicationIdSubscriptionsSubscriptionIdTags</a>(publicationId, subscriptionId, { ...params }) -> beehiiv.SubscriptionTagsPostPublicationsPublicationIdSubscriptionsSubscriptionIdTagsResponse</code> </summary>
+
+<details><summary> <code>beehiiv.subscriptionTags.<a href="./src/api/resources/subscriptionTags/client/Client.ts">create</a>(publicationId, subscriptionId, { ...params }) -> Beehiiv.SubscriptionTagsCreateResponse</code> </summary>
 
 <dl>
 
@@ -3539,13 +2990,9 @@ Create new subscription tags for a subscription. If the tag does not exist on th
 <dd>
 
 ```ts
-await beehiiv.subscriptionTags.postPublicationsPublicationIdSubscriptionsSubscriptionIdTags(
-    "publicationId",
-    "subscriptionId",
-    {
-        tags: ["Premium"],
-    }
-);
+await beehiiv.subscriptionTags.create("publicationId", "subscriptionId", {
+    tags: ["Premium"]
+});
 ```
 
 </dd>
@@ -3566,7 +3013,9 @@ await beehiiv.subscriptionTags.postPublicationsPublicationIdSubscriptionsSubscri
 
 <dd>
 
-**publicationId: `string`**
+
+**publicationId: `string`** 
+
 
 </dd>
 
@@ -3576,7 +3025,9 @@ await beehiiv.subscriptionTags.postPublicationsPublicationIdSubscriptionsSubscri
 
 <dd>
 
-**subscriptionId: `string`**
+
+**subscriptionId: `string`** 
+
 
 </dd>
 
@@ -3586,7 +3037,9 @@ await beehiiv.subscriptionTags.postPublicationsPublicationIdSubscriptionsSubscri
 
 <dd>
 
-**request: `beehiiv.SubscriptionTagsPostPublicationsPublicationIdSubscriptionsSubscriptionIdTagsRequest`**
+
+**request: `Beehiiv.SubscriptionTagsCreateRequest`** 
+
 
 </dd>
 
@@ -3596,7 +3049,9 @@ await beehiiv.subscriptionTags.postPublicationsPublicationIdSubscriptionsSubscri
 
 <dd>
 
-**requestOptions: `SubscriptionTags.RequestOptions`**
+
+**requestOptions: `SubscriptionTags.RequestOptions`** 
+
 
 </dd>
 
@@ -3605,8 +3060,12 @@ await beehiiv.subscriptionTags.postPublicationsPublicationIdSubscriptionsSubscri
 </dd>
 
 </dl>
+
+
 
 </dd>
 
 </dl>
 </details>
+
+

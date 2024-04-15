@@ -3,7 +3,7 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { PostStatus } from "./PostStatus";
 import { PostAudience } from "./PostAudience";
@@ -11,7 +11,7 @@ import { PostPlatform } from "./PostPlatform";
 import { PostContent } from "./PostContent";
 import { PostStats } from "./PostStats";
 
-export const Post: core.serialization.ObjectSchema<serializers.Post.Raw, beehiiv.Post> = core.serialization.object({
+export const Post: core.serialization.ObjectSchema<serializers.Post.Raw, Beehiiv.Post> = core.serialization.object({
     id: core.serialization.string(),
     subtitle: core.serialization.string(),
     title: core.serialization.string(),

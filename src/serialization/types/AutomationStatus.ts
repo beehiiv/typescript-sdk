@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const AutomationStatus: core.serialization.Schema<serializers.AutomationStatus.Raw, beehiiv.AutomationStatus> =
+export const AutomationStatus: core.serialization.Schema<serializers.AutomationStatus.Raw, Beehiiv.AutomationStatus> =
     core.serialization.enum_(["running", "finishing", "inactive"]);
 
 export declare namespace AutomationStatus {

@@ -3,13 +3,13 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { AutomationJourneyStatus } from "./AutomationJourneyStatus";
 
 export const AutomationJourney: core.serialization.ObjectSchema<
     serializers.AutomationJourney.Raw,
-    beehiiv.AutomationJourney
+    Beehiiv.AutomationJourney
 > = core.serialization.object({
     id: core.serialization.string(),
     automationId: core.serialization.property("automation_id", core.serialization.string()),

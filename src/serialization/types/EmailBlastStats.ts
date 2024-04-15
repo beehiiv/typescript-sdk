@@ -3,14 +3,14 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { EmailBlastStatsEmail } from "./EmailBlastStatsEmail";
 import { EmailBlastStatsClicksItem } from "./EmailBlastStatsClicksItem";
 
 export const EmailBlastStats: core.serialization.ObjectSchema<
     serializers.EmailBlastStats.Raw,
-    beehiiv.EmailBlastStats
+    Beehiiv.EmailBlastStats
 > = core.serialization.object({
     email: EmailBlastStatsEmail.optional(),
     clicks: core.serialization.list(EmailBlastStatsClicksItem).optional(),

@@ -1,2 +1,2 @@
-export * as deleteSubscriptionsSubscriptionId from "./deleteSubscriptionsSubscriptionId";
+export * as delete from "./delete";
 export * from "./requests";

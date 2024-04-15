@@ -1,1 +1,1 @@
-export * as deletePublicationsPublicationIdSegmentsSegmentId from "./deletePublicationsPublicationIdSegmentsSegmentId";
+export * as delete from "./delete";

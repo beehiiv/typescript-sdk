@@ -1,3 +1,3 @@
-export { CustomFieldsPostPublicationsPublicationIdCustomFieldsRequest } from "./CustomFieldsPostPublicationsPublicationIdCustomFieldsRequest";
-export { CustomFieldsPutPublicationsPublicationIdCustomFieldsIdRequest } from "./CustomFieldsPutPublicationsPublicationIdCustomFieldsIdRequest";
-export { CustomFieldsPatchPublicationsPublicationIdCustomFieldsIdRequest } from "./CustomFieldsPatchPublicationsPublicationIdCustomFieldsIdRequest";
+export { CustomFieldsCreateRequest } from "./CustomFieldsCreateRequest";
+export { CustomFieldsPutRequest } from "./CustomFieldsPutRequest";
+export { CustomFieldsPatchRequest } from "./CustomFieldsPatchRequest";

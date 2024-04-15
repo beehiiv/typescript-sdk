@@ -1,2 +1,2 @@
-export { beehiivError } from "./beehiivError";
-export { beehiivTimeoutError } from "./beehiivTimeoutError";
+export { BeehiivError } from "./BeehiivError";
+export { BeehiivTimeoutError } from "./BeehiivTimeoutError";

@@ -4,14 +4,14 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as beehiiv from "../../..";
+import * as Beehiiv from "../../..";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
 
 export declare namespace EmailBlasts {
     interface Options {
-        environment?: core.Supplier<environments.beehiivEnvironment | string>;
+        environment?: core.Supplier<environments.BeehiivEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         fetcher?: core.FetchFunction;
     }
@@ -27,28 +27,19 @@ export class EmailBlasts {
 
     /**
      * Retrieve all Email Blasts
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlasts("pub_00000000-0000-0000-0000-000000000000")
-     *
-     * @example
-     *     await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlasts("string", {
-     *         expand: beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsRequestExpandItem.Stats,
-     *         limit: 1,
-     *         page: 1,
-     *         direction: beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsRequestDirection.Asc,
-     *         orderBy: beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsRequestOrderBy.Created
-     *     })
+     *     await beehiiv.emailBlasts.list("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async getPublicationsPublicationIdEmailBlasts(
+    public async list(
         publicationId: string,
-        request: beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsRequest = {},
+        request: Beehiiv.EmailBlastsListRequest = {},
         requestOptions?: EmailBlasts.RequestOptions
-    ): Promise<beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsResponse> {
+    ): Promise<Beehiiv.EmailBlastsListResponse> {
         const { expand, limit, page, direction, orderBy } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
@@ -77,7 +68,7 @@ export class EmailBlasts {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
                 `publications/${publicationId}/email_blasts`
             ),
             method: "GET",
@@ -85,7 +76,7 @@ export class EmailBlasts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
+                "X-Fern-SDK-Version": "0.1.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -95,22 +86,19 @@ export class EmailBlasts {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.EmailBlastsGetPublicationsPublicationIdEmailBlastsResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
+            return await serializers.EmailBlastsListResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new beehiiv.BadRequestError(
+                    throw new Beehiiv.BadRequestError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -120,7 +108,7 @@ export class EmailBlasts {
                         })
                     );
                 case 404:
-                    throw new beehiiv.NotFoundError(
+                    throw new Beehiiv.NotFoundError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -130,7 +118,7 @@ export class EmailBlasts {
                         })
                     );
                 case 429:
-                    throw new beehiiv.TooManyRequestsError(
+                    throw new Beehiiv.TooManyRequestsError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -140,7 +128,7 @@ export class EmailBlasts {
                         })
                     );
                 case 500:
-                    throw new beehiiv.InternalServerError(
+                    throw new Beehiiv.InternalServerError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -150,7 +138,7 @@ export class EmailBlasts {
                         })
                     );
                 default:
-                    throw new errors.beehiivError({
+                    throw new errors.BeehiivError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
@@ -159,14 +147,14 @@ export class EmailBlasts {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.beehiivTimeoutError();
+                throw new errors.BeehiivTimeoutError();
             case "unknown":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     message: _response.error.errorMessage,
                 });
         }
@@ -174,25 +162,20 @@ export class EmailBlasts {
 
     /**
      * Retrieve an Email Blast
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000")
-     *
-     * @example
-     *     await beehiiv.emailBlasts.getPublicationsPublicationIdEmailBlastsEmailBlastId("string", "string", {
-     *         expand: beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdRequestExpandItem.Stats
-     *     })
+     *     await beehiiv.emailBlasts.get("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000")
      */
-    public async getPublicationsPublicationIdEmailBlastsEmailBlastId(
+    public async get(
         publicationId: string,
         emailBlastId: string,
-        request: beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdRequest = {},
+        request: Beehiiv.EmailBlastsGetRequest = {},
         requestOptions?: EmailBlasts.RequestOptions
-    ): Promise<beehiiv.EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdResponse> {
+    ): Promise<Beehiiv.EmailBlastsGetResponse> {
         const { expand } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
@@ -205,7 +188,7 @@ export class EmailBlasts {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
                 `publications/${publicationId}/email_blasts/${emailBlastId}`
             ),
             method: "GET",
@@ -213,7 +196,7 @@ export class EmailBlasts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
+                "X-Fern-SDK-Version": "0.1.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -223,22 +206,19 @@ export class EmailBlasts {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
+            return await serializers.EmailBlastsGetResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new beehiiv.BadRequestError(
+                    throw new Beehiiv.BadRequestError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -248,7 +228,7 @@ export class EmailBlasts {
                         })
                     );
                 case 404:
-                    throw new beehiiv.NotFoundError(
+                    throw new Beehiiv.NotFoundError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -258,7 +238,7 @@ export class EmailBlasts {
                         })
                     );
                 case 429:
-                    throw new beehiiv.TooManyRequestsError(
+                    throw new Beehiiv.TooManyRequestsError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -268,7 +248,7 @@ export class EmailBlasts {
                         })
                     );
                 case 500:
-                    throw new beehiiv.InternalServerError(
+                    throw new Beehiiv.InternalServerError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -278,7 +258,7 @@ export class EmailBlasts {
                         })
                     );
                 default:
-                    throw new errors.beehiivError({
+                    throw new errors.BeehiivError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
@@ -287,14 +267,14 @@ export class EmailBlasts {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.beehiivTimeoutError();
+                throw new errors.BeehiivTimeoutError();
             case "unknown":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     message: _response.error.errorMessage,
                 });
         }

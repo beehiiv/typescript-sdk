@@ -1,2 +1,2 @@
-export * from "./AutomationsGetPublicationsPublicationIdAutomationsResponse";
-export * from "./AutomationsGetPublicationsPublicationIdAutomationsAutomationIdResponse";
+export * from "./AutomationsListResponse";
+export * from "./AutomationsGetResponse";

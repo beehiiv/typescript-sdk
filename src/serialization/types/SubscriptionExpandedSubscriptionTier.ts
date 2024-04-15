@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const SubscriptionExpandedSubscriptionTier: core.serialization.Schema<
     serializers.SubscriptionExpandedSubscriptionTier.Raw,
-    beehiiv.SubscriptionExpandedSubscriptionTier
+    Beehiiv.SubscriptionExpandedSubscriptionTier
 > = core.serialization.enum_(["free", "premium"]);
 
 export declare namespace SubscriptionExpandedSubscriptionTier {

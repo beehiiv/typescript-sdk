@@ -4,14 +4,14 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as beehiiv from "../../..";
+import * as Beehiiv from "../../..";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
 
 export declare namespace BulkSubscriptionUpdates {
     interface Options {
-        environment?: core.Supplier<environments.beehiivEnvironment | string>;
+        environment?: core.Supplier<environments.BeehiivEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         fetcher?: core.FetchFunction;
     }
@@ -27,24 +27,21 @@ export class BulkSubscriptionUpdates {
 
     /**
      * Returns a list of Subscription Update objects for a publication
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpdates("publicationId")
-     *
-     * @example
-     *     await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpdates("string")
+     *     await beehiiv.bulkSubscriptionUpdates.list("publicationId")
      */
-    public async getPublicationsPublicationIdSubcriptionUpdates(
+    public async list(
         publicationId: string,
         requestOptions?: BulkSubscriptionUpdates.RequestOptions
-    ): Promise<beehiiv.BulkSubscriptionUpdatesGetPublicationsPublicationIdSubcriptionUpdatesResponse> {
+    ): Promise<Beehiiv.BulkSubscriptionUpdatesListResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
                 `publications/${publicationId}/bulk_subscription_updates`
             ),
             method: "GET",
@@ -52,7 +49,7 @@ export class BulkSubscriptionUpdates {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
+                "X-Fern-SDK-Version": "0.1.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -61,22 +58,19 @@ export class BulkSubscriptionUpdates {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.BulkSubscriptionUpdatesGetPublicationsPublicationIdSubcriptionUpdatesResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
+            return await serializers.BulkSubscriptionUpdatesListResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new beehiiv.BadRequestError(
+                    throw new Beehiiv.BadRequestError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -86,7 +80,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 case 404:
-                    throw new beehiiv.NotFoundError(
+                    throw new Beehiiv.NotFoundError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -96,7 +90,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 case 429:
-                    throw new beehiiv.TooManyRequestsError(
+                    throw new Beehiiv.TooManyRequestsError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -106,7 +100,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 case 500:
-                    throw new beehiiv.InternalServerError(
+                    throw new Beehiiv.InternalServerError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -116,7 +110,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 default:
-                    throw new errors.beehiivError({
+                    throw new errors.BeehiivError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
@@ -125,14 +119,14 @@ export class BulkSubscriptionUpdates {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.beehiivTimeoutError();
+                throw new errors.BeehiivTimeoutError();
             case "unknown":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     message: _response.error.errorMessage,
                 });
         }
@@ -140,25 +134,22 @@ export class BulkSubscriptionUpdates {
 
     /**
      * Returns a single Subscription Update object for a publication
-     * @throws {@link beehiiv.BadRequestError}
-     * @throws {@link beehiiv.NotFoundError}
-     * @throws {@link beehiiv.TooManyRequestsError}
-     * @throws {@link beehiiv.InternalServerError}
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpdatesId("publicationId", "id")
-     *
-     * @example
-     *     await beehiiv.bulkSubscriptionUpdates.getPublicationsPublicationIdSubcriptionUpdatesId("string", "string")
+     *     await beehiiv.bulkSubscriptionUpdates.get("publicationId", "id")
      */
-    public async getPublicationsPublicationIdSubcriptionUpdatesId(
+    public async get(
         publicationId: string,
         id: string,
         requestOptions?: BulkSubscriptionUpdates.RequestOptions
-    ): Promise<beehiiv.BulkSubscriptionUpdatesGetPublicationsPublicationIdSubcriptionUpdatesIdResponse> {
+    ): Promise<Beehiiv.BulkSubscriptionUpdatesGetResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.beehiivEnvironment.Default,
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
                 `publications/${publicationId}/bulk_subscription_updates/${id}`
             ),
             method: "GET",
@@ -166,7 +157,7 @@ export class BulkSubscriptionUpdates {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.0",
+                "X-Fern-SDK-Version": "0.1.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -175,22 +166,19 @@ export class BulkSubscriptionUpdates {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.BulkSubscriptionUpdatesGetPublicationsPublicationIdSubcriptionUpdatesIdResponse.parseOrThrow(
-                _response.body,
-                {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }
-            );
+            return await serializers.BulkSubscriptionUpdatesGetResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new beehiiv.BadRequestError(
+                    throw new Beehiiv.BadRequestError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -200,7 +188,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 case 404:
-                    throw new beehiiv.NotFoundError(
+                    throw new Beehiiv.NotFoundError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -210,7 +198,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 case 429:
-                    throw new beehiiv.TooManyRequestsError(
+                    throw new Beehiiv.TooManyRequestsError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -220,7 +208,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 case 500:
-                    throw new beehiiv.InternalServerError(
+                    throw new Beehiiv.InternalServerError(
                         await serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -230,7 +218,7 @@ export class BulkSubscriptionUpdates {
                         })
                     );
                 default:
-                    throw new errors.beehiivError({
+                    throw new errors.BeehiivError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
@@ -239,14 +227,14 @@ export class BulkSubscriptionUpdates {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.beehiivTimeoutError();
+                throw new errors.BeehiivTimeoutError();
             case "unknown":
-                throw new errors.beehiivError({
+                throw new errors.BeehiivError({
                     message: _response.error.errorMessage,
                 });
         }

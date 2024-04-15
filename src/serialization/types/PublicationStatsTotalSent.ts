@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const PublicationStatsTotalSent: core.serialization.Schema<
     serializers.PublicationStatsTotalSent.Raw,
-    beehiiv.PublicationStatsTotalSent
+    Beehiiv.PublicationStatsTotalSent
 > = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.boolean()]);
 
 export declare namespace PublicationStatsTotalSent {

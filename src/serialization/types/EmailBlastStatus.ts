@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const EmailBlastStatus: core.serialization.Schema<serializers.EmailBlastStatus.Raw, beehiiv.EmailBlastStatus> =
+export const EmailBlastStatus: core.serialization.Schema<serializers.EmailBlastStatus.Raw, Beehiiv.EmailBlastStatus> =
     core.serialization.enum_(["active", "inactive"]);
 
 export declare namespace EmailBlastStatus {

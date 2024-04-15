@@ -1,1 +1,1 @@
-export { SubscriptionTagsPostPublicationsPublicationIdSubscriptionsSubscriptionIdTagsRequest } from "./SubscriptionTagsPostPublicationsPublicationIdSubscriptionsSubscriptionIdTagsRequest";
+export { SubscriptionTagsCreateRequest } from "./SubscriptionTagsCreateRequest";

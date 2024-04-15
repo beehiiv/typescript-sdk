@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { PostClickStatsEmail } from "./PostClickStatsEmail";
 import { PostClickStatsWeb } from "./PostClickStatsWeb";
 
-export const ClickStats: core.serialization.ObjectSchema<serializers.ClickStats.Raw, beehiiv.ClickStats> =
+export const ClickStats: core.serialization.ObjectSchema<serializers.ClickStats.Raw, Beehiiv.ClickStats> =
     core.serialization.object({
         url: core.serialization.string().optional(),
         email: PostClickStatsEmail.optional(),

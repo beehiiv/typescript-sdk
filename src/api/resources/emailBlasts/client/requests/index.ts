@@ -1,2 +1,2 @@
-export { EmailBlastsGetPublicationsPublicationIdEmailBlastsRequest } from "./EmailBlastsGetPublicationsPublicationIdEmailBlastsRequest";
-export { EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdRequest } from "./EmailBlastsGetPublicationsPublicationIdEmailBlastsEmailBlastIdRequest";
+export { EmailBlastsListRequest } from "./EmailBlastsListRequest";
+export { EmailBlastsGetRequest } from "./EmailBlastsGetRequest";

@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { PostContentFree } from "./PostContentFree";
 import { PostContentPremium } from "./PostContentPremium";
 
-export const PostContent: core.serialization.ObjectSchema<serializers.PostContent.Raw, beehiiv.PostContent> =
+export const PostContent: core.serialization.ObjectSchema<serializers.PostContent.Raw, Beehiiv.PostContent> =
     core.serialization.object({
         free: PostContentFree.optional(),
         premium: PostContentPremium.optional(),

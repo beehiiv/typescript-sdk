@@ -3,11 +3,11 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { MilestoneReward } from "./MilestoneReward";
 
-export const Milestone: core.serialization.ObjectSchema<serializers.Milestone.Raw, beehiiv.Milestone> =
+export const Milestone: core.serialization.ObjectSchema<serializers.Milestone.Raw, Beehiiv.Milestone> =
     core.serialization.object({
         id: core.serialization.string(),
         autoFulfill: core.serialization.property("auto_fulfill", core.serialization.boolean()),

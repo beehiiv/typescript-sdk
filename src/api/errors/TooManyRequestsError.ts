@@ -3,10 +3,10 @@
  */
 
 import * as errors from "../../errors";
-import * as beehiiv from "..";
+import * as Beehiiv from "..";
 
-export class TooManyRequestsError extends errors.beehiivError {
-    constructor(body: beehiiv.Error_) {
+export class TooManyRequestsError extends errors.BeehiivError {
+    constructor(body: Beehiiv.Error_) {
         super({
             message: "TooManyRequestsError",
             statusCode: 429,

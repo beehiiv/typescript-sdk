@@ -3,11 +3,11 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { CustomFieldKind } from "./CustomFieldKind";
 
-export const CustomField: core.serialization.ObjectSchema<serializers.CustomField.Raw, beehiiv.CustomField> =
+export const CustomField: core.serialization.ObjectSchema<serializers.CustomField.Raw, Beehiiv.CustomField> =
     core.serialization.object({
         name: core.serialization.string().optional(),
         kind: CustomFieldKind.optional(),

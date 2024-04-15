@@ -3,13 +3,13 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { MilestoneRewardType } from "./MilestoneRewardType";
 
 export const MilestoneReward: core.serialization.ObjectSchema<
     serializers.MilestoneReward.Raw,
-    beehiiv.MilestoneReward
+    Beehiiv.MilestoneReward
 > = core.serialization.object({
     id: core.serialization.string(),
     name: core.serialization.string(),

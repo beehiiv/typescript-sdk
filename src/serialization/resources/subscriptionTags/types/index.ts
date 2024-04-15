@@ -1,1 +1,1 @@
-export * from "./SubscriptionTagsPostPublicationsPublicationIdSubscriptionsSubscriptionIdTagsResponse";
+export * from "./SubscriptionTagsCreateResponse";

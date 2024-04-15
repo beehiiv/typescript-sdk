@@ -1,1 +1,1 @@
-export * from "./ReferralProgramGetPublicationsPublicReferralProgramResponse";
+export * from "./ReferralProgramGetResponse";

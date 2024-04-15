@@ -1,1 +1,1 @@
-export { AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysRequest } from "./AutomationJourneysPostPublicationsPublicationIdAutomationsAutomationIdJourneysRequest";
+export { AutomationJourneysCreateRequest } from "./AutomationJourneysCreateRequest";

@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const MilestoneRewardType: core.serialization.Schema<
     serializers.MilestoneRewardType.Raw,
-    beehiiv.MilestoneRewardType
+    Beehiiv.MilestoneRewardType
 > = core.serialization.enum_(["physical", "promo_code"]);
 
 export declare namespace MilestoneRewardType {

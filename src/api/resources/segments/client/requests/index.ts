@@ -1,2 +1,2 @@
-export { SegmentsGetPublicationsPublicationIdSegmentsRequest } from "./SegmentsGetPublicationsPublicationIdSegmentsRequest";
-export { SegmentsGetPublicationsPublicationIdSegmentsSegmentIdResultsRequest } from "./SegmentsGetPublicationsPublicationIdSegmentsSegmentIdResultsRequest";
+export { SegmentsListRequest } from "./SegmentsListRequest";
+export { SegmentsGetRequest } from "./SegmentsGetRequest";

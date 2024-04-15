@@ -3,10 +3,10 @@
  */
 
 import * as errors from "../../errors";
-import * as beehiiv from "..";
+import * as Beehiiv from "..";
 
-export class NotFoundError extends errors.beehiivError {
-    constructor(body: beehiiv.Error_) {
+export class NotFoundError extends errors.BeehiivError {
+    constructor(body: Beehiiv.Error_) {
         super({
             message: "NotFoundError",
             statusCode: 404,

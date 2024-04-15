@@ -1,1 +1,1 @@
-export { AutomationsGetPublicationsPublicationIdAutomationsRequest } from "./AutomationsGetPublicationsPublicationIdAutomationsRequest";
+export { AutomationsListRequest } from "./AutomationsListRequest";

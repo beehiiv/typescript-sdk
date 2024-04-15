@@ -3,13 +3,13 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { CustomField } from "./CustomField";
 
 export const SubscriptionCustomFields: core.serialization.Schema<
     serializers.SubscriptionCustomFields.Raw,
-    beehiiv.SubscriptionCustomFields
+    Beehiiv.SubscriptionCustomFields
 > = core.serialization.list(CustomField);
 
 export declare namespace SubscriptionCustomFields {

@@ -3,11 +3,11 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { PublicationStats } from "./PublicationStats";
 
-export const Publication: core.serialization.ObjectSchema<serializers.Publication.Raw, beehiiv.Publication> =
+export const Publication: core.serialization.ObjectSchema<serializers.Publication.Raw, Beehiiv.Publication> =
     core.serialization.object({
         id: core.serialization.string(),
         name: core.serialization.string(),

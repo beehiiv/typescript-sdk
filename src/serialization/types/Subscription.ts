@@ -3,7 +3,7 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { SubscriptionExpandedStatus } from "./SubscriptionExpandedStatus";
 import { SubscriptionExpandedSubscriptionTier } from "./SubscriptionExpandedSubscriptionTier";
@@ -13,7 +13,7 @@ import { SubscriptionStats } from "./SubscriptionStats";
 import { SubscriptionTags } from "./SubscriptionTags";
 import { CustomField } from "./CustomField";
 
-export const Subscription: core.serialization.ObjectSchema<serializers.Subscription.Raw, beehiiv.Subscription> =
+export const Subscription: core.serialization.ObjectSchema<serializers.Subscription.Raw, Beehiiv.Subscription> =
     core.serialization.object({
         id: core.serialization.string(),
         email: core.serialization.string(),

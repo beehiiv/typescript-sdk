@@ -1,2 +1,2 @@
-export { PostsGetPostsRequest } from "./PostsGetPostsRequest";
-export { PostsGetPostsPostIdRequest } from "./PostsGetPostsPostIdRequest";
+export { PostsListRequest } from "./PostsListRequest";
+export { PostsGetRequest } from "./PostsGetRequest";

@@ -3,10 +3,10 @@
  */
 
 import * as errors from "../../errors";
-import * as beehiiv from "..";
+import * as Beehiiv from "..";
 
-export class BadRequestError extends errors.beehiivError {
-    constructor(body: beehiiv.Error_) {
+export class BadRequestError extends errors.BeehiivError {
+    constructor(body: Beehiiv.Error_) {
         super({
             message: "BadRequestError",
             statusCode: 400,

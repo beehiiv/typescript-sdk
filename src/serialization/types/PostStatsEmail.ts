@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const PostStatsEmail: core.serialization.ObjectSchema<serializers.PostStatsEmail.Raw, beehiiv.PostStatsEmail> =
+export const PostStatsEmail: core.serialization.ObjectSchema<serializers.PostStatsEmail.Raw, Beehiiv.PostStatsEmail> =
     core.serialization.object({
         recipients: core.serialization.number().optional(),
         opens: core.serialization.number().optional(),

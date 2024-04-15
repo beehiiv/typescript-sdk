@@ -1,2 +1,2 @@
-export { PublicationsGetPublicationsRequest } from "./PublicationsGetPublicationsRequest";
-export { PublicationsGetPublicationsPublicationIdRequest } from "./PublicationsGetPublicationsPublicationIdRequest";
+export { PublicationsListRequest } from "./PublicationsListRequest";
+export { PublicationsGetRequest } from "./PublicationsGetRequest";

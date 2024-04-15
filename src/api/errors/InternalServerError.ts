@@ -3,10 +3,10 @@
  */
 
 import * as errors from "../../errors";
-import * as beehiiv from "..";
+import * as Beehiiv from "..";
 
-export class InternalServerError extends errors.beehiivError {
-    constructor(body: beehiiv.Error_) {
+export class InternalServerError extends errors.BeehiivError {
+    constructor(body: Beehiiv.Error_) {
         super({
             message: "InternalServerError",
             statusCode: 500,

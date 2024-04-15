@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const SegmentType: core.serialization.Schema<serializers.SegmentType.Raw, beehiiv.SegmentType> =
+export const SegmentType: core.serialization.Schema<serializers.SegmentType.Raw, Beehiiv.SegmentType> =
     core.serialization.enum_(["dynamic", "static", "manual"]);
 
 export declare namespace SegmentType {

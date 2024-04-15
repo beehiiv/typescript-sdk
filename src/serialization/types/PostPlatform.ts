@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const PostPlatform: core.serialization.Schema<serializers.PostPlatform.Raw, beehiiv.PostPlatform> =
+export const PostPlatform: core.serialization.Schema<serializers.PostPlatform.Raw, Beehiiv.PostPlatform> =
     core.serialization.enum_(["web", "email", "both"]);
 
 export declare namespace PostPlatform {

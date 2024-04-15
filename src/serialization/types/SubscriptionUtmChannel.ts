@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const SubscriptionUtmChannel: core.serialization.Schema<
     serializers.SubscriptionUtmChannel.Raw,
-    beehiiv.SubscriptionUtmChannel
+    Beehiiv.SubscriptionUtmChannel
 > = core.serialization.enum_([
     "",
     "website",

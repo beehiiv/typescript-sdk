@@ -3,13 +3,13 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { EmailBlastContentEmail } from "./EmailBlastContentEmail";
 
 export const EmailBlastContent: core.serialization.ObjectSchema<
     serializers.EmailBlastContent.Raw,
-    beehiiv.EmailBlastContent
+    Beehiiv.EmailBlastContent
 > = core.serialization.object({
     email: EmailBlastContentEmail.optional(),
 });

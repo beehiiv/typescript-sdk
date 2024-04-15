@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const PostClickStatsEmail: core.serialization.ObjectSchema<
     serializers.PostClickStatsEmail.Raw,
-    beehiiv.PostClickStatsEmail
+    Beehiiv.PostClickStatsEmail
 > = core.serialization.object({
     clicks: core.serialization.number().optional(),
     uniqueClicks: core.serialization.property("unique_clicks", core.serialization.number().optional()),

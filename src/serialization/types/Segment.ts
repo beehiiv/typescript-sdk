@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { SegmentType } from "./SegmentType";
 import { SegmentStatus } from "./SegmentStatus";
 
-export const Segment: core.serialization.ObjectSchema<serializers.Segment.Raw, beehiiv.Segment> =
+export const Segment: core.serialization.ObjectSchema<serializers.Segment.Raw, Beehiiv.Segment> =
     core.serialization.object({
         id: core.serialization.string(),
         name: core.serialization.string(),

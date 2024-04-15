@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const SubscriptionStatus: core.serialization.Schema<
     serializers.SubscriptionStatus.Raw,
-    beehiiv.SubscriptionStatus
+    Beehiiv.SubscriptionStatus
 > = core.serialization.enum_(["validating", "invalid", "pending", "active", "inactive", "needs_attention"]);
 
 export declare namespace SubscriptionStatus {

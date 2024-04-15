@@ -3,11 +3,11 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { ErrorErrorsItem } from "./ErrorErrorsItem";
 
-export const Error_: core.serialization.ObjectSchema<serializers.Error_.Raw, beehiiv.Error_> =
+export const Error_: core.serialization.ObjectSchema<serializers.Error_.Raw, Beehiiv.Error_> =
     core.serialization.object({
         status: core.serialization.string(),
         statusText: core.serialization.string(),

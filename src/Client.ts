@@ -16,9 +16,9 @@ import { AutomationJourneys } from "./api/resources/automationJourneys/client/Cl
 import { Automations } from "./api/resources/automations/client/Client";
 import { SubscriptionTags } from "./api/resources/subscriptionTags/client/Client";
 
-export declare namespace beehiivClient {
+export declare namespace BeehiivClient {
     interface Options {
-        environment?: core.Supplier<environments.beehiivEnvironment | string>;
+        environment?: core.Supplier<environments.BeehiivEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         fetcher?: core.FetchFunction;
     }
@@ -29,8 +29,8 @@ export declare namespace beehiivClient {
     }
 }
 
-export class beehiivClient {
-    constructor(protected readonly _options: beehiivClient.Options) {}
+export class BeehiivClient {
+    constructor(protected readonly _options: BeehiivClient.Options) {}
 
     protected _publications: Publications | undefined;
 

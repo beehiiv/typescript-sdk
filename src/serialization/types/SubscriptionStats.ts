@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const SubscriptionStats: core.serialization.ObjectSchema<
     serializers.SubscriptionStats.Raw,
-    beehiiv.SubscriptionStats
+    Beehiiv.SubscriptionStats
 > = core.serialization.object({
     emailsReceived: core.serialization.property("emails_received", core.serialization.number().optional()),
     openRate: core.serialization.property("open_rate", core.serialization.number().optional()),

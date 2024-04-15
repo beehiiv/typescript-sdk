@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
 export const PostContentFree: core.serialization.ObjectSchema<
     serializers.PostContentFree.Raw,
-    beehiiv.PostContentFree
+    Beehiiv.PostContentFree
 > = core.serialization.object({
     web: core.serialization.string().optional(),
     email: core.serialization.string().optional(),

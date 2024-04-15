@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const PostStatsWeb: core.serialization.ObjectSchema<serializers.PostStatsWeb.Raw, beehiiv.PostStatsWeb> =
+export const PostStatsWeb: core.serialization.ObjectSchema<serializers.PostStatsWeb.Raw, Beehiiv.PostStatsWeb> =
     core.serialization.object({
         views: core.serialization.number().optional(),
         clicks: core.serialization.number().optional(),

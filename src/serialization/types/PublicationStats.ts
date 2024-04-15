@@ -3,7 +3,7 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { PublicationStatsActiveSubscriptions } from "./PublicationStatsActiveSubscriptions";
 import { PublicationStatsActivePremiumSubscriptions } from "./PublicationStatsActivePremiumSubscriptions";
@@ -16,7 +16,7 @@ import { PublicationStatsTotalClicked } from "./PublicationStatsTotalClicked";
 
 export const PublicationStats: core.serialization.ObjectSchema<
     serializers.PublicationStats.Raw,
-    beehiiv.PublicationStats
+    Beehiiv.PublicationStats
 > = core.serialization.object({
     activeSubscriptions: core.serialization.property(
         "active_subscriptions",

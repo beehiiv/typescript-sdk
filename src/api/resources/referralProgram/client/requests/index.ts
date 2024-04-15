@@ -1,1 +1,1 @@
-export { ReferralProgramGetPublicationsPublicReferralProgramRequest } from "./ReferralProgramGetPublicationsPublicReferralProgramRequest";
+export { ReferralProgramGetRequest } from "./ReferralProgramGetRequest";

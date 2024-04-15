@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 
-export const SegmentStatus: core.serialization.Schema<serializers.SegmentStatus.Raw, beehiiv.SegmentStatus> =
+export const SegmentStatus: core.serialization.Schema<serializers.SegmentStatus.Raw, Beehiiv.SegmentStatus> =
     core.serialization.enum_(["pending", "processing", "completed", "failed"]);
 
 export declare namespace SegmentStatus {

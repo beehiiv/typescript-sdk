@@ -3,13 +3,13 @@
  */
 
 import * as serializers from "..";
-import * as beehiiv from "../../api";
+import * as Beehiiv from "../../api";
 import * as core from "../../core";
 import { EmailBlastStatus } from "./EmailBlastStatus";
 import { EmailBlastStats } from "./EmailBlastStats";
 import { EmailBlastContent } from "./EmailBlastContent";
 
-export const EmailBlast: core.serialization.ObjectSchema<serializers.EmailBlast.Raw, beehiiv.EmailBlast> =
+export const EmailBlast: core.serialization.ObjectSchema<serializers.EmailBlast.Raw, Beehiiv.EmailBlast> =
     core.serialization.object({
         id: core.serialization.string(),
         created: core.serialization.number(),

@@ -6,12 +6,12 @@ import * as serializers from "../../../..";
 import * as Beehiiv from "../../../../../api";
 import * as core from "../../../../../core";
 import { CustomFieldValue } from "../../../../types/CustomFieldValue";
-import { SubscriptionsPostRequestDoubleOptOverride } from "../../types/SubscriptionsPostRequestDoubleOptOverride";
-import { SubscriptionsPostRequestTier } from "../../types/SubscriptionsPostRequestTier";
+import { SubscriptionsCreateRequestDoubleOptOverride } from "../../types/SubscriptionsCreateRequestDoubleOptOverride";
+import { SubscriptionsCreateRequestTier } from "../../types/SubscriptionsCreateRequestTier";
 
-export const SubscriptionsPostRequest: core.serialization.Schema<
-    serializers.SubscriptionsPostRequest.Raw,
-    Omit<Beehiiv.SubscriptionsPostRequest, "undefined">
+export const SubscriptionsCreateRequest: core.serialization.Schema<
+    serializers.SubscriptionsCreateRequest.Raw,
+    Omit<Beehiiv.SubscriptionsCreateRequest, "undefined">
 > = core.serialization.object({
     email: core.serialization.string(),
     reactivateExisting: core.serialization.property("reactivate_existing", core.serialization.boolean().optional()),
@@ -24,16 +24,16 @@ export const SubscriptionsPostRequest: core.serialization.Schema<
     customFields: core.serialization.property("custom_fields", core.serialization.list(CustomFieldValue).optional()),
     doubleOptOverride: core.serialization.property(
         "double_opt_override",
-        SubscriptionsPostRequestDoubleOptOverride.optional()
+        SubscriptionsCreateRequestDoubleOptOverride.optional()
     ),
-    tier: SubscriptionsPostRequestTier.optional(),
+    tier: SubscriptionsCreateRequestTier.optional(),
     automationIds: core.serialization.property(
         "automation_ids",
         core.serialization.list(core.serialization.string()).optional()
     ),
 });
 
-export declare namespace SubscriptionsPostRequest {
+export declare namespace SubscriptionsCreateRequest {
     interface Raw {
         email: string;
         reactivate_existing?: boolean | null;
@@ -44,8 +44,8 @@ export declare namespace SubscriptionsPostRequest {
         referring_site?: string | null;
         referral_code?: string | null;
         custom_fields?: CustomFieldValue.Raw[] | null;
-        double_opt_override?: SubscriptionsPostRequestDoubleOptOverride.Raw | null;
-        tier?: SubscriptionsPostRequestTier.Raw | null;
+        double_opt_override?: SubscriptionsCreateRequestDoubleOptOverride.Raw | null;
+        tier?: SubscriptionsCreateRequestTier.Raw | null;
         automation_ids?: string[] | null;
     }
 }

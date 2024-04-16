@@ -4,6 +4,6 @@
 
 import * as Beehiiv from "../../..";
 
-export interface SubscriptionsPostResponse {
+export interface SubscriptionsCreateResponse {
     data: Beehiiv.Subscription;
 }

@@ -90,7 +90,7 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -182,7 +182,7 @@ export class Subscriptions {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.post("pub_00000000-0000-0000-0000-000000000000", {
+     *     await beehiiv.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
      *         email: "bruce.wayne@wayneenterprise.com",
      *         reactivateExisting: false,
      *         sendWelcomeEmail: false,
@@ -200,11 +200,11 @@ export class Subscriptions {
      *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
      *     })
      */
-    public async post(
+    public async create(
         publicationId: string,
-        request: Beehiiv.SubscriptionsPostRequest,
+        request: Beehiiv.SubscriptionsCreateRequest,
         requestOptions?: Subscriptions.RequestOptions
-    ): Promise<Beehiiv.SubscriptionsPostResponse> {
+    ): Promise<Beehiiv.SubscriptionsCreateResponse> {
         const { undefined, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (undefined != null) {
@@ -221,18 +221,18 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
-            body: await serializers.SubscriptionsPostRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.SubscriptionsCreateRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionsPostResponse.parseOrThrow(_response.body, {
+            return await serializers.SubscriptionsCreateResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -331,7 +331,7 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -440,7 +440,7 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -560,7 +560,7 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -673,7 +673,7 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

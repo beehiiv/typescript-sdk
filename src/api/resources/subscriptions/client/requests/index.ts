@@ -1,5 +1,5 @@
 export { SubscriptionsListRequest } from "./SubscriptionsListRequest";
-export { SubscriptionsPostRequest } from "./SubscriptionsPostRequest";
+export { SubscriptionsCreateRequest } from "./SubscriptionsCreateRequest";
 export { SubscriptionsPutRequest } from "./SubscriptionsPutRequest";
 export { SubscriptionsPatchRequest } from "./SubscriptionsPatchRequest";
 export { SubscriptionsGetRequest } from "./SubscriptionsGetRequest";

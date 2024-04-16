@@ -5,9 +5,9 @@
 /**
  * The tier for this subscription.
  */
-export type SubscriptionsPostRequestTier = "free" | "premium";
+export type SubscriptionsCreateRequestTier = "free" | "premium";
 
-export const SubscriptionsPostRequestTier = {
+export const SubscriptionsCreateRequestTier = {
     Free: "free",
     Premium: "premium",
 } as const;

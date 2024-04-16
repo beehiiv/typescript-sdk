@@ -7,14 +7,14 @@ import * as Beehiiv from "../../../../api";
 import * as core from "../../../../core";
 import { Subscription } from "../../../types/Subscription";
 
-export const SubscriptionsPostResponse: core.serialization.ObjectSchema<
-    serializers.SubscriptionsPostResponse.Raw,
-    Beehiiv.SubscriptionsPostResponse
+export const SubscriptionsCreateResponse: core.serialization.ObjectSchema<
+    serializers.SubscriptionsCreateResponse.Raw,
+    Beehiiv.SubscriptionsCreateResponse
 > = core.serialization.object({
     data: Subscription,
 });
 
-export declare namespace SubscriptionsPostResponse {
+export declare namespace SubscriptionsCreateResponse {
     interface Raw {
         data: Subscription.Raw;
     }

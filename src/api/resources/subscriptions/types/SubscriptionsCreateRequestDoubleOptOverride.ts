@@ -5,9 +5,9 @@
 /**
  * Override publication double-opt settings for this subscription.
  */
-export type SubscriptionsPostRequestDoubleOptOverride = "on" | "off" | "not_set";
+export type SubscriptionsCreateRequestDoubleOptOverride = "on" | "off" | "not_set";
 
-export const SubscriptionsPostRequestDoubleOptOverride = {
+export const SubscriptionsCreateRequestDoubleOptOverride = {
     On: "on",
     Off: "off",
     NotSet: "not_set",

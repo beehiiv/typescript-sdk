@@ -626,7 +626,7 @@ await beehiiv.subscriptions.list("pub_00000000-0000-0000-0000-000000000000", {
 </details>
 
 
-<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">post</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionsPostResponse</code> </summary>
+<details><summary> <code>beehiiv.subscriptions.<a href="./src/api/resources/subscriptions/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionsCreateResponse</code> </summary>
 
 <dl>
 
@@ -663,7 +663,7 @@ Create new subscriptions for a publication.
 <dd>
 
 ```ts
-await beehiiv.subscriptions.post("pub_00000000-0000-0000-0000-000000000000", {
+await beehiiv.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
     email: "bruce.wayne@wayneenterprise.com",
     reactivateExisting: false,
     sendWelcomeEmail: false,
@@ -713,7 +713,7 @@ await beehiiv.subscriptions.post("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 
-**request: `Beehiiv.SubscriptionsPostRequest`** 
+**request: `Beehiiv.SubscriptionsCreateRequest`** 
 
 
 </dd>

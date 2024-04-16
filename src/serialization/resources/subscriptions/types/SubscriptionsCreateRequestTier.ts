@@ -6,11 +6,11 @@ import * as serializers from "../../..";
 import * as Beehiiv from "../../../../api";
 import * as core from "../../../../core";
 
-export const SubscriptionsPostRequestTier: core.serialization.Schema<
-    serializers.SubscriptionsPostRequestTier.Raw,
-    Beehiiv.SubscriptionsPostRequestTier
+export const SubscriptionsCreateRequestTier: core.serialization.Schema<
+    serializers.SubscriptionsCreateRequestTier.Raw,
+    Beehiiv.SubscriptionsCreateRequestTier
 > = core.serialization.enum_(["free", "premium"]);
 
-export declare namespace SubscriptionsPostRequestTier {
+export declare namespace SubscriptionsCreateRequestTier {
     type Raw = "free" | "premium";
 }

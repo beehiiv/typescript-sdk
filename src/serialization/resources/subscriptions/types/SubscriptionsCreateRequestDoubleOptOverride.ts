@@ -6,11 +6,11 @@ import * as serializers from "../../..";
 import * as Beehiiv from "../../../../api";
 import * as core from "../../../../core";
 
-export const SubscriptionsPostRequestDoubleOptOverride: core.serialization.Schema<
-    serializers.SubscriptionsPostRequestDoubleOptOverride.Raw,
-    Beehiiv.SubscriptionsPostRequestDoubleOptOverride
+export const SubscriptionsCreateRequestDoubleOptOverride: core.serialization.Schema<
+    serializers.SubscriptionsCreateRequestDoubleOptOverride.Raw,
+    Beehiiv.SubscriptionsCreateRequestDoubleOptOverride
 > = core.serialization.enum_(["on", "off", "not_set"]);
 
-export declare namespace SubscriptionsPostRequestDoubleOptOverride {
+export declare namespace SubscriptionsCreateRequestDoubleOptOverride {
     type Raw = "on" | "off" | "not_set";
 }

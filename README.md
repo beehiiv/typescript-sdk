@@ -32,15 +32,10 @@ import { Intercom } from "npm:intercom";
 import { BeehiivClient, Beehiiv } from 'beehiiv';
 
 const beehiv = new BeehiivClient({
-  token: "...", // Defaults to process.env.BEEHIIV_API_KEY
+  token: "token...", // Defaults to process.env.BEEHIIV_API_KEY
 });
 
-const postSubscriptionsResponse = await beehiv.subscriptions.create(
-    "pub_...", 
-    {
-        email: "...@email.com"
-    }
-);
+const postSubscriptionsResponse = await beehiv.subscriptions.list("pub_id...");
 ```
 
 ## Request and Response Types
@@ -71,7 +66,7 @@ try {
    await beehiv.subscriptions.create(
       "pub_11c6387f-1d31-40c7-85ee-4a2da0c63001", 
       {
-          email: "bsinghvi2@gmail.com",
+          email: "...@email.com",
       },
   );
 } catch (err) {

@@ -22,15 +22,15 @@ export interface SegmentsListRequest {
      */
     limit?: number;
     /**
-     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br>If not specified, results 1-10 from page 1 will be returned.
+     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br />If not specified, results 1-10 from page 1 will be returned.
      */
     page?: number;
     /**
-     * The field that the results are sorted by. Defaults to created<br> `created` - The time in which the segment was first created.<br> `last_calculated` - The time that the segment last completed calculation. Measured in seconds since the Unix epoch.
+     * The field that the results are sorted by. Defaults to created<br /> `created` - The time in which the segment was first created.<br /> `last_calculated` - The time that the segment last completed calculation. Measured in seconds since the Unix epoch.
      */
     orderBy?: Beehiiv.SegmentsListRequestOrderBy;
     /**
-     * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
+     * The direction that the results are sorted in. Defaults to asc<br /> `asc` - Ascending, sorts from smallest to largest.<br /> `desc` - Descending, sorts from largest to smallest.
      */
     direction?: Beehiiv.SegmentsListRequestDirection;
 }

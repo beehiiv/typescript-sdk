@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "version": "0.1.2",
+    "name": "beehiiv",
+    "version": "0.1.3",
     "private": false,
     "repository": "https://github.com/fern-demo/beehiiv-typescript",
     "main": "./index.js",

@@ -12,7 +12,7 @@ import * as Beehiiv from "../../../..";
  */
 export interface SubscriptionsListRequest {
     /**
-     * Optional list of expandable objects.<br>`stats` - Returns statistics about the subscription(s).<br>`custom_fields` - Returns an array of custom field values that have been set on the subscription.<br>`referrals` - Returns an array of subscriptions with limited data - `id`, `email`, and `status`. These are the subscriptions that were referred by this subscription.
+     * Optional list of expandable objects.<br />`stats` - Returns statistics about the subscription(s).<br />`custom_fields` - Returns an array of custom field values that have been set on the subscription.<br />`referrals` - Returns an array of subscriptions with limited data - `id`, `email`, and `status`. These are the subscriptions that were referred by this subscription.
      */
     expand?: Beehiiv.SubscriptionsListRequestExpandItem | Beehiiv.SubscriptionsListRequestExpandItem[];
     /**
@@ -28,19 +28,19 @@ export interface SubscriptionsListRequest {
      */
     limit?: number;
     /**
-     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br>If not specified, results 1-10 from page 1 will be returned.
+     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br />If not specified, results 1-10 from page 1 will be returned.
      */
     page?: number;
     /**
-     * Optional email address to find a subscription.<br>This param must be an exact match and is case insensitive.
+     * Optional email address to find a subscription.<br />This param must be an exact match and is case insensitive.
      */
     email?: string;
     /**
-     * The field that the results are sorted by. Defaults to created<br> `created` - The time in which the subscription was first created.<br> `email` - The email address of the subscription.
+     * The field that the results are sorted by. Defaults to created<br /> `created` - The time in which the subscription was first created.<br /> `email` - The email address of the subscription.
      */
     orderBy?: Beehiiv.SubscriptionsListRequestOrderBy;
     /**
-     * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
+     * The direction that the results are sorted in. Defaults to asc<br /> `asc` - Ascending, sorts from smallest to largest.<br /> `desc` - Descending, sorts from largest to smallest.
      */
     direction?: Beehiiv.SubscriptionsListRequestDirection;
 }

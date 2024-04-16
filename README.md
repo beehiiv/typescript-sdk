@@ -2,7 +2,7 @@
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/)
 
-The Beehiiv TypeScript library provides convenient access to the Intercom API from JavaScript/TypeScript.
+The Beehiiv TypeScript library provides convenient access to the Beehiiv Public API from JavaScript/TypeScript.
 
 ## Documentation
 
@@ -23,7 +23,7 @@ yarn add beehiiv
 In Deno (1.25+) you can import by doing: 
 
 ```ts
-import { Intercom } from "npm:intercom";
+import { Beehiv } from "npm:beehiv";
 ```
 
 ## Usage
@@ -31,11 +31,16 @@ import { Intercom } from "npm:intercom";
 ```typescript
 import { BeehiivClient, Beehiiv } from 'beehiiv';
 
-const beehiv = new BeehiivClient({
+const beehiiv = new BeehiivClient({
   token: "token...", // Defaults to process.env.BEEHIIV_API_KEY
 });
 
-const postSubscriptionsResponse = await beehiv.subscriptions.list("pub_id...");
+const response =  await beehiiv.subscriptions.create(
+    "pub_11c6387f-1d31-40c7-85ee-4a2da0c63001", 
+    {
+        email: "...@email.com",
+    },
+);
 ```
 
 ## Request and Response Types
@@ -63,7 +68,7 @@ a subclass of [BeehiivError](./src/errors/BeehiivError.ts) will be thrown:
 import { BeehiivError } from 'beehiiv';
 
 try {
-   await beehiv.subscriptions.create(
+   await beehiiv.subscriptions.create(
       "pub_11c6387f-1d31-40c7-85ee-4a2da0c63001", 
       {
           email: "...@email.com",
@@ -76,6 +81,67 @@ try {
     console.log(err.body); 
   }
 }
+```
+
+## Retries
+
+The TypeScript SDK is instrumented with automatic retries with exponential backoff. A request will be
+retried as long as the request is deemed retriable and the number of retry attempts has not grown larger
+than the configured retry limit (default: 2).
+
+A request is deemed retriable when any of the following HTTP status codes is returned:
+
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+  
+Use the `maxRetries` request option to configure this behavior. 
+
+```ts
+const response = await beehiiv.subscriptions.create(..., {
+  maxRetries: 0 // override maxRetries at the request level
+});
+```
+
+## Timeouts
+
+The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to 
+configure this behavior. 
+
+```ts
+const response = await beehiiv.subscriptions.create(..., {
+  timeoutInSeconds: 30 // override timeout to 30s
+});
+```
+
+## Runtime compatiblity
+
+The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK 
+works in the following runtimes: 
+
+The following runtimes are supported:
+
+- Node.js 15+ 
+- Vercel 
+- Cloudflare Workers
+- Deno v1.25+
+- Bun 1.0+
+- React Native
+
+### Customizing Fetch client
+
+The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're 
+running in an unsupported environment, this provides a way for you to break the glass and 
+ensure the SDK works. 
+
+```ts
+import { BeehiivClient } from 'beehiiv';
+
+const beehiiv = new BeehiivClient({
+  apiKey: "...",
+  fetcher: // provide your implementation here
+});
 ```
 
 ## Beta status

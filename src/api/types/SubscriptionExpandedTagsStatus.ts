@@ -3,7 +3,7 @@
  */
 
 /**
- * The status of the subscription.<br>`validating` - The email address is being validated.<br>`invalid` - The email address is invalid.<br>`pending` - The email address is valid, but the subscription is pending double opt-in.<br>`active` - The email was valid and the subscription is active.<br>`inactive` - The subscription was made inactive, possibly due to an unsubscribe.<br>`needs_attention` - The subscription requires approval or denial.
+ * The status of the subscription.<br />`validating` - The email address is being validated.<br />`invalid` - The email address is invalid.<br />`pending` - The email address is valid, but the subscription is pending double opt-in.<br />`active` - The email was valid and the subscription is active.<br />`inactive` - The subscription was made inactive, possibly due to an unsubscribe.<br />`needs_attention` - The subscription requires approval or denial.
  */
 export type SubscriptionExpandedTagsStatus =
     | "validating"

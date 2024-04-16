@@ -15,7 +15,7 @@ export interface Post {
     authors: string[];
     /** The time the post was created. Measured in seconds since the Unix epoch */
     created: number;
-    /** The status of the post.<br>`draft` - not been scheduled.<br>`confirmed` - The post will be active after the `scheduled_at`.<br>`archived` - The post is no longer active. */
+    /** The status of the post.<br />`draft` - not been scheduled.<br />`confirmed` - The post will be active after the `scheduled_at`.<br />`archived` - The post is no longer active. */
     status: Beehiiv.PostStatus;
     /** The time the post was set to be published. Measured in seconds since the Unix epoch */
     publishDate?: number;

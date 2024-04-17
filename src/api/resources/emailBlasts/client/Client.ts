@@ -34,6 +34,15 @@ export class EmailBlasts {
      *
      * @example
      *     await beehiiv.emailBlasts.list("pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.emailBlasts.list("string", {
+     *         expand: Beehiiv.EmailBlastsListRequestExpandItem.Stats,
+     *         limit: 1,
+     *         page: 1,
+     *         direction: Beehiiv.EmailBlastsListRequestDirection.Asc,
+     *         orderBy: Beehiiv.EmailBlastsListRequestOrderBy.Created
+     *     })
      */
     public async list(
         publicationId: string,
@@ -75,8 +84,8 @@ export class EmailBlasts {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -169,6 +178,11 @@ export class EmailBlasts {
      *
      * @example
      *     await beehiiv.emailBlasts.get("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.emailBlasts.get("string", "string", {
+     *         expand: Beehiiv.EmailBlastsGetRequestExpandItem.Stats
+     *     })
      */
     public async get(
         publicationId: string,
@@ -195,8 +209,8 @@ export class EmailBlasts {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

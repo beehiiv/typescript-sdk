@@ -34,6 +34,20 @@ export class Posts {
      *
      * @example
      *     await beehiiv.posts.list("pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.posts.list("string", {
+     *         expand: Beehiiv.PostsListRequestExpandItem.Stats,
+     *         audience: Beehiiv.PostsListRequestAudience.Free,
+     *         platform: Beehiiv.PostsListRequestPlatform.Web,
+     *         status: Beehiiv.PostsListRequestStatus.Draft,
+     *         contentTags: "string",
+     *         limit: 1,
+     *         page: 1,
+     *         orderBy: Beehiiv.PostsListRequestOrderBy.Created,
+     *         direction: Beehiiv.PostsListRequestDirection.Asc,
+     *         hiddenFromFeed: Beehiiv.PostsListRequestHiddenFromFeed.All
+     *     })
      */
     public async list(
         publicationId: string,
@@ -100,8 +114,8 @@ export class Posts {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -194,6 +208,11 @@ export class Posts {
      *
      * @example
      *     await beehiiv.posts.get("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.posts.get("string", "string", {
+     *         expand: Beehiiv.PostsGetRequestExpandItem.Stats
+     *     })
      */
     public async get(
         postId: string,
@@ -220,8 +239,8 @@ export class Posts {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -314,6 +333,9 @@ export class Posts {
      *
      * @example
      *     await beehiiv.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.posts.delete("string", "string")
      */
     public async delete(
         postId: string,
@@ -329,8 +351,8 @@ export class Posts {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

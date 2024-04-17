@@ -36,6 +36,11 @@ export class SubscriptionTags {
      *     await beehiiv.subscriptionTags.create("publicationId", "subscriptionId", {
      *         tags: ["Premium"]
      *     })
+     *
+     * @example
+     *     await beehiiv.subscriptionTags.create("string", "string", {
+     *         tags: ["Premium"]
+     *     })
      */
     public async create(
         publicationId: string,
@@ -52,14 +57,16 @@ export class SubscriptionTags {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             body: await serializers.SubscriptionTagsCreateRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,

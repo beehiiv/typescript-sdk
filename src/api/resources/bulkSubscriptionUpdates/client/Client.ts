@@ -34,6 +34,9 @@ export class BulkSubscriptionUpdates {
      *
      * @example
      *     await beehiiv.bulkSubscriptionUpdates.list("publicationId")
+     *
+     * @example
+     *     await beehiiv.bulkSubscriptionUpdates.list("string")
      */
     public async list(
         publicationId: string,
@@ -48,8 +51,8 @@ export class BulkSubscriptionUpdates {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -141,6 +144,9 @@ export class BulkSubscriptionUpdates {
      *
      * @example
      *     await beehiiv.bulkSubscriptionUpdates.get("publicationId", "id")
+     *
+     * @example
+     *     await beehiiv.bulkSubscriptionUpdates.get("string", "string")
      */
     public async get(
         publicationId: string,
@@ -156,8 +162,8 @@ export class BulkSubscriptionUpdates {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

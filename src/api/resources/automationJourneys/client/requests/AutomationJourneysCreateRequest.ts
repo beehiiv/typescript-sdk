@@ -10,6 +10,36 @@ import * as Beehiiv from "../../../..";
  *         email: "example@example.com",
  *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
  *     }
+ *
+ * @example
+ *     {
+ *         email: "example@example.com",
+ *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
+ *     }
+ *
+ * @example
+ *     {
+ *         email: "example@example.com",
+ *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
+ *     }
+ *
+ * @example
+ *     {
+ *         email: "example@example.com",
+ *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
+ *     }
+ *
+ * @example
+ *     {
+ *         email: "example@example.com",
+ *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
+ *     }
+ *
+ * @example
+ *     {
+ *         email: "example@example.com",
+ *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000"
+ *     }
  */
 export interface AutomationJourneysCreateRequest {
     /** The email address associated with the subscription */

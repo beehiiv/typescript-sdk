@@ -34,6 +34,15 @@ export class Publications {
      *
      * @example
      *     await beehiiv.publications.list()
+     *
+     * @example
+     *     await beehiiv.publications.list({
+     *         expand: "stats",
+     *         limit: 1,
+     *         page: 1,
+     *         direction: Beehiiv.PublicationsListRequestDirection.Asc,
+     *         orderBy: Beehiiv.PublicationsListRequestOrderBy.Created
+     *     })
      */
     public async list(
         request: Beehiiv.PublicationsListRequest = {},
@@ -74,8 +83,8 @@ export class Publications {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -168,6 +177,11 @@ export class Publications {
      *
      * @example
      *     await beehiiv.publications.get("pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.publications.get("string", {
+     *         expand: "stats"
+     *     })
      */
     public async get(
         publicationId: string,
@@ -193,8 +207,8 @@ export class Publications {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -11,7 +11,7 @@ export interface EmailBlast {
     created: number;
     /** The time the blast was last sent. Measured in seconds since the Unix epoch */
     lastSent: number;
-    /** The status of the blast.<br>`inactive` - not been scheduled.<br>`active` - The blast is scheduled to send. */
+    /** The status of the blast.<br />`inactive` - not been scheduled.<br />`active` - The blast is scheduled to send. */
     status: Beehiiv.EmailBlastStatus;
     /** The email subject line. */
     subjectLine: string;

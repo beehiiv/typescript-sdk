@@ -34,6 +34,16 @@ export class Segments {
      *
      * @example
      *     await beehiiv.segments.list("pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.segments.list("string", {
+     *         type: Beehiiv.SegmentsListRequestType.Dynamic,
+     *         status: Beehiiv.SegmentsListRequestStatus.Pending,
+     *         limit: 1,
+     *         page: 1,
+     *         orderBy: Beehiiv.SegmentsListRequestOrderBy.Created,
+     *         direction: Beehiiv.SegmentsListRequestDirection.Asc
+     *     })
      */
     public async list(
         publicationId: string,
@@ -75,8 +85,8 @@ export class Segments {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -169,6 +179,12 @@ export class Segments {
      *
      * @example
      *     await beehiiv.segments.get("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.segments.get("string", "string", {
+     *         limit: 1,
+     *         page: 1
+     *     })
      */
     public async get(
         publicationId: string,
@@ -195,8 +211,8 @@ export class Segments {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -288,6 +304,9 @@ export class Segments {
      *
      * @example
      *     await beehiiv.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.segments.delete("string", "string")
      */
     public async delete(
         publicationId: string,
@@ -303,8 +322,8 @@ export class Segments {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

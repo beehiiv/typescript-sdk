@@ -23,6 +23,106 @@ import * as Beehiiv from "../../../..";
  *             }],
  *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
  *     }
+ *
+ * @example
+ *     {
+ *         undefined: "string",
+ *         email: "bruce.wayne@wayneenterprise.com",
+ *         reactivateExisting: false,
+ *         sendWelcomeEmail: false,
+ *         utmSource: "WayneEnterprise",
+ *         utmMedium: "organic",
+ *         utmCampaign: "fall_2022_promotion",
+ *         referringSite: "www.wayneenterprise.com/blog",
+ *         customFields: [{
+ *                 name: "First Name",
+ *                 value: "Bruce"
+ *             }, {
+ *                 name: "Last Name",
+ *                 value: "Wayne"
+ *             }],
+ *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+ *     }
+ *
+ * @example
+ *     {
+ *         undefined: "string",
+ *         email: "bruce.wayne@wayneenterprise.com",
+ *         reactivateExisting: false,
+ *         sendWelcomeEmail: false,
+ *         utmSource: "WayneEnterprise",
+ *         utmMedium: "organic",
+ *         utmCampaign: "fall_2022_promotion",
+ *         referringSite: "www.wayneenterprise.com/blog",
+ *         customFields: [{
+ *                 name: "First Name",
+ *                 value: "Bruce"
+ *             }, {
+ *                 name: "Last Name",
+ *                 value: "Wayne"
+ *             }],
+ *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+ *     }
+ *
+ * @example
+ *     {
+ *         undefined: "string",
+ *         email: "bruce.wayne@wayneenterprise.com",
+ *         reactivateExisting: false,
+ *         sendWelcomeEmail: false,
+ *         utmSource: "WayneEnterprise",
+ *         utmMedium: "organic",
+ *         utmCampaign: "fall_2022_promotion",
+ *         referringSite: "www.wayneenterprise.com/blog",
+ *         customFields: [{
+ *                 name: "First Name",
+ *                 value: "Bruce"
+ *             }, {
+ *                 name: "Last Name",
+ *                 value: "Wayne"
+ *             }],
+ *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+ *     }
+ *
+ * @example
+ *     {
+ *         undefined: "string",
+ *         email: "bruce.wayne@wayneenterprise.com",
+ *         reactivateExisting: false,
+ *         sendWelcomeEmail: false,
+ *         utmSource: "WayneEnterprise",
+ *         utmMedium: "organic",
+ *         utmCampaign: "fall_2022_promotion",
+ *         referringSite: "www.wayneenterprise.com/blog",
+ *         customFields: [{
+ *                 name: "First Name",
+ *                 value: "Bruce"
+ *             }, {
+ *                 name: "Last Name",
+ *                 value: "Wayne"
+ *             }],
+ *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+ *     }
+ *
+ * @example
+ *     {
+ *         undefined: "string",
+ *         email: "bruce.wayne@wayneenterprise.com",
+ *         reactivateExisting: false,
+ *         sendWelcomeEmail: false,
+ *         utmSource: "WayneEnterprise",
+ *         utmMedium: "organic",
+ *         utmCampaign: "fall_2022_promotion",
+ *         referringSite: "www.wayneenterprise.com/blog",
+ *         customFields: [{
+ *                 name: "First Name",
+ *                 value: "Bruce"
+ *             }, {
+ *                 name: "Last Name",
+ *                 value: "Wayne"
+ *             }],
+ *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+ *     }
  */
 export interface SubscriptionsCreateRequest {
     undefined?: string;

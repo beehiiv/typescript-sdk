@@ -7,6 +7,21 @@ import * as Beehiiv from "../../../..";
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
  */
 export interface SubscriptionsPatchRequest {
     /** An array of objects representing the subscriptions to be updated */

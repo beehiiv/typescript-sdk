@@ -7,10 +7,55 @@ import * as Beehiiv from "../../../..";
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         expand: Beehiiv.EmailBlastsListRequestExpandItem.Stats,
+ *         limit: 1,
+ *         page: 1,
+ *         direction: Beehiiv.EmailBlastsListRequestDirection.Asc,
+ *         orderBy: Beehiiv.EmailBlastsListRequestOrderBy.Created
+ *     }
+ *
+ * @example
+ *     {
+ *         expand: Beehiiv.EmailBlastsListRequestExpandItem.Stats,
+ *         limit: 1,
+ *         page: 1,
+ *         direction: Beehiiv.EmailBlastsListRequestDirection.Asc,
+ *         orderBy: Beehiiv.EmailBlastsListRequestOrderBy.Created
+ *     }
+ *
+ * @example
+ *     {
+ *         expand: Beehiiv.EmailBlastsListRequestExpandItem.Stats,
+ *         limit: 1,
+ *         page: 1,
+ *         direction: Beehiiv.EmailBlastsListRequestDirection.Asc,
+ *         orderBy: Beehiiv.EmailBlastsListRequestOrderBy.Created
+ *     }
+ *
+ * @example
+ *     {
+ *         expand: Beehiiv.EmailBlastsListRequestExpandItem.Stats,
+ *         limit: 1,
+ *         page: 1,
+ *         direction: Beehiiv.EmailBlastsListRequestDirection.Asc,
+ *         orderBy: Beehiiv.EmailBlastsListRequestOrderBy.Created
+ *     }
+ *
+ * @example
+ *     {
+ *         expand: Beehiiv.EmailBlastsListRequestExpandItem.Stats,
+ *         limit: 1,
+ *         page: 1,
+ *         direction: Beehiiv.EmailBlastsListRequestDirection.Asc,
+ *         orderBy: Beehiiv.EmailBlastsListRequestOrderBy.Created
+ *     }
  */
 export interface EmailBlastsListRequest {
     /**
-     * Optional list of expandable objects.<br>`stats` - Returns statistics about the email blast(s)<br> `free_email_content` - Returns the email HTML rendered to a free reader<br> `premium_email_content` - Returns the email HTML rendered to a premium reader
+     * Optional list of expandable objects.<br />`stats` - Returns statistics about the email blast(s)<br /> `free_email_content` - Returns the email HTML rendered to a free reader<br /> `premium_email_content` - Returns the email HTML rendered to a premium reader
      */
     expand?: Beehiiv.EmailBlastsListRequestExpandItem | Beehiiv.EmailBlastsListRequestExpandItem[];
     /**
@@ -18,15 +63,15 @@ export interface EmailBlastsListRequest {
      */
     limit?: number;
     /**
-     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br>If not specified, results 1-10 from page 1 will be returned.
+     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br />If not specified, results 1-10 from page 1 will be returned.
      */
     page?: number;
     /**
-     * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
+     * The direction that the results are sorted in. Defaults to asc<br /> `asc` - Ascending, sorts from smallest to largest.<br /> `desc` - Descending, sorts from largest to smallest.
      */
     direction?: Beehiiv.EmailBlastsListRequestDirection;
     /**
-     * The field that the results are sorted by. Defaults to created<br> `created` - The time in which the segment was first created.<br> `last_sent` - The time the blast was last sent. Measured in seconds since the Unix epoch.
+     * The field that the results are sorted by. Defaults to created<br /> `created` - The time in which the segment was first created.<br /> `last_sent` - The time the blast was last sent. Measured in seconds since the Unix epoch.
      */
     orderBy?: Beehiiv.EmailBlastsListRequestOrderBy;
 }

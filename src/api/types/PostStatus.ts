@@ -3,7 +3,7 @@
  */
 
 /**
- * The status of the post.<br>`draft` - not been scheduled.<br>`confirmed` - The post will be active after the `scheduled_at`.<br>`archived` - The post is no longer active.
+ * The status of the post.<br />`draft` - not been scheduled.<br />`confirmed` - The post will be active after the `scheduled_at`.<br />`archived` - The post is no longer active.
  */
 export type PostStatus = "draft" | "confirmed" | "archived";
 

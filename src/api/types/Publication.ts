@@ -14,4 +14,6 @@ export interface Publication {
     /** The time that the publication was created. Measured in seconds since the Unix epoch */
     created: number;
     stats?: Beehiiv.PublicationStats;
+    /** The name of the organization */
+    organizationName: string;
 }

@@ -5,6 +5,21 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
  */
 export interface CustomFieldsPutRequest {
     display?: string;

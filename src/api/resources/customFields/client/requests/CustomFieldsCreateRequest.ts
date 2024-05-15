@@ -10,6 +10,36 @@ import * as Beehiiv from "../../../..";
  *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
  *         display: "display"
  *     }
+ *
+ * @example
+ *     {
+ *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+ *         display: "display"
+ *     }
+ *
+ * @example
+ *     {
+ *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+ *         display: "display"
+ *     }
+ *
+ * @example
+ *     {
+ *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+ *         display: "display"
+ *     }
+ *
+ * @example
+ *     {
+ *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+ *         display: "display"
+ *     }
+ *
+ * @example
+ *     {
+ *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+ *         display: "display"
+ *     }
  */
 export interface CustomFieldsCreateRequest {
     kind: Beehiiv.CustomFieldsCreateRequestKind;

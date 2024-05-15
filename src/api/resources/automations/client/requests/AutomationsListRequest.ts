@@ -5,6 +5,36 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         limit: 1,
+ *         page: 1
+ *     }
+ *
+ * @example
+ *     {
+ *         limit: 1,
+ *         page: 1
+ *     }
+ *
+ * @example
+ *     {
+ *         limit: 1,
+ *         page: 1
+ *     }
+ *
+ * @example
+ *     {
+ *         limit: 1,
+ *         page: 1
+ *     }
+ *
+ * @example
+ *     {
+ *         limit: 1,
+ *         page: 1
+ *     }
  */
 export interface AutomationsListRequest {
     /**
@@ -12,7 +42,7 @@ export interface AutomationsListRequest {
      */
     limit?: number;
     /**
-     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br>If not specified, results 1-10 from page 1 will be returned.
+     * Pagination returns the results in pages. Each page contains the number of results specified by the `limit` (default: 10).<br />If not specified, results 1-10 from page 1 will be returned.
      */
     page?: number;
 }

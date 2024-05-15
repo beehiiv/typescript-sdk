@@ -14,6 +14,7 @@ export const Publication: core.serialization.ObjectSchema<serializers.Publicatio
         referralProgramEnabled: core.serialization.property("referral_program_enabled", core.serialization.boolean()),
         created: core.serialization.number(),
         stats: PublicationStats.optional(),
+        organizationName: core.serialization.property("organization_name", core.serialization.string()),
     });
 
 export declare namespace Publication {
@@ -23,5 +24,6 @@ export declare namespace Publication {
         referral_program_enabled: boolean;
         created: number;
         stats?: PublicationStats.Raw | null;
+        organization_name: string;
     }
 }

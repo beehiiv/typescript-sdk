@@ -34,6 +34,9 @@ export class CustomFields {
      *
      * @example
      *     await beehiiv.customFields.get("publicationId", "id")
+     *
+     * @example
+     *     await beehiiv.customFields.get("string", "string")
      */
     public async get(
         publicationId: string,
@@ -49,8 +52,8 @@ export class CustomFields {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -145,6 +148,12 @@ export class CustomFields {
      *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
      *         display: "display"
      *     })
+     *
+     * @example
+     *     await beehiiv.customFields.create("string", {
+     *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
+     *         display: "display"
+     *     })
      */
     public async create(
         publicationId: string,
@@ -160,13 +169,17 @@ export class CustomFields {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CustomFieldsCreateRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.CustomFieldsCreateRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -254,6 +267,9 @@ export class CustomFields {
      *
      * @example
      *     await beehiiv.customFields.put("publicationId", "id")
+     *
+     * @example
+     *     await beehiiv.customFields.put("string", "string")
      */
     public async put(
         publicationId: string,
@@ -270,13 +286,17 @@ export class CustomFields {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CustomFieldsPutRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.CustomFieldsPutRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -364,6 +384,9 @@ export class CustomFields {
      *
      * @example
      *     await beehiiv.customFields.delete("publicationId", "id")
+     *
+     * @example
+     *     await beehiiv.customFields.delete("string", "string")
      */
     public async delete(
         publicationId: string,
@@ -379,8 +402,8 @@ export class CustomFields {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -472,6 +495,9 @@ export class CustomFields {
      *
      * @example
      *     await beehiiv.customFields.patch("publicationId", "id")
+     *
+     * @example
+     *     await beehiiv.customFields.patch("string", "string")
      */
     public async patch(
         publicationId: string,
@@ -488,13 +514,17 @@ export class CustomFields {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.CustomFieldsPatchRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.CustomFieldsPatchRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });

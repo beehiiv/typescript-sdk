@@ -3,7 +3,7 @@
  */
 
 /**
- * What type of reward this is.<br>`physical` - A product which must be sent to the subscriber.<br>`promo_code` - A code that is redeemable for goods or services.
+ * What type of reward this is.<br />`physical` - A product which must be sent to the subscriber.<br />`promo_code` - A code that is redeemable for goods or services.
  */
 export type MilestoneRewardType = "physical" | "promo_code";
 

@@ -7,6 +7,31 @@
  *     {
  *         tags: ["Premium"]
  *     }
+ *
+ * @example
+ *     {
+ *         tags: ["Premium"]
+ *     }
+ *
+ * @example
+ *     {
+ *         tags: ["Premium"]
+ *     }
+ *
+ * @example
+ *     {
+ *         tags: ["Premium"]
+ *     }
+ *
+ * @example
+ *     {
+ *         tags: ["Premium"]
+ *     }
+ *
+ * @example
+ *     {
+ *         tags: ["Premium"]
+ *     }
  */
 export interface SubscriptionTagsCreateRequest {
     /** Tags that can be used to group subscribers */

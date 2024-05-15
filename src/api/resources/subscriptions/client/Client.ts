@@ -36,6 +36,18 @@ export class Subscriptions {
      *     await beehiiv.subscriptions.list("pub_00000000-0000-0000-0000-000000000000", {
      *         email: "clark@dailyplanet.com"
      *     })
+     *
+     * @example
+     *     await beehiiv.subscriptions.list("string", {
+     *         expand: Beehiiv.SubscriptionsListRequestExpandItem.Stats,
+     *         status: Beehiiv.SubscriptionsListRequestStatus.Validating,
+     *         tier: Beehiiv.SubscriptionsListRequestTier.Free,
+     *         limit: 1,
+     *         page: 1,
+     *         email: "string",
+     *         orderBy: Beehiiv.SubscriptionsListRequestOrderBy.Created,
+     *         direction: Beehiiv.SubscriptionsListRequestDirection.Asc
+     *     })
      */
     public async list(
         publicationId: string,
@@ -89,8 +101,8 @@ export class Subscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -199,6 +211,26 @@ export class Subscriptions {
      *             }],
      *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
      *     })
+     *
+     * @example
+     *     await beehiiv.subscriptions.create("string", {
+     *         undefined: "string",
+     *         email: "bruce.wayne@wayneenterprise.com",
+     *         reactivateExisting: false,
+     *         sendWelcomeEmail: false,
+     *         utmSource: "WayneEnterprise",
+     *         utmMedium: "organic",
+     *         utmCampaign: "fall_2022_promotion",
+     *         referringSite: "www.wayneenterprise.com/blog",
+     *         customFields: [{
+     *                 name: "First Name",
+     *                 value: "Bruce"
+     *             }, {
+     *                 name: "Last Name",
+     *                 value: "Wayne"
+     *             }],
+     *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+     *     })
      */
     public async create(
         publicationId: string,
@@ -220,14 +252,18 @@ export class Subscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
-            body: await serializers.SubscriptionsCreateRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.SubscriptionsCreateRequest.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -315,6 +351,9 @@ export class Subscriptions {
      *
      * @example
      *     await beehiiv.subscriptions.put("publicationId")
+     *
+     * @example
+     *     await beehiiv.subscriptions.put("string")
      */
     public async put(
         publicationId: string,
@@ -330,13 +369,17 @@ export class Subscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SubscriptionsPutRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.SubscriptionsPutRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -424,6 +467,9 @@ export class Subscriptions {
      *
      * @example
      *     await beehiiv.subscriptions.patch("publicationId")
+     *
+     * @example
+     *     await beehiiv.subscriptions.patch("string")
      */
     public async patch(
         publicationId: string,
@@ -439,13 +485,17 @@ export class Subscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SubscriptionsPatchRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.SubscriptionsPatchRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -533,6 +583,11 @@ export class Subscriptions {
      *
      * @example
      *     await beehiiv.subscriptions.get("pub_00000000-0000-0000-0000-000000000000", "work@example.com")
+     *
+     * @example
+     *     await beehiiv.subscriptions.get("string", "string", {
+     *         expand: Beehiiv.SubscriptionsGetRequestExpandItem.Stats
+     *     })
      */
     public async get(
         publicationId: string,
@@ -559,8 +614,8 @@ export class Subscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -657,6 +712,9 @@ export class Subscriptions {
      *
      * @example
      *     await beehiiv.subscriptions.delete("sub_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
+     *
+     * @example
+     *     await beehiiv.subscriptions.delete("string", "string")
      */
     public async delete(
         subscriptionId: string,
@@ -672,8 +730,8 @@ export class Subscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

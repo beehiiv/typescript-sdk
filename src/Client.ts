@@ -15,6 +15,8 @@ import { BulkSubscriptionUpdates } from "./api/resources/bulkSubscriptionUpdates
 import { AutomationJourneys } from "./api/resources/automationJourneys/client/Client";
 import { Automations } from "./api/resources/automations/client/Client";
 import { SubscriptionTags } from "./api/resources/subscriptionTags/client/Client";
+import { Tiers } from "./api/resources/tiers/client/Client";
+import { Webhooks } from "./api/resources/webhooks/client/Client";
 
 export declare namespace BeehiivClient {
     interface Options {
@@ -24,8 +26,12 @@ export declare namespace BeehiivClient {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
+        abortSignal?: AbortSignal;
     }
 }
 
@@ -96,5 +102,17 @@ export class BeehiivClient {
 
     public get subscriptionTags(): SubscriptionTags {
         return (this._subscriptionTags ??= new SubscriptionTags(this._options));
+    }
+
+    protected _tiers: Tiers | undefined;
+
+    public get tiers(): Tiers {
+        return (this._tiers ??= new Tiers(this._options));
+    }
+
+    protected _webhooks: Webhooks | undefined;
+
+    public get webhooks(): Webhooks {
+        return (this._webhooks ??= new Webhooks(this._options));
     }
 }

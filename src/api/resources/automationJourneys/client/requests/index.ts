@@ -1,1 +1,1 @@
-export { AutomationJourneysCreateRequest } from "./AutomationJourneysCreateRequest";
+export { type AutomationJourneysCreateRequest } from "./AutomationJourneysCreateRequest";

@@ -1,1 +1,1 @@
-export { AutomationsListRequest } from "./AutomationsListRequest";
+export { type AutomationsListRequest } from "./AutomationsListRequest";

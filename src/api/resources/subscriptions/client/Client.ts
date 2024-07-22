@@ -4,10 +4,10 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Beehiiv from "../../..";
+import * as Beehiiv from "../../../index";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization";
-import * as errors from "../../../../errors";
+import * as serializers from "../../../../serialization/index";
+import * as errors from "../../../../errors/index";
 
 export declare namespace Subscriptions {
     interface Options {
@@ -17,8 +17,12 @@ export declare namespace Subscriptions {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
+        abortSignal?: AbortSignal;
     }
 }
 
@@ -27,13 +31,18 @@ export class Subscriptions {
 
     /**
      * Retrieve all subscriptions belonging to a specific publication
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SubscriptionsListRequest} request
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.list("pub_00000000-0000-0000-0000-000000000000", {
+     *     await client.subscriptions.list("pub_00000000-0000-0000-0000-000000000000", {
      *         email: "clark@dailyplanet.com"
      *     })
      */
@@ -42,7 +51,7 @@ export class Subscriptions {
         request: Beehiiv.SubscriptionsListRequest = {},
         requestOptions?: Subscriptions.RequestOptions
     ): Promise<Beehiiv.SubscriptionsListResponse> {
-        const { expand, status, tier, limit, page, email, orderBy, direction } = request;
+        const { expand, status, tier, premiumTiers, premiumTierIds, limit, page, email, orderBy, direction } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
@@ -58,6 +67,22 @@ export class Subscriptions {
 
         if (tier != null) {
             _queryParams["tier"] = tier;
+        }
+
+        if (premiumTiers != null) {
+            if (Array.isArray(premiumTiers)) {
+                _queryParams["premium_tiers[]"] = premiumTiers.map((item) => item);
+            } else {
+                _queryParams["premium_tiers[]"] = premiumTiers;
+            }
+        }
+
+        if (premiumTierIds != null) {
+            if (Array.isArray(premiumTierIds)) {
+                _queryParams["premium_tier_ids[]"] = premiumTierIds.map((item) => item);
+            } else {
+                _queryParams["premium_tier_ids[]"] = premiumTierIds;
+            }
         }
 
         if (limit != null) {
@@ -83,24 +108,26 @@ export class Subscriptions {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionsListResponse.parseOrThrow(_response.body, {
+            return serializers.SubscriptionsListResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -113,7 +140,7 @@ export class Subscriptions {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -123,7 +150,7 @@ export class Subscriptions {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -133,7 +160,7 @@ export class Subscriptions {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -143,7 +170,7 @@ export class Subscriptions {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -176,13 +203,18 @@ export class Subscriptions {
 
     /**
      * Create new subscriptions for a publication.
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SubscriptionsCreateRequest} request
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
+     *     await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
      *         email: "bruce.wayne@wayneenterprise.com",
      *         reactivateExisting: false,
      *         sendWelcomeEmail: false,
@@ -197,7 +229,7 @@ export class Subscriptions {
      *                 name: "Last Name",
      *                 value: "Wayne"
      *             }],
-     *         automationIds: ["aut_00000000-0000-0000-0000-000000000000"]
+     *         stripeCustomerId: "stripe_customer_id"
      *     })
      */
     public async create(
@@ -214,25 +246,31 @@ export class Subscriptions {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
-            body: await serializers.SubscriptionsCreateRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.SubscriptionsCreateRequest.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionsCreateResponse.parseOrThrow(_response.body, {
+            return serializers.SubscriptionsCreateResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -245,7 +283,7 @@ export class Subscriptions {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -255,7 +293,7 @@ export class Subscriptions {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -265,7 +303,7 @@ export class Subscriptions {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -275,7 +313,7 @@ export class Subscriptions {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -308,13 +346,18 @@ export class Subscriptions {
 
     /**
      * Bulk update subscriptions' field values (standard fields and custom fields)
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SubscriptionsPutRequest} request
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.put("publicationId")
+     *     await client.subscriptions.put("publicationId")
      */
     public async put(
         publicationId: string,
@@ -324,24 +367,30 @@ export class Subscriptions {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions/bulk_actions`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions/bulk_actions`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SubscriptionsPutRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.SubscriptionsPutRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionsPutResponse.parseOrThrow(_response.body, {
+            return serializers.SubscriptionsPutResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -354,7 +403,7 @@ export class Subscriptions {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -364,7 +413,7 @@ export class Subscriptions {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -374,7 +423,7 @@ export class Subscriptions {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -384,7 +433,7 @@ export class Subscriptions {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -417,13 +466,18 @@ export class Subscriptions {
 
     /**
      * Bulk update subscriptions' field values (standard fields and custom fields)
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SubscriptionsPatchRequest} request
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.patch("publicationId")
+     *     await client.subscriptions.patch("publicationId")
      */
     public async patch(
         publicationId: string,
@@ -433,24 +487,30 @@ export class Subscriptions {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions/bulk_actions`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions/bulk_actions`
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SubscriptionsPatchRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            requestType: "json",
+            body: serializers.SubscriptionsPatchRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionsPatchResponse.parseOrThrow(_response.body, {
+            return serializers.SubscriptionsPatchResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -463,7 +523,7 @@ export class Subscriptions {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -473,7 +533,7 @@ export class Subscriptions {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -483,7 +543,7 @@ export class Subscriptions {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -493,7 +553,7 @@ export class Subscriptions {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -526,13 +586,19 @@ export class Subscriptions {
 
     /**
      * Retrieve a single subscription belonging to a specific email address in a specific publication
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {string} email - The ID of the subscriber object
+     * @param {Beehiiv.SubscriptionsGetRequest} request
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.get("pub_00000000-0000-0000-0000-000000000000", "work@example.com")
+     *     await client.subscriptions.get("pub_00000000-0000-0000-0000-000000000000", "work@example.com")
      */
     public async get(
         publicationId: string,
@@ -553,24 +619,26 @@ export class Subscriptions {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions/by_email/${email}`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions/by_email/${encodeURIComponent(email)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionsGetResponse.parseOrThrow(_response.body, {
+            return serializers.SubscriptionsGetResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -583,7 +651,7 @@ export class Subscriptions {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -593,7 +661,7 @@ export class Subscriptions {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -603,7 +671,7 @@ export class Subscriptions {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -613,7 +681,7 @@ export class Subscriptions {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -650,13 +718,18 @@ export class Subscriptions {
      * **This cannot be undone** All data associated with the subscription will also be deleted. We recommend unsubscribing when possible instead of deleting.
      *
      * If a premium subscription is deleted they will no longer be billed.
+     *
+     * @param {string} subscriptionId - The prefixed ID of the subscription object
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptions.delete("sub_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
+     *     await client.subscriptions.delete("sub_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
      */
     public async delete(
         subscriptionId: string,
@@ -666,23 +739,25 @@ export class Subscriptions {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions/${subscriptionId}`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions/${encodeURIComponent(subscriptionId)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.subscriptions.delete.Response.parseOrThrow(_response.body, {
+            return serializers.subscriptions.delete.Response.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -695,7 +770,7 @@ export class Subscriptions {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -705,7 +780,7 @@ export class Subscriptions {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -715,7 +790,7 @@ export class Subscriptions {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -725,7 +800,7 @@ export class Subscriptions {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -756,7 +831,7 @@ export class Subscriptions {
         }
     }
 
-    protected async _getAuthorizationHeader() {
+    protected async _getAuthorizationHeader(): Promise<string> {
         return `Bearer ${await core.Supplier.get(this._options.token)}`;
     }
 }

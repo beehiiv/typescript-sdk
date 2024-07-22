@@ -1,2 +1,2 @@
-export { PublicationsListRequest } from "./PublicationsListRequest";
-export { PublicationsGetRequest } from "./PublicationsGetRequest";
+export { type PublicationsListRequest } from "./PublicationsListRequest";
+export { type PublicationsGetRequest } from "./PublicationsGetRequest";

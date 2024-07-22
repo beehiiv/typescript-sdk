@@ -1,1 +1,1 @@
-export { SubscriptionTagsCreateRequest } from "./SubscriptionTagsCreateRequest";
+export { type SubscriptionTagsCreateRequest } from "./SubscriptionTagsCreateRequest";

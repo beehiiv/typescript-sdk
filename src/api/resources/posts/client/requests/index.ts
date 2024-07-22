@@ -1,2 +1,2 @@
-export { PostsListRequest } from "./PostsListRequest";
-export { PostsGetRequest } from "./PostsGetRequest";
+export { type PostsListRequest } from "./PostsListRequest";
+export { type PostsGetRequest } from "./PostsGetRequest";

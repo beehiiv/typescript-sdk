@@ -4,10 +4,10 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Beehiiv from "../../..";
+import * as Beehiiv from "../../../index";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization";
-import * as errors from "../../../../errors";
+import * as serializers from "../../../../serialization/index";
+import * as errors from "../../../../errors/index";
 
 export declare namespace Segments {
     interface Options {
@@ -17,8 +17,12 @@ export declare namespace Segments {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
+        abortSignal?: AbortSignal;
     }
 }
 
@@ -27,13 +31,18 @@ export class Segments {
 
     /**
      * Retrieve information about all segments belonging to a specific publication
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SegmentsListRequest} request
+     * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.segments.list("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.segments.list("pub_00000000-0000-0000-0000-000000000000")
      */
     public async list(
         publicationId: string,
@@ -69,24 +78,26 @@ export class Segments {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/segments`
+                `publications/${encodeURIComponent(publicationId)}/segments`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SegmentsListResponse.parseOrThrow(_response.body, {
+            return serializers.SegmentsListResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -99,7 +110,7 @@ export class Segments {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -109,7 +120,7 @@ export class Segments {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -119,7 +130,7 @@ export class Segments {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -129,7 +140,7 @@ export class Segments {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -162,13 +173,19 @@ export class Segments {
 
     /**
      * List the Subscriber Ids from the most recent calculation of a specific publication.
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {string} segmentId - The prefixed ID of the segment object
+     * @param {Beehiiv.SegmentsGetRequest} request
+     * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.segments.get("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     *     await client.segments.get("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
      */
     public async get(
         publicationId: string,
@@ -189,24 +206,26 @@ export class Segments {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/segments/${segmentId}/results`
+                `publications/${encodeURIComponent(publicationId)}/segments/${encodeURIComponent(segmentId)}/results`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SegmentsGetResponse.parseOrThrow(_response.body, {
+            return serializers.SegmentsGetResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -219,7 +238,7 @@ export class Segments {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -229,7 +248,7 @@ export class Segments {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -239,7 +258,7 @@ export class Segments {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -249,7 +268,7 @@ export class Segments {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -282,12 +301,17 @@ export class Segments {
 
     /**
      * Delete a segment. Deleting the segment does not effect the subscriptions in the segment.
+     *
+     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {string} segmentId - The prefixed ID of the segment object
+     * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     *     await client.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
      */
     public async delete(
         publicationId: string,
@@ -297,23 +321,25 @@ export class Segments {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/segments/${segmentId}`
+                `publications/${encodeURIComponent(publicationId)}/segments/${encodeURIComponent(segmentId)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.segments.delete.Response.parseOrThrow(_response.body, {
+            return serializers.segments.delete.Response.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -326,7 +352,7 @@ export class Segments {
             switch (_response.error.statusCode) {
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -336,7 +362,7 @@ export class Segments {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -346,7 +372,7 @@ export class Segments {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -377,7 +403,7 @@ export class Segments {
         }
     }
 
-    protected async _getAuthorizationHeader() {
+    protected async _getAuthorizationHeader(): Promise<string> {
         return `Bearer ${await core.Supplier.get(this._options.token)}`;
     }
 }

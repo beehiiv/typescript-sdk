@@ -3,11 +3,23 @@
  */
 
 export type PostsListRequestExpandItem =
+    /**
+     * Returns statistics about the post(s). */
     | "stats"
+    /**
+     * Returns the web HTML rendered to a free reader. */
     | "free_web_content"
+    /**
+     * Returns the email HTML rendered to a free reader. */
     | "free_email_content"
+    /**
+     * Returns the RSS feed HTML. */
     | "free_rss_content"
+    /**
+     * Returns the web HTML rendered to a premium reader. */
     | "premium_web_content"
+    /**
+     * Returns the email HTML rendered to a premium reader. */
     | "premium_email_content";
 
 export const PostsListRequestExpandItem = {

@@ -4,10 +4,10 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Beehiiv from "../../..";
-import * as serializers from "../../../../serialization";
+import * as Beehiiv from "../../../index";
+import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 
 export declare namespace SubscriptionTags {
     interface Options {
@@ -17,8 +17,12 @@ export declare namespace SubscriptionTags {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
+        abortSignal?: AbortSignal;
     }
 }
 
@@ -27,15 +31,19 @@ export class SubscriptionTags {
 
     /**
      * Create new subscription tags for a subscription. If the tag does not exist on the publication, it will be created automatically.
+     *
+     * @param {string} publicationId
+     * @param {string} subscriptionId
+     * @param {Beehiiv.SubscriptionTagsCreateRequest} request
+     * @param {SubscriptionTags.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await beehiiv.subscriptionTags.create("publicationId", "subscriptionId", {
-     *         tags: ["Premium"]
-     *     })
+     *     await client.subscriptionTags.create("publicationId", "subscriptionId")
      */
     public async create(
         publicationId: string,
@@ -46,26 +54,32 @@ export class SubscriptionTags {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${publicationId}/subscriptions/${subscriptionId}/tags`
+                `publications/${encodeURIComponent(publicationId)}/subscriptions/${encodeURIComponent(
+                    subscriptionId
+                )}/tags`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.1.2",
+                "X-Fern-SDK-Name": "beehiiv",
+                "X-Fern-SDK-Version": "0.1.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            body: await serializers.SubscriptionTagsCreateRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
+            requestType: "json",
+            body: serializers.SubscriptionTagsCreateRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return await serializers.SubscriptionTagsCreateResponse.parseOrThrow(_response.body, {
+            return serializers.SubscriptionTagsCreateResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -78,7 +92,7 @@ export class SubscriptionTags {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Beehiiv.BadRequestError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -88,7 +102,7 @@ export class SubscriptionTags {
                     );
                 case 404:
                     throw new Beehiiv.NotFoundError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -98,7 +112,7 @@ export class SubscriptionTags {
                     );
                 case 429:
                     throw new Beehiiv.TooManyRequestsError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -108,7 +122,7 @@ export class SubscriptionTags {
                     );
                 case 500:
                     throw new Beehiiv.InternalServerError(
-                        await serializers.Error_.parseOrThrow(_response.error.body, {
+                        serializers.Error_.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -139,7 +153,7 @@ export class SubscriptionTags {
         }
     }
 
-    protected async _getAuthorizationHeader() {
+    protected async _getAuthorizationHeader(): Promise<string> {
         return `Bearer ${await core.Supplier.get(this._options.token)}`;
     }
 }

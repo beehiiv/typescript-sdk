@@ -1,2 +1,2 @@
-export { EmailBlastsListRequest } from "./EmailBlastsListRequest";
-export { EmailBlastsGetRequest } from "./EmailBlastsGetRequest";
+export { type EmailBlastsListRequest } from "./EmailBlastsListRequest";
+export { type EmailBlastsGetRequest } from "./EmailBlastsGetRequest";

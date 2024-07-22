@@ -1,1 +1,1 @@
-export { ReferralProgramGetRequest } from "./ReferralProgramGetRequest";
+export { type ReferralProgramGetRequest } from "./ReferralProgramGetRequest";

@@ -1,6 +1,7 @@
 # Beehiiv TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/)
+[![npm shield](https://img.shields.io/npm/v/beehiiv)](https://www.npmjs.com/package/beehiiv)
 
 The Beehiiv TypeScript library provides convenient access to the Beehiiv Public API from JavaScript/TypeScript.
 

@@ -6,19 +6,19 @@ import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
 import { EmailBlastStatsEmail } from "./EmailBlastStatsEmail";
-import { EmailBlastStatsClicksItem } from "./EmailBlastStatsClicksItem";
+import { EmailBlastStatsClicks } from "./EmailBlastStatsClicks";
 
 export const EmailBlastStats: core.serialization.ObjectSchema<
     serializers.EmailBlastStats.Raw,
     Beehiiv.EmailBlastStats
 > = core.serialization.object({
     email: EmailBlastStatsEmail.optional(),
-    clicks: core.serialization.list(EmailBlastStatsClicksItem).optional(),
+    clicks: core.serialization.list(EmailBlastStatsClicks).optional(),
 });
 
 export declare namespace EmailBlastStats {
     interface Raw {
         email?: EmailBlastStatsEmail.Raw | null;
-        clicks?: EmailBlastStatsClicksItem.Raw[] | null;
+        clicks?: EmailBlastStatsClicks.Raw[] | null;
     }
 }

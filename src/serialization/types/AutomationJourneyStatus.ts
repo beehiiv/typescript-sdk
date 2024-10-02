@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const AutomationJourneyStatus: core.serialization.Schema<
     serializers.AutomationJourneyStatus.Raw,
     Beehiiv.AutomationJourneyStatus
-> = core.serialization.enum_(["initiated", "running", "completed", "failed"]);
+> = core.serialization.enum_(["initiated", "running", "in_progress", "completed", "failed"]);
 
 export declare namespace AutomationJourneyStatus {
-    type Raw = "initiated" | "running" | "completed" | "failed";
+    type Raw = "initiated" | "running" | "in_progress" | "completed" | "failed";
 }

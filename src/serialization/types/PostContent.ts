@@ -5,18 +5,18 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
-import { PostContentFree } from "./PostContentFree";
-import { PostContentPremium } from "./PostContentPremium";
+import { FreePostContent } from "./FreePostContent";
+import { PremiumPostContent } from "./PremiumPostContent";
 
 export const PostContent: core.serialization.ObjectSchema<serializers.PostContent.Raw, Beehiiv.PostContent> =
     core.serialization.object({
-        free: PostContentFree.optional(),
-        premium: PostContentPremium.optional(),
+        free: FreePostContent.optional(),
+        premium: PremiumPostContent.optional(),
     });
 
 export declare namespace PostContent {
     interface Raw {
-        free?: PostContentFree.Raw | null;
-        premium?: PostContentPremium.Raw | null;
+        free?: FreePostContent.Raw | null;
+        premium?: PremiumPostContent.Raw | null;
     }
 }

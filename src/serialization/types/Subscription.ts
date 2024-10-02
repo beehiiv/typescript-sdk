@@ -5,19 +5,20 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { SubscriptionId } from "../resources/ids/types/SubscriptionId";
 import { SubscriptionExpandedStatus } from "./SubscriptionExpandedStatus";
 import { SubscriptionExpandedSubscriptionTier } from "./SubscriptionExpandedSubscriptionTier";
 import { SubscriptionExpandedUtmChannel } from "./SubscriptionExpandedUtmChannel";
-import { SubscriptionTiers } from "./SubscriptionTiers";
-import { SubscriptionCustomFields } from "./SubscriptionCustomFields";
+import { SubscriptionTierList } from "./SubscriptionTierList";
+import { SubscriptionCustomFieldList } from "./SubscriptionCustomFieldList";
 import { SubscriptionTags } from "./SubscriptionTags";
 import { SubscriptionStats } from "./SubscriptionStats";
-import { SubscriptionTiersItem } from "./SubscriptionTiersItem";
+import { SubscriptionTierInfo } from "./SubscriptionTierInfo";
 import { CustomField } from "./CustomField";
 
 export const Subscription: core.serialization.ObjectSchema<serializers.Subscription.Raw, Beehiiv.Subscription> =
     core.serialization.object({
-        id: core.serialization.string(),
+        id: SubscriptionId,
         email: core.serialization.string(),
         status: SubscriptionExpandedStatus,
         created: core.serialization.number(),
@@ -34,16 +35,16 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         referralCode: core.serialization.property("referral_code", core.serialization.string()),
         subscriptionPremiumTiers: core.serialization.property(
             "subscription_premium_tiers",
-            SubscriptionTiers.optional()
+            SubscriptionTierList.optional()
         ),
-        customFields: core.serialization.property("custom_fields", SubscriptionCustomFields.optional()),
+        customFields: core.serialization.property("custom_fields", SubscriptionCustomFieldList.optional()),
         tags: SubscriptionTags.optional(),
         stats: SubscriptionStats.optional(),
     });
 
 export declare namespace Subscription {
     interface Raw {
-        id: string;
+        id: SubscriptionId.Raw;
         email: string;
         status: SubscriptionExpandedStatus.Raw;
         created: number;
@@ -55,8 +56,8 @@ export declare namespace Subscription {
         utm_campaign: string;
         referring_site: string;
         referral_code: string;
-        subscription_premium_tiers?: SubscriptionTiers.Raw | null;
-        custom_fields?: SubscriptionCustomFields.Raw | null;
+        subscription_premium_tiers?: SubscriptionTierList.Raw | null;
+        custom_fields?: SubscriptionCustomFieldList.Raw | null;
         tags?: SubscriptionTags.Raw | null;
         stats?: SubscriptionStats.Raw | null;
     }

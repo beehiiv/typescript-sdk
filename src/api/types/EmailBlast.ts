@@ -6,7 +6,7 @@ import * as Beehiiv from "../index";
 
 export interface EmailBlast {
     /** The prefixed email blast id */
-    id: string;
+    id: Beehiiv.EmailBlastId;
     /** The time the blast was created. Measured in seconds since the Unix epoch */
     created: number;
     /** The time the blast was last sent. Measured in seconds since the Unix epoch */

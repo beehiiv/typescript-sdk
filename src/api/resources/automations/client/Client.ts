@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Automations {
@@ -30,7 +30,7 @@ export class Automations {
     constructor(protected readonly _options: Automations.Options) {}
 
     /**
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.AutomationsListRequest} request
      * @param {Automations.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -40,10 +40,10 @@ export class Automations {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.automations.list("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.automations.index("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async list(
-        publicationId: string,
+    public async index(
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.AutomationsListRequest = {},
         requestOptions?: Automations.RequestOptions
     ): Promise<Beehiiv.AutomationsListResponse> {
@@ -60,14 +60,14 @@ export class Automations {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/automations`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/automations`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -154,8 +154,8 @@ export class Automations {
     }
 
     /**
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} automationId - The prefixed ID of the automation object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.AutomationId} automationId - The prefixed ID of the automation object
      * @param {Automations.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -164,24 +164,26 @@ export class Automations {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.automations.get("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000")
+     *     await client.automations.show("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000")
      */
-    public async get(
-        publicationId: string,
-        automationId: string,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
+        automationId: Beehiiv.AutomationId,
         requestOptions?: Automations.RequestOptions
     ): Promise<Beehiiv.AutomationsGetResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/automations/${encodeURIComponent(automationId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/automations/${encodeURIComponent(serializers.AutomationId.jsonOrThrow(automationId))}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

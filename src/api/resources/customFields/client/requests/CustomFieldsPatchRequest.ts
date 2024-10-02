@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         display: "New Display"
+ *     }
  */
 export interface CustomFieldsPatchRequest {
     display?: string;

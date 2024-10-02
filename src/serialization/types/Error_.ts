@@ -5,19 +5,19 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
-import { ErrorErrorsItem } from "./ErrorErrorsItem";
+import { ErrorDetail } from "./ErrorDetail";
 
 export const Error_: core.serialization.ObjectSchema<serializers.Error_.Raw, Beehiiv.Error_> =
     core.serialization.object({
-        status: core.serialization.string(),
+        status: core.serialization.number(),
         statusText: core.serialization.string(),
-        errors: core.serialization.list(ErrorErrorsItem),
+        errors: core.serialization.list(ErrorDetail),
     });
 
 export declare namespace Error_ {
     interface Raw {
-        status: string;
+        status: number;
         statusText: string;
-        errors: ErrorErrorsItem.Raw[];
+        errors: ErrorDetail.Raw[];
     }
 }

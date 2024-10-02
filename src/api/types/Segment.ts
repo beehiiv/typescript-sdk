@@ -8,8 +8,8 @@ import * as Beehiiv from "../index";
  * The segment object. To expand results, see the results endpoint.
  */
 export interface Segment {
-    /** The prefixed ID of the Segment object. */
-    id: string;
+    /** The prefixed ID of the segment. */
+    id: Beehiiv.SegmentId;
     /** The name of the segment. */
     name: string;
     /** The type of segment.<br>`dynamic` - The segment is recalculated at set intervals.<br>`static` - The segment is calculated once at creation.<br>`manual` - The segment is not calculated at all. The results are created via CSV. */

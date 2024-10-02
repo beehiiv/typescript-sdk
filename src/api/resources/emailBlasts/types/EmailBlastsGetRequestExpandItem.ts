@@ -4,17 +4,9 @@
 
 export type EmailBlastsGetRequestExpandItem =
     /**
-     * Returns statistics about the email blast(s). */
-    | "stats"
-    /**
-     * Returns the email HTML rendered to a free reader. */
-    | "free_email_content"
-    /**
-     * Returns the email HTML rendered to a premium reader. */
-    | "premium_email_content";
+     * Returns statistics about the email blast. */
+    "stats";
 
 export const EmailBlastsGetRequestExpandItem = {
     Stats: "stats",
-    FreeEmailContent: "free_email_content",
-    PremiumEmailContent: "premium_email_content",
 } as const;

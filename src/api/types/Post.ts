@@ -6,7 +6,7 @@ import * as Beehiiv from "../index";
 
 export interface Post {
     /** The prefixed post id */
-    id: string;
+    id: Beehiiv.PostId;
     /** The subtitle displayed in web views */
     subtitle: string;
     /** The title displayed in web views */

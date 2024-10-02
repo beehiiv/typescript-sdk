@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace CustomFields {
@@ -30,10 +30,10 @@ export class CustomFields {
     constructor(protected readonly _options: CustomFields.Options) {}
 
     /**
-     * View a specific custom field on a publication
+     * Create a custom field on a publication, for use in subscriptions
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} id - The ID of the Custom Fields object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.CustomFieldsCreateRequest} request
      * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -42,35 +42,43 @@ export class CustomFields {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.customFields.get("publicationId", "id")
+     *     await client.customFields.create("publicationId", {
+     *         kind: "string",
+     *         display: "Display"
+     *     })
      */
-    public async get(
-        publicationId: string,
-        id: string,
+    public async create(
+        publicationId: Beehiiv.PublicationId,
+        request: Beehiiv.CustomFieldsCreateRequest,
         requestOptions?: CustomFields.RequestOptions
-    ): Promise<Beehiiv.CustomFieldsGetResponse> {
+    ): Promise<Beehiiv.CustomFieldResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/custom_fields/${encodeURIComponent(id)}`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/custom_fields`
             ),
-            method: "GET",
+            method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
+            body: serializers.CustomFieldsCreateRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CustomFieldsGetResponse.parseOrThrow(_response.body, {
+            return serializers.CustomFieldResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -145,10 +153,10 @@ export class CustomFields {
     }
 
     /**
-     * Create a custom field on a publication, for use in subscriptions
+     * View a specific custom field on a publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {Beehiiv.CustomFieldsCreateRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {string} id - The ID of the Custom Fields object
      * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -157,43 +165,150 @@ export class CustomFields {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.customFields.create("publicationId", {
-     *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
-     *         display: "display"
-     *     })
+     *     await client.customFields.show("publicationId", "id")
      */
-    public async create(
-        publicationId: string,
-        request: Beehiiv.CustomFieldsCreateRequest,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
+        id: string,
         requestOptions?: CustomFields.RequestOptions
-    ): Promise<Beehiiv.CustomFieldsCreateResponse> {
+    ): Promise<Beehiiv.CustomFieldResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/custom_fields`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/custom_fields/${encodeURIComponent(id)}`
             ),
-            method: "POST",
+            method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.CustomFieldsCreateRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CustomFieldsCreateResponse.parseOrThrow(_response.body, {
+            return serializers.CustomFieldResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Beehiiv.BadRequestError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 404:
+                    throw new Beehiiv.NotFoundError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 429:
+                    throw new Beehiiv.TooManyRequestsError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 500:
+                    throw new Beehiiv.InternalServerError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.BeehiivError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.BeehiivError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.BeehiivTimeoutError();
+            case "unknown":
+                throw new errors.BeehiivError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * List all custom fields on a publication
+     *
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
+     *
+     * @example
+     *     await client.customFields.index("publicationId")
+     */
+    public async index(
+        publicationId: Beehiiv.PublicationId,
+        requestOptions?: CustomFields.RequestOptions
+    ): Promise<Beehiiv.CustomFieldIndexResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/custom_fields`
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.CustomFieldIndexResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -270,7 +385,7 @@ export class CustomFields {
     /**
      * Update a custom field on a publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {string} id - The ID of the Custom Fields object
      * @param {Beehiiv.CustomFieldsPutRequest} request
      * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
@@ -281,25 +396,29 @@ export class CustomFields {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.customFields.put("publicationId", "id")
+     *     await client.customFields.put("publicationId", "id", {
+     *         display: "New Display"
+     *     })
      */
     public async put(
-        publicationId: string,
+        publicationId: Beehiiv.PublicationId,
         id: string,
         request: Beehiiv.CustomFieldsPutRequest = {},
         requestOptions?: CustomFields.RequestOptions
-    ): Promise<Beehiiv.CustomFieldsPutResponse> {
+    ): Promise<Beehiiv.CustomFieldResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/custom_fields/${encodeURIComponent(id)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/custom_fields/${encodeURIComponent(id)}`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -315,7 +434,133 @@ export class CustomFields {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CustomFieldsPutResponse.parseOrThrow(_response.body, {
+            return serializers.CustomFieldResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Beehiiv.BadRequestError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 404:
+                    throw new Beehiiv.NotFoundError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 429:
+                    throw new Beehiiv.TooManyRequestsError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 500:
+                    throw new Beehiiv.InternalServerError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.BeehiivError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.BeehiivError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.BeehiivTimeoutError();
+            case "unknown":
+                throw new errors.BeehiivError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Update a custom field on a publication
+     *
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {string} id - The ID of the Custom Fields object
+     * @param {Beehiiv.CustomFieldsPatchRequest} request
+     * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
+     *
+     * @example
+     *     await client.customFields.patch("publicationId", "id", {
+     *         display: "New Display"
+     *     })
+     */
+    public async patch(
+        publicationId: Beehiiv.PublicationId,
+        id: string,
+        request: Beehiiv.CustomFieldsPatchRequest = {},
+        requestOptions?: CustomFields.RequestOptions
+    ): Promise<Beehiiv.CustomFieldsPatchResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/custom_fields/${encodeURIComponent(id)}`
+            ),
+            method: "PATCH",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.CustomFieldsPatchRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.CustomFieldsPatchResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -392,7 +637,7 @@ export class CustomFields {
     /**
      * Delete a custom field from a publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {string} id - The ID of the Custom Fields object
      * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -405,21 +650,23 @@ export class CustomFields {
      *     await client.customFields.delete("publicationId", "id")
      */
     public async delete(
-        publicationId: string,
+        publicationId: Beehiiv.PublicationId,
         id: string,
         requestOptions?: CustomFields.RequestOptions
     ): Promise<Beehiiv.CustomFieldsDeleteResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/custom_fields/${encodeURIComponent(id)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/custom_fields/${encodeURIComponent(id)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -431,128 +678,6 @@ export class CustomFields {
         });
         if (_response.ok) {
             return serializers.CustomFieldsDeleteResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Beehiiv.BadRequestError(
-                        serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 404:
-                    throw new Beehiiv.NotFoundError(
-                        serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 429:
-                    throw new Beehiiv.TooManyRequestsError(
-                        serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 500:
-                    throw new Beehiiv.InternalServerError(
-                        serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.BeehiivError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.BeehiivError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.BeehiivTimeoutError();
-            case "unknown":
-                throw new errors.BeehiivError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Update a custom field on a publication
-     *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} id - The ID of the Custom Fields object
-     * @param {Beehiiv.CustomFieldsPatchRequest} request
-     * @param {CustomFields.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Beehiiv.BadRequestError}
-     * @throws {@link Beehiiv.NotFoundError}
-     * @throws {@link Beehiiv.TooManyRequestsError}
-     * @throws {@link Beehiiv.InternalServerError}
-     *
-     * @example
-     *     await client.customFields.patch("publicationId", "id")
-     */
-    public async patch(
-        publicationId: string,
-        id: string,
-        request: Beehiiv.CustomFieldsPatchRequest = {},
-        requestOptions?: CustomFields.RequestOptions
-    ): Promise<Beehiiv.CustomFieldsPatchResponse> {
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/custom_fields/${encodeURIComponent(id)}`
-            ),
-            method: "PATCH",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: serializers.CustomFieldsPatchRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-            }),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return serializers.CustomFieldsPatchResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

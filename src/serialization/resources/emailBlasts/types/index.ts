@@ -1,5 +1,5 @@
 export * from "./EmailBlastsListRequestExpandItem";
-export * from "./EmailBlastsListRequestDirection";
+export * from "./EmailBlastsListRequestStatus";
 export * from "./EmailBlastsListRequestOrderBy";
 export * from "./EmailBlastsListResponse";
 export * from "./EmailBlastsGetRequestExpandItem";

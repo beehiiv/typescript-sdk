@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { PostId } from "../resources/ids/types/PostId";
 import { PostStatus } from "./PostStatus";
 import { PostAudience } from "./PostAudience";
 import { PostPlatform } from "./PostPlatform";
@@ -12,7 +13,7 @@ import { PostContent } from "./PostContent";
 import { PostStats } from "./PostStats";
 
 export const Post: core.serialization.ObjectSchema<serializers.Post.Raw, Beehiiv.Post> = core.serialization.object({
-    id: core.serialization.string(),
+    id: PostId,
     subtitle: core.serialization.string(),
     title: core.serialization.string(),
     authors: core.serialization.list(core.serialization.string()),
@@ -41,7 +42,7 @@ export const Post: core.serialization.ObjectSchema<serializers.Post.Raw, Beehiiv
 
 export declare namespace Post {
     interface Raw {
-        id: string;
+        id: PostId.Raw;
         subtitle: string;
         title: string;
         authors: string[];

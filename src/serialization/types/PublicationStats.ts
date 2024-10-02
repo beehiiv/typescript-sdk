@@ -5,47 +5,44 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
-import { PublicationStatsActiveSubscriptions } from "./PublicationStatsActiveSubscriptions";
-import { PublicationStatsActivePremiumSubscriptions } from "./PublicationStatsActivePremiumSubscriptions";
-import { PublicationStatsActiveFreeSubscriptions } from "./PublicationStatsActiveFreeSubscriptions";
-import { PublicationStatsAverageOpenRate } from "./PublicationStatsAverageOpenRate";
-import { PublicationStatsAverageClickRate } from "./PublicationStatsAverageClickRate";
-import { PublicationStatsTotalSent } from "./PublicationStatsTotalSent";
-import { PublicationStatsTotalUniqueOpened } from "./PublicationStatsTotalUniqueOpened";
-import { PublicationStatsTotalClicked } from "./PublicationStatsTotalClicked";
+import { ActiveSubscriptionCount } from "./ActiveSubscriptionCount";
+import { ActivePremiumSubscriptionCount } from "./ActivePremiumSubscriptionCount";
+import { ActiveFreeSubscriptionCount } from "./ActiveFreeSubscriptionCount";
+import { AverageOpenRate } from "./AverageOpenRate";
+import { AverageClickRate } from "./AverageClickRate";
+import { TotalEmailsSent } from "./TotalEmailsSent";
+import { TotalUniqueOpens } from "./TotalUniqueOpens";
+import { TotalClicks } from "./TotalClicks";
 
 export const PublicationStats: core.serialization.ObjectSchema<
     serializers.PublicationStats.Raw,
     Beehiiv.PublicationStats
 > = core.serialization.object({
-    activeSubscriptions: core.serialization.property(
-        "active_subscriptions",
-        PublicationStatsActiveSubscriptions.optional()
-    ),
+    activeSubscriptions: core.serialization.property("active_subscriptions", ActiveSubscriptionCount.optional()),
     activePremiumSubscriptions: core.serialization.property(
         "active_premium_subscriptions",
-        PublicationStatsActivePremiumSubscriptions.optional()
+        ActivePremiumSubscriptionCount.optional()
     ),
     activeFreeSubscriptions: core.serialization.property(
         "active_free_subscriptions",
-        PublicationStatsActiveFreeSubscriptions.optional()
+        ActiveFreeSubscriptionCount.optional()
     ),
-    averageOpenRate: core.serialization.property("average_open_rate", PublicationStatsAverageOpenRate.optional()),
-    averageClickRate: core.serialization.property("average_click_rate", PublicationStatsAverageClickRate.optional()),
-    totalSent: core.serialization.property("total_sent", PublicationStatsTotalSent.optional()),
-    totalUniqueOpened: core.serialization.property("total_unique_opened", PublicationStatsTotalUniqueOpened.optional()),
-    totalClicked: core.serialization.property("total_clicked", PublicationStatsTotalClicked.optional()),
+    averageOpenRate: core.serialization.property("average_open_rate", AverageOpenRate.optional()),
+    averageClickRate: core.serialization.property("average_click_rate", AverageClickRate.optional()),
+    totalSent: core.serialization.property("total_sent", TotalEmailsSent.optional()),
+    totalUniqueOpened: core.serialization.property("total_unique_opened", TotalUniqueOpens.optional()),
+    totalClicked: core.serialization.property("total_clicked", TotalClicks.optional()),
 });
 
 export declare namespace PublicationStats {
     interface Raw {
-        active_subscriptions?: PublicationStatsActiveSubscriptions.Raw | null;
-        active_premium_subscriptions?: PublicationStatsActivePremiumSubscriptions.Raw | null;
-        active_free_subscriptions?: PublicationStatsActiveFreeSubscriptions.Raw | null;
-        average_open_rate?: PublicationStatsAverageOpenRate.Raw | null;
-        average_click_rate?: PublicationStatsAverageClickRate.Raw | null;
-        total_sent?: PublicationStatsTotalSent.Raw | null;
-        total_unique_opened?: PublicationStatsTotalUniqueOpened.Raw | null;
-        total_clicked?: PublicationStatsTotalClicked.Raw | null;
+        active_subscriptions?: ActiveSubscriptionCount.Raw | null;
+        active_premium_subscriptions?: ActivePremiumSubscriptionCount.Raw | null;
+        active_free_subscriptions?: ActiveFreeSubscriptionCount.Raw | null;
+        average_open_rate?: AverageOpenRate.Raw | null;
+        average_click_rate?: AverageClickRate.Raw | null;
+        total_sent?: TotalEmailsSent.Raw | null;
+        total_unique_opened?: TotalUniqueOpens.Raw | null;
+        total_clicked?: TotalClicks.Raw | null;
     }
 }

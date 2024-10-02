@@ -6,14 +6,25 @@ import * as Beehiiv from "../index";
 
 /**
  * A subscribers' journey through an automation flow.
+ *
+ * @example
+ *     {
+ *         id: "aj_00000000-0000-0000-0000-000000000000",
+ *         automationId: "aut_00000000-0000-0000-0000-000000000000",
+ *         subscriptionId: "sub_00000000-0000-0000-0000-000000000000",
+ *         email: "test@example.com",
+ *         status: Beehiiv.AutomationJourneyStatus.Initiated,
+ *         startedAt: 1714857600,
+ *         completedAt: 1714861200
+ *     }
  */
 export interface AutomationJourney {
     /** The prefixed automation journey id */
-    id: string;
+    id: Beehiiv.AutomationJourneyId;
     /** The prefixed automation id */
-    automationId: string;
-    /** The prefixed subscription id */
-    subscriptionId: string;
+    automationId: Beehiiv.AutomationId;
+    subscriptionId?: Beehiiv.SubscriptionId;
+    email?: string;
     status: Beehiiv.AutomationJourneyStatus;
     /** The time that the subscriber started their flow through the automation. Measured in seconds since the Unix epoch. */
     startedAt?: number;

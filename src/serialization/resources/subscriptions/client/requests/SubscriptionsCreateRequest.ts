@@ -6,12 +6,12 @@ import * as serializers from "../../../../index";
 import * as Beehiiv from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { CustomFieldValue } from "../../../../types/CustomFieldValue";
-import { SubscriptionsCreateRequestDoubleOptOverride } from "../../types/SubscriptionsCreateRequestDoubleOptOverride";
+import { DoubleOptOverride } from "../../../../types/DoubleOptOverride";
 import { SubscriptionsCreateRequestTier } from "../../types/SubscriptionsCreateRequestTier";
 
 export const SubscriptionsCreateRequest: core.serialization.Schema<
     serializers.SubscriptionsCreateRequest.Raw,
-    Omit<Beehiiv.SubscriptionsCreateRequest, "undefined">
+    Beehiiv.SubscriptionsCreateRequest
 > = core.serialization.object({
     email: core.serialization.string(),
     reactivateExisting: core.serialization.property("reactivate_existing", core.serialization.boolean().optional()),
@@ -22,10 +22,7 @@ export const SubscriptionsCreateRequest: core.serialization.Schema<
     referringSite: core.serialization.property("referring_site", core.serialization.string().optional()),
     referralCode: core.serialization.property("referral_code", core.serialization.string().optional()),
     customFields: core.serialization.property("custom_fields", core.serialization.list(CustomFieldValue).optional()),
-    doubleOptOverride: core.serialization.property(
-        "double_opt_override",
-        SubscriptionsCreateRequestDoubleOptOverride.optional()
-    ),
+    doubleOptOverride: core.serialization.property("double_opt_override", DoubleOptOverride.optional()),
     tier: SubscriptionsCreateRequestTier.optional(),
     premiumTiers: core.serialization.property(
         "premium_tiers",
@@ -53,7 +50,7 @@ export declare namespace SubscriptionsCreateRequest {
         referring_site?: string | null;
         referral_code?: string | null;
         custom_fields?: CustomFieldValue.Raw[] | null;
-        double_opt_override?: SubscriptionsCreateRequestDoubleOptOverride.Raw | null;
+        double_opt_override?: DoubleOptOverride.Raw | null;
         tier?: SubscriptionsCreateRequestTier.Raw | null;
         premium_tiers?: string[] | null;
         premium_tier_ids?: string[] | null;

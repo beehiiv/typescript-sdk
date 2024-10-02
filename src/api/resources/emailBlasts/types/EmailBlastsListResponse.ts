@@ -6,7 +6,7 @@ import * as Beehiiv from "../../../index";
 
 export interface EmailBlastsListResponse {
     data: Beehiiv.EmailBlast[];
-    /** The limit placed on the results. If no limit was specified in the request,this defaults to 10. */
+    /** The limit placed on the results. If no limit was specified in the request, this defaults to 10. */
     limit: number;
     /** The page number the results are from. If no page was specified in the request, this defaults to page 1. */
     page: number;

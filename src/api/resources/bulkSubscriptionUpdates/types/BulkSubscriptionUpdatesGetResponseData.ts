@@ -14,7 +14,7 @@ export interface BulkSubscriptionUpdatesGetResponseData {
     /** The status of the update */
     status?: Beehiiv.BulkSubscriptionUpdatesGetResponseDataStatus;
     /** The publication ID associated with this update */
-    publicationId?: string;
+    publicationId?: Beehiiv.PublicationId;
     /** If the job as a whole fails, this will detail the errors encountered */
     failureReason?: string;
     /** The timestamp of the job's completion */

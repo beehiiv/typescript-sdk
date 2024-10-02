@@ -1,3 +1,3 @@
 export { SubscriptionsCreateRequest } from "./SubscriptionsCreateRequest";
-export { SubscriptionsPutRequest } from "./SubscriptionsPutRequest";
-export { SubscriptionsPatchRequest } from "./SubscriptionsPatchRequest";
+export { SubscriptionsUpdateRequest } from "./SubscriptionsUpdateRequest";
+export { SubscriptionsPatchSingleRequest } from "./SubscriptionsPatchSingleRequest";

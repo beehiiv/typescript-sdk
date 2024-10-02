@@ -5,7 +5,7 @@
 import * as serializers from "../../../../index";
 import * as Beehiiv from "../../../../../api/index";
 import * as core from "../../../../../core";
-import { PostPublicationsPublicationIdTiersRequestPricesAttributesItem } from "../../types/PostPublicationsPublicationIdTiersRequestPricesAttributesItem";
+import { TierPricesAttributesItem } from "../../types/TierPricesAttributesItem";
 
 export const PostPublicationsPublicationIdTiersRequest: core.serialization.Schema<
     serializers.PostPublicationsPublicationIdTiersRequest.Raw,
@@ -15,7 +15,7 @@ export const PostPublicationsPublicationIdTiersRequest: core.serialization.Schem
     description: core.serialization.string().optional(),
     pricesAttributes: core.serialization.property(
         "prices_attributes",
-        core.serialization.list(PostPublicationsPublicationIdTiersRequestPricesAttributesItem).optional()
+        core.serialization.list(TierPricesAttributesItem).optional()
     ),
 });
 
@@ -23,6 +23,6 @@ export declare namespace PostPublicationsPublicationIdTiersRequest {
     interface Raw {
         name: string;
         description?: string | null;
-        prices_attributes?: PostPublicationsPublicationIdTiersRequestPricesAttributesItem.Raw[] | null;
+        prices_attributes?: TierPricesAttributesItem.Raw[] | null;
     }
 }

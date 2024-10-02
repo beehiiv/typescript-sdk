@@ -5,21 +5,21 @@
 import * as serializers from "../../../../index";
 import * as Beehiiv from "../../../../../api/index";
 import * as core from "../../../../../core";
-import { PostWebhooksRequestEventTypesItem } from "../../types/PostWebhooksRequestEventTypesItem";
+import { WebhookEventType } from "../../types/WebhookEventType";
 
 export const PostWebhooksRequest: core.serialization.Schema<
     serializers.PostWebhooksRequest.Raw,
     Beehiiv.PostWebhooksRequest
 > = core.serialization.object({
     url: core.serialization.string(),
-    eventTypes: core.serialization.property("event_types", core.serialization.list(PostWebhooksRequestEventTypesItem)),
+    eventTypes: core.serialization.property("event_types", core.serialization.list(WebhookEventType)),
     description: core.serialization.string().optional(),
 });
 
 export declare namespace PostWebhooksRequest {
     interface Raw {
         url: string;
-        event_types: PostWebhooksRequestEventTypesItem.Raw[];
+        event_types: WebhookEventType.Raw[];
         description?: string | null;
     }
 }

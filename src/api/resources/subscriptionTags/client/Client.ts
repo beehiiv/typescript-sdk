@@ -30,10 +30,10 @@ export class SubscriptionTags {
     constructor(protected readonly _options: SubscriptionTags.Options) {}
 
     /**
-     * Create new subscription tags for a subscription. If the tag does not exist on the publication, it will be created automatically.
+     * Adds tags to a subscription. If the tag does not exist on the publication, it will be created automatically.
      *
-     * @param {string} publicationId
-     * @param {string} subscriptionId
+     * @param {Beehiiv.PublicationId} publicationId
+     * @param {Beehiiv.SubscriptionId} subscriptionId
      * @param {Beehiiv.SubscriptionTagsCreateRequest} request
      * @param {SubscriptionTags.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -46,24 +46,24 @@ export class SubscriptionTags {
      *     await client.subscriptionTags.create("publicationId", "subscriptionId")
      */
     public async create(
-        publicationId: string,
-        subscriptionId: string,
+        publicationId: Beehiiv.PublicationId,
+        subscriptionId: Beehiiv.SubscriptionId,
         request: Beehiiv.SubscriptionTagsCreateRequest = {},
         requestOptions?: SubscriptionTags.RequestOptions
     ): Promise<Beehiiv.SubscriptionTagsCreateResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/subscriptions/${encodeURIComponent(
-                    subscriptionId
-                )}/tags`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/subscriptions/${encodeURIComponent(serializers.SubscriptionId.jsonOrThrow(subscriptionId))}/tags`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

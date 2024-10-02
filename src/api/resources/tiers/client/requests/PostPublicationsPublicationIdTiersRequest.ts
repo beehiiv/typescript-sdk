@@ -7,11 +7,21 @@ import * as Beehiiv from "../../../../index";
 /**
  * @example
  *     {
- *         name: "name"
+ *         name: "Gold Tier",
+ *         description: "Our premium tier with exclusive benefits",
+ *         pricesAttributes: [{
+ *                 currency: "usd",
+ *                 amountCents: 500,
+ *                 enabled: true,
+ *                 interval: "month",
+ *                 intervalDisplay: "Monthly",
+ *                 cta: "Subscribe Now",
+ *                 features: ["Exclusive content", "Ad-free experience", "Priority support"]
+ *             }]
  *     }
  */
 export interface PostPublicationsPublicationIdTiersRequest {
     name: string;
     description?: string;
-    pricesAttributes?: Beehiiv.PostPublicationsPublicationIdTiersRequestPricesAttributesItem[];
+    pricesAttributes?: Beehiiv.TierPricesAttributesItem[];
 }

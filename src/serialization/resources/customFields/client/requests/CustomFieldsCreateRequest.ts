@@ -5,19 +5,19 @@
 import * as serializers from "../../../../index";
 import * as Beehiiv from "../../../../../api/index";
 import * as core from "../../../../../core";
-import { CustomFieldsCreateRequestKind } from "../../types/CustomFieldsCreateRequestKind";
+import { CustomFieldType } from "../../../../types/CustomFieldType";
 
 export const CustomFieldsCreateRequest: core.serialization.Schema<
     serializers.CustomFieldsCreateRequest.Raw,
     Beehiiv.CustomFieldsCreateRequest
 > = core.serialization.object({
-    kind: CustomFieldsCreateRequestKind,
+    kind: CustomFieldType,
     display: core.serialization.string(),
 });
 
 export declare namespace CustomFieldsCreateRequest {
     interface Raw {
-        kind: CustomFieldsCreateRequestKind.Raw;
+        kind: CustomFieldType.Raw;
         display: string;
     }
 }

@@ -6,13 +6,15 @@ import * as Beehiiv from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         email: "test@example.com",
+ *         doubleOptOverride: "on"
+ *     }
  */
 export interface AutomationJourneysCreateRequest {
     /** The email address associated with the subscription. */
     email?: string;
-    /** The prefixed ID of the subscription. */
-    subscriptionId?: string;
+    subscriptionId?: Beehiiv.SubscriptionId;
     /** Override publication double-opt settings for this subscription. */
-    doubleOptOverride?: Beehiiv.AutomationJourneysCreateRequestDoubleOptOverride;
+    doubleOptOverride?: Beehiiv.DoubleOptOverride;
 }

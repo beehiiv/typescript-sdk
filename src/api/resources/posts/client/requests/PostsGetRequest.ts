@@ -9,5 +9,8 @@ import * as Beehiiv from "../../../../index";
  *     {}
  */
 export interface PostsGetRequest {
-    expand?: Beehiiv.PostsGetRequestExpandItem | Beehiiv.PostsGetRequestExpandItem[];
+    /**
+     * Optionally expand the results by adding additional information. <br>`stats` - Adds statistics about the post(s). <br>`free_web_content` - Adds the web HTML rendered to a free reader. <br>`free_email_content` - Adds the email HTML rendered to a free reader. <br>`free_rss_content` - Adds the RSS feed HTML. <br>`premium_web_content` - Adds the web HTML rendered to a premium reader. <br>`premium_email_content` - Adds the email HTML rendered to a premium reader.
+     */
+    expand?: Beehiiv.PostExpandField[] | Beehiiv.PostExpandField[][];
 }

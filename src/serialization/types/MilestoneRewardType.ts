@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const MilestoneRewardType: core.serialization.Schema<
     serializers.MilestoneRewardType.Raw,
     Beehiiv.MilestoneRewardType
-> = core.serialization.enum_(["physical", "promo_code"]);
+> = core.serialization.enum_(["physical", "promo_code", "digital", "premium_gift"]);
 
 export declare namespace MilestoneRewardType {
-    type Raw = "physical" | "promo_code";
+    type Raw = "physical" | "promo_code" | "digital" | "premium_gift";
 }

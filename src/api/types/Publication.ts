@@ -6,7 +6,7 @@ import * as Beehiiv from "../index";
 
 export interface Publication {
     /** A unique prefixed id of the publication */
-    id: string;
+    id: Beehiiv.PublicationId;
     /** The name of the publication */
     name: string;
     /** The name of the organization */

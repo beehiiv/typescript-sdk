@@ -18,19 +18,19 @@ import * as Beehiiv from "../index";
  */
 export interface PublicationStats {
     /** Total number of active free and premium subscriptions */
-    activeSubscriptions?: Beehiiv.PublicationStatsActiveSubscriptions;
+    activeSubscriptions?: Beehiiv.ActiveSubscriptionCount;
     /** Total number of active premium/paid subscriptions */
-    activePremiumSubscriptions?: Beehiiv.PublicationStatsActivePremiumSubscriptions;
+    activePremiumSubscriptions?: Beehiiv.ActivePremiumSubscriptionCount;
     /** Total number of active free subscriptions */
-    activeFreeSubscriptions?: Beehiiv.PublicationStatsActiveFreeSubscriptions;
+    activeFreeSubscriptions?: Beehiiv.ActiveFreeSubscriptionCount;
     /** The publications historical average open rate */
-    averageOpenRate?: Beehiiv.PublicationStatsAverageOpenRate;
+    averageOpenRate?: Beehiiv.AverageOpenRate;
     /** The publications historical average click through rate */
-    averageClickRate?: Beehiiv.PublicationStatsAverageClickRate;
+    averageClickRate?: Beehiiv.AverageClickRate;
     /** Total number of emails sent */
-    totalSent?: Beehiiv.PublicationStatsTotalSent;
+    totalSent?: Beehiiv.TotalEmailsSent;
     /** Total number of uniquely opened emails. Only counts the first open for each subscriber. */
-    totalUniqueOpened?: Beehiiv.PublicationStatsTotalUniqueOpened;
+    totalUniqueOpened?: Beehiiv.TotalUniqueOpens;
     /** The total number of links clicked from emails. */
-    totalClicked?: Beehiiv.PublicationStatsTotalClicked;
+    totalClicked?: Beehiiv.TotalClicks;
 }

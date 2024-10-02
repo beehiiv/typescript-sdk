@@ -7,11 +7,11 @@ import * as Beehiiv from "../../../../index";
 /**
  * @example
  *     {
- *         kind: Beehiiv.CustomFieldsCreateRequestKind.String,
- *         display: "display"
+ *         kind: "string",
+ *         display: "Display"
  *     }
  */
 export interface CustomFieldsCreateRequest {
-    kind: Beehiiv.CustomFieldsCreateRequestKind;
+    kind: Beehiiv.CustomFieldType;
     display: string;
 }

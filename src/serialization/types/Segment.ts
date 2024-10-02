@@ -5,12 +5,13 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { SegmentId } from "../resources/ids/types/SegmentId";
 import { SegmentType } from "./SegmentType";
 import { SegmentStatus } from "./SegmentStatus";
 
 export const Segment: core.serialization.ObjectSchema<serializers.Segment.Raw, Beehiiv.Segment> =
     core.serialization.object({
-        id: core.serialization.string(),
+        id: SegmentId,
         name: core.serialization.string(),
         type: SegmentType,
         lastCalculated: core.serialization.property("last_calculated", core.serialization.number().optional()),
@@ -21,7 +22,7 @@ export const Segment: core.serialization.ObjectSchema<serializers.Segment.Raw, B
 
 export declare namespace Segment {
     interface Raw {
-        id: string;
+        id: SegmentId.Raw;
         name: string;
         type: SegmentType.Raw;
         last_calculated?: number | null;

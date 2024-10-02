@@ -5,24 +5,22 @@
 import * as serializers from "../../../../index";
 import * as Beehiiv from "../../../../../api/index";
 import * as core from "../../../../../core";
-import { AutomationJourneysCreateRequestDoubleOptOverride } from "../../types/AutomationJourneysCreateRequestDoubleOptOverride";
+import { SubscriptionId } from "../../../ids/types/SubscriptionId";
+import { DoubleOptOverride } from "../../../../types/DoubleOptOverride";
 
 export const AutomationJourneysCreateRequest: core.serialization.Schema<
     serializers.AutomationJourneysCreateRequest.Raw,
     Beehiiv.AutomationJourneysCreateRequest
 > = core.serialization.object({
     email: core.serialization.string().optional(),
-    subscriptionId: core.serialization.property("subscription_id", core.serialization.string().optional()),
-    doubleOptOverride: core.serialization.property(
-        "double_opt_override",
-        AutomationJourneysCreateRequestDoubleOptOverride.optional()
-    ),
+    subscriptionId: core.serialization.property("subscription_id", SubscriptionId.optional()),
+    doubleOptOverride: core.serialization.property("double_opt_override", DoubleOptOverride.optional()),
 });
 
 export declare namespace AutomationJourneysCreateRequest {
     interface Raw {
         email?: string | null;
-        subscription_id?: string | null;
-        double_opt_override?: AutomationJourneysCreateRequestDoubleOptOverride.Raw | null;
+        subscription_id?: SubscriptionId.Raw | null;
+        double_opt_override?: DoubleOptOverride.Raw | null;
     }
 }

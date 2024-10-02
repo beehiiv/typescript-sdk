@@ -5,10 +5,11 @@
 /**
  * The type of segment.<br>`dynamic` - The segment is recalculated at set intervals.<br>`static` - The segment is calculated once at creation.<br>`manual` - The segment is not calculated at all. The results are created via CSV.
  */
-export type SegmentType = "dynamic" | "static" | "manual";
+export type SegmentType = "dynamic" | "static" | "manual" | "all";
 
 export const SegmentType = {
     Dynamic: "dynamic",
     Static: "static",
     Manual: "manual",
+    All: "all",
 } as const;

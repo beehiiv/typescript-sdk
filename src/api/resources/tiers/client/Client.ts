@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Tiers {
@@ -30,10 +30,10 @@ export class Tiers {
     constructor(protected readonly _options: Tiers.Options) {}
 
     /**
-     * Retrieve all tiers belonging to a specific publication
+     * Create a new tier for a publication.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {Beehiiv.GetPublicationsPublicationIdTiersRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PostPublicationsPublicationIdTiersRequest} request
      * @param {Tiers.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -42,58 +42,52 @@ export class Tiers {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.tiers.getPublicationsPublicationIdTiers("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.tiers.create("pub_00000000-0000-0000-0000-000000000000", {
+     *         name: "Gold Tier",
+     *         description: "Our premium tier with exclusive benefits",
+     *         pricesAttributes: [{
+     *                 currency: "usd",
+     *                 amountCents: 500,
+     *                 enabled: true,
+     *                 interval: "month",
+     *                 intervalDisplay: "Monthly",
+     *                 cta: "Subscribe Now",
+     *                 features: ["Exclusive content", "Ad-free experience", "Priority support"]
+     *             }]
+     *     })
      */
-    public async getPublicationsPublicationIdTiers(
-        publicationId: string,
-        request: Beehiiv.GetPublicationsPublicationIdTiersRequest = {},
+    public async create(
+        publicationId: Beehiiv.PublicationId,
+        request: Beehiiv.PostPublicationsPublicationIdTiersRequest,
         requestOptions?: Tiers.RequestOptions
-    ): Promise<Beehiiv.GetPublicationsPublicationIdTiersResponse> {
-        const { expand, limit, page, direction } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (expand != null) {
-            if (Array.isArray(expand)) {
-                _queryParams["expand[]"] = expand.map((item) => item);
-            } else {
-                _queryParams["expand[]"] = expand;
-            }
-        }
-
-        if (limit != null) {
-            _queryParams["limit"] = limit.toString();
-        }
-
-        if (page != null) {
-            _queryParams["page"] = page.toString();
-        }
-
-        if (direction != null) {
-            _queryParams["direction"] = direction;
-        }
-
+    ): Promise<Beehiiv.TierResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/tiers`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/tiers`
             ),
-            method: "GET",
+            method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            queryParameters: _queryParams,
             requestType: "json",
+            body: serializers.PostPublicationsPublicationIdTiersRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetPublicationsPublicationIdTiersResponse.parseOrThrow(_response.body, {
+            return serializers.TierResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -168,10 +162,10 @@ export class Tiers {
     }
 
     /**
-     * Create a new tier for a publication.
+     * Retrieve all tiers belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {Beehiiv.PostPublicationsPublicationIdTiersRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.GetPublicationsPublicationIdTiersRequest} request
      * @param {Tiers.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -180,42 +174,58 @@ export class Tiers {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.tiers.postPublicationsPublicationIdTiers("pub_00000000-0000-0000-0000-000000000000", {
-     *         name: "name"
-     *     })
+     *     await client.tiers.index("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async postPublicationsPublicationIdTiers(
-        publicationId: string,
-        request: Beehiiv.PostPublicationsPublicationIdTiersRequest,
+    public async index(
+        publicationId: Beehiiv.PublicationId,
+        request: Beehiiv.GetPublicationsPublicationIdTiersRequest = {},
         requestOptions?: Tiers.RequestOptions
-    ): Promise<Beehiiv.PostPublicationsPublicationIdTiersResponse> {
+    ): Promise<Beehiiv.IndexTiersResponse> {
+        const { expand, limit, page, direction } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (expand != null) {
+            if (Array.isArray(expand)) {
+                _queryParams["expand[]"] = expand.map((item) => item);
+            } else {
+                _queryParams["expand[]"] = expand;
+            }
+        }
+
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
+        if (page != null) {
+            _queryParams["page"] = page.toString();
+        }
+
+        if (direction != null) {
+            _queryParams["direction"] = direction;
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/tiers`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/tiers`
             ),
-            method: "POST",
+            method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.PostPublicationsPublicationIdTiersRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.PostPublicationsPublicationIdTiersResponse.parseOrThrow(_response.body, {
+            return serializers.IndexTiersResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -292,8 +302,8 @@ export class Tiers {
     /**
      * Retrieve a single tier belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} tierId - The prefixed ID of the tier object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.TierId} tierId - The prefixed ID of the tier object
      * @param {Beehiiv.GetPublicationsPublicationIdTiersTierIdRequest} request
      * @param {Tiers.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -303,14 +313,14 @@ export class Tiers {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.tiers.getPublicationsPublicationIdTiersTierId("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000")
+     *     await client.tiers.show("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000")
      */
-    public async getPublicationsPublicationIdTiersTierId(
-        publicationId: string,
-        tierId: string,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
+        tierId: Beehiiv.TierId,
         request: Beehiiv.GetPublicationsPublicationIdTiersTierIdRequest = {},
         requestOptions?: Tiers.RequestOptions
-    ): Promise<Beehiiv.GetPublicationsPublicationIdTiersTierIdResponse> {
+    ): Promise<Beehiiv.TierResponse> {
         const { expand } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
@@ -324,14 +334,16 @@ export class Tiers {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/tiers/${encodeURIComponent(tierId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/tiers/${encodeURIComponent(serializers.TierId.jsonOrThrow(tierId))}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -343,7 +355,7 @@ export class Tiers {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetPublicationsPublicationIdTiersTierIdResponse.parseOrThrow(_response.body, {
+            return serializers.TierResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -420,9 +432,9 @@ export class Tiers {
     /**
      * Update an existing tier belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} tierId - The prefixed ID of the tier object
-     * @param {Beehiiv.PutPublicationsPublicationIdTiersTierIdRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.TierId} tierId - The prefixed ID of the tier object
+     * @param {Beehiiv.UpdatePutTierRequest} request
      * @param {Tiers.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -431,31 +443,46 @@ export class Tiers {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.tiers.putPublicationsPublicationIdTiersTierId("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000")
+     *     await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000", {
+     *         name: "Gold",
+     *         description: "Our premium tier with exclusive benefits",
+     *         pricesAttributes: [{
+     *                 id: "price_00000000-0000-0000-0000-000000000000",
+     *                 currency: "usd",
+     *                 amountCents: 500,
+     *                 interval: "month",
+     *                 intervalDisplay: "Monthly",
+     *                 cta: "Subscribe Now",
+     *                 features: ["Exclusive content"],
+     *                 delete: true
+     *             }]
+     *     })
      */
-    public async putPublicationsPublicationIdTiersTierId(
-        publicationId: string,
-        tierId: string,
-        request: Beehiiv.PutPublicationsPublicationIdTiersTierIdRequest = {},
+    public async put(
+        publicationId: Beehiiv.PublicationId,
+        tierId: Beehiiv.TierId,
+        request: Beehiiv.UpdatePutTierRequest = {},
         requestOptions?: Tiers.RequestOptions
-    ): Promise<Beehiiv.PutPublicationsPublicationIdTiersTierIdResponse> {
+    ): Promise<Beehiiv.TierResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/tiers/${encodeURIComponent(tierId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/tiers/${encodeURIComponent(serializers.TierId.jsonOrThrow(tierId))}`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.PutPublicationsPublicationIdTiersTierIdRequest.jsonOrThrow(request, {
+            body: serializers.UpdatePutTierRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -465,7 +492,7 @@ export class Tiers {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.PutPublicationsPublicationIdTiersTierIdResponse.parseOrThrow(_response.body, {
+            return serializers.TierResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -542,9 +569,9 @@ export class Tiers {
     /**
      * Update an existing tier belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} tierId - The prefixed ID of the tier object
-     * @param {Beehiiv.PatchPublicationsPublicationIdTiersTierIdRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.TierId} tierId - The prefixed ID of the tier object
+     * @param {Beehiiv.UpdatePatchTierRequest} request
      * @param {Tiers.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -553,31 +580,46 @@ export class Tiers {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.tiers.patchPublicationsPublicationIdTiersTierId("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000")
+     *     await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000", {
+     *         name: "Gold",
+     *         description: "Our premium tier with exclusive benefits",
+     *         pricesAttributes: [{
+     *                 id: "price_00000000-0000-0000-0000-000000000000",
+     *                 currency: "usd",
+     *                 amountCents: 500,
+     *                 interval: "month",
+     *                 intervalDisplay: "Monthly",
+     *                 cta: "Subscribe Now",
+     *                 features: ["Exclusive content"],
+     *                 delete: true
+     *             }]
+     *     })
      */
-    public async patchPublicationsPublicationIdTiersTierId(
-        publicationId: string,
-        tierId: string,
-        request: Beehiiv.PatchPublicationsPublicationIdTiersTierIdRequest = {},
+    public async patch(
+        publicationId: Beehiiv.PublicationId,
+        tierId: Beehiiv.TierId,
+        request: Beehiiv.UpdatePatchTierRequest = {},
         requestOptions?: Tiers.RequestOptions
-    ): Promise<Beehiiv.PatchPublicationsPublicationIdTiersTierIdResponse> {
+    ): Promise<Beehiiv.TierResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/tiers/${encodeURIComponent(tierId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/tiers/${encodeURIComponent(serializers.TierId.jsonOrThrow(tierId))}`
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.PatchPublicationsPublicationIdTiersTierIdRequest.jsonOrThrow(request, {
+            body: serializers.UpdatePatchTierRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -587,7 +629,7 @@ export class Tiers {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.PatchPublicationsPublicationIdTiersTierIdResponse.parseOrThrow(_response.body, {
+            return serializers.TierResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

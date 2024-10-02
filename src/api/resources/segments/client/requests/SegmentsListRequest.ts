@@ -12,11 +12,11 @@ export interface SegmentsListRequest {
     /**
      * Optionally filter the results by the segment's type.
      */
-    type?: Beehiiv.SegmentsListRequestType;
+    type?: Beehiiv.SegmentType;
     /**
      * Optionally filter the results by the segment's status.
      */
-    status?: Beehiiv.SegmentsListRequestStatus;
+    status?: Beehiiv.SegmentRequestStatus;
     /**
      * A limit on the number of objects to be returned. The limit can range between 1 and 100, and the default is 10.
      */
@@ -28,9 +28,9 @@ export interface SegmentsListRequest {
     /**
      * The field that the results are sorted by. Defaults to created<br> `created` - The time in which the segment was first created.<br> `last_calculated` - The time that the segment last completed calculation. Measured in seconds since the Unix epoch.
      */
-    orderBy?: Beehiiv.SegmentsListRequestOrderBy;
+    orderBy?: Beehiiv.SegmentOrderBy;
     /**
      * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
      */
-    direction?: Beehiiv.SegmentsListRequestDirection;
+    direction?: Beehiiv.RequestDirection;
 }

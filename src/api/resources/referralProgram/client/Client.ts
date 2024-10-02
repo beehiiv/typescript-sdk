@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace ReferralProgram {
@@ -32,7 +32,7 @@ export class ReferralProgram {
     /**
      * Retrieve details about the publication's referral program, including milestones and rewards.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.ReferralProgramGetRequest} request
      * @param {ReferralProgram.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -42,10 +42,10 @@ export class ReferralProgram {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.referralProgram.get("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.referralProgram.show("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async get(
-        publicationId: string,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.ReferralProgramGetRequest = {},
         requestOptions?: ReferralProgram.RequestOptions
     ): Promise<Beehiiv.ReferralProgramGetResponse> {
@@ -62,14 +62,16 @@ export class ReferralProgram {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/referral_program`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/referral_program`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

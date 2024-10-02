@@ -9,7 +9,7 @@ import * as Beehiiv from "../index";
  */
 export interface MilestoneReward {
     /** A unique prefixed id of the reward. */
-    id: string;
+    id: Beehiiv.RewardId;
     /** The name given to the reward at creation. */
     name: string;
     /** The description given to the name at creation. */

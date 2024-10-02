@@ -5,27 +5,25 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { AutomationId } from "../resources/ids/types/AutomationId";
 import { AutomationStatus } from "./AutomationStatus";
-import { AutomationTriggerEventsItem } from "./AutomationTriggerEventsItem";
+import { AutomationTriggerEvent } from "./AutomationTriggerEvent";
 
 export const Automation: core.serialization.ObjectSchema<serializers.Automation.Raw, Beehiiv.Automation> =
     core.serialization.object({
-        id: core.serialization.string(),
+        id: AutomationId,
         status: AutomationStatus,
         name: core.serialization.string(),
-        triggerEvents: core.serialization.property(
-            "trigger_events",
-            core.serialization.list(AutomationTriggerEventsItem)
-        ),
+        triggerEvents: core.serialization.property("trigger_events", core.serialization.list(AutomationTriggerEvent)),
         description: core.serialization.string().optional(),
     });
 
 export declare namespace Automation {
     interface Raw {
-        id: string;
+        id: AutomationId.Raw;
         status: AutomationStatus.Raw;
         name: string;
-        trigger_events: AutomationTriggerEventsItem.Raw[];
+        trigger_events: AutomationTriggerEvent.Raw[];
         description?: string | null;
     }
 }

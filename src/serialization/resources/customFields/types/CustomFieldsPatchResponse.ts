@@ -5,17 +5,17 @@
 import * as serializers from "../../../index";
 import * as Beehiiv from "../../../../api/index";
 import * as core from "../../../../core";
-import { CustomFieldsPatchResponseData } from "./CustomFieldsPatchResponseData";
+import { CustomFieldInfo } from "./CustomFieldInfo";
 
 export const CustomFieldsPatchResponse: core.serialization.ObjectSchema<
     serializers.CustomFieldsPatchResponse.Raw,
     Beehiiv.CustomFieldsPatchResponse
 > = core.serialization.object({
-    data: CustomFieldsPatchResponseData.optional(),
+    data: CustomFieldInfo.optional(),
 });
 
 export declare namespace CustomFieldsPatchResponse {
     interface Raw {
-        data?: CustomFieldsPatchResponseData.Raw | null;
+        data?: CustomFieldInfo.Raw | null;
     }
 }

@@ -9,7 +9,7 @@ import * as Beehiiv from "../index";
  */
 export interface Subscription {
     /** The prefixed subscription id */
-    id: string;
+    id: Beehiiv.SubscriptionId;
     email: string;
     /** The status of the subscription.<br>`validating` - The email address is being validated.<br>`invalid` - The email address is invalid.<br>`pending` - The email address is valid, but the subscription is pending double opt-in.<br>`active` - The email was valid and the subscription is active.<br>`inactive` - The subscription was made inactive, possibly due to an unsubscribe.<br>`needs_attention` - The subscription requires approval or denial. */
     status: Beehiiv.SubscriptionExpandedStatus;
@@ -31,8 +31,8 @@ export interface Subscription {
     referringSite: string;
     /** The code associated to this subscriber to refer others. When a new subscription is created with this referral code, credit for the referral goes to this subscription. */
     referralCode: string;
-    subscriptionPremiumTiers?: Beehiiv.SubscriptionTiers;
-    customFields?: Beehiiv.SubscriptionCustomFields;
+    subscriptionPremiumTiers?: Beehiiv.SubscriptionTierList;
+    customFields?: Beehiiv.SubscriptionCustomFieldList;
     tags?: Beehiiv.SubscriptionTags;
     stats?: Beehiiv.SubscriptionStats;
 }

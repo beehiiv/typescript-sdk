@@ -5,9 +5,11 @@
 /**
  * What type of reward this is.<br>`physical` - A product which must be sent to the subscriber.<br>`promo_code` - A code that is redeemable for goods or services.
  */
-export type MilestoneRewardType = "physical" | "promo_code";
+export type MilestoneRewardType = "physical" | "promo_code" | "digital" | "premium_gift";
 
 export const MilestoneRewardType = {
     Physical: "physical",
     PromoCode: "promo_code",
+    Digital: "digital",
+    PremiumGift: "premium_gift",
 } as const;

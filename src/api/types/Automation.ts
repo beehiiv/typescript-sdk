@@ -6,10 +6,10 @@ import * as Beehiiv from "../index";
 
 export interface Automation {
     /** A unique prefixed id of the automation */
-    id: string;
+    id: Beehiiv.AutomationId;
     status: Beehiiv.AutomationStatus;
     name: string;
     /** The types of events that can trigger the automation. */
-    triggerEvents: Beehiiv.AutomationTriggerEventsItem[];
+    triggerEvents: Beehiiv.AutomationTriggerEvent[];
     description?: string;
 }

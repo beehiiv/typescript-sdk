@@ -5,19 +5,20 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
-import { CustomFieldKind } from "./CustomFieldKind";
+import { CustomFieldType } from "./CustomFieldType";
+import { CustomFieldDataType } from "./CustomFieldDataType";
 
 export const CustomField: core.serialization.ObjectSchema<serializers.CustomField.Raw, Beehiiv.CustomField> =
     core.serialization.object({
         name: core.serialization.string().optional(),
-        kind: CustomFieldKind.optional(),
-        value: core.serialization.string().optional(),
+        kind: CustomFieldType.optional(),
+        value: CustomFieldDataType.optional(),
     });
 
 export declare namespace CustomField {
     interface Raw {
         name?: string | null;
-        kind?: CustomFieldKind.Raw | null;
-        value?: string | null;
+        kind?: CustomFieldType.Raw | null;
+        value?: CustomFieldDataType.Raw | null;
     }
 }

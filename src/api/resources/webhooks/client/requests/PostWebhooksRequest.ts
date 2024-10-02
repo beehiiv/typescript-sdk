@@ -8,14 +8,14 @@ import * as Beehiiv from "../../../../index";
  * @example
  *     {
  *         url: "https://example.com/webhook",
- *         eventTypes: [Beehiiv.PostWebhooksRequestEventTypesItem.PostSent]
+ *         eventTypes: ["post.sent"]
  *     }
  */
 export interface PostWebhooksRequest {
     /** The webhook URL to send events to. */
     url: string;
     /** The types of events the webhook will receive. */
-    eventTypes: Beehiiv.PostWebhooksRequestEventTypesItem[];
+    eventTypes: Beehiiv.WebhookEventType[];
     /** A description of the webhook. */
     description?: string;
 }

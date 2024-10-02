@@ -8,7 +8,7 @@ import * as Beehiiv from "../index";
  * The top level error response.
  */
 export interface Error_ {
-    status: string;
+    status: number;
     statusText: string;
-    errors: Beehiiv.ErrorErrorsItem[];
+    errors: Beehiiv.ErrorDetail[];
 }

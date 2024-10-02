@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace EmailBlasts {
@@ -30,9 +30,9 @@ export class EmailBlasts {
     constructor(protected readonly _options: EmailBlasts.Options) {}
 
     /**
-     * Retrieve all Email Blasts
+     * Retrieve all email blasts belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.EmailBlastsListRequest} request
      * @param {EmailBlasts.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -42,14 +42,14 @@ export class EmailBlasts {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.emailBlasts.list("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.emailBlasts.index("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async list(
-        publicationId: string,
+    public async index(
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.EmailBlastsListRequest = {},
         requestOptions?: EmailBlasts.RequestOptions
     ): Promise<Beehiiv.EmailBlastsListResponse> {
-        const { expand, limit, page, direction, orderBy } = request;
+        const { expand, status, limit, page, orderBy, direction } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
@@ -57,6 +57,10 @@ export class EmailBlasts {
             } else {
                 _queryParams["expand[]"] = expand;
             }
+        }
+
+        if (status != null) {
+            _queryParams["status"] = status;
         }
 
         if (limit != null) {
@@ -67,25 +71,25 @@ export class EmailBlasts {
             _queryParams["page"] = page.toString();
         }
 
-        if (direction != null) {
-            _queryParams["direction"] = direction;
-        }
-
         if (orderBy != null) {
             _queryParams["order_by"] = orderBy;
+        }
+
+        if (direction != null) {
+            _queryParams["direction"] = direction;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/email_blasts`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/email_blasts`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -172,10 +176,10 @@ export class EmailBlasts {
     }
 
     /**
-     * Retrieve an Email Blast
+     * Retrieve a single email blast belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} emailBlastId - The prefixed ID of the email blast object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.EmailBlastId} emailBlastId - The prefixed ID of the email blast object
      * @param {Beehiiv.EmailBlastsGetRequest} request
      * @param {EmailBlasts.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -185,11 +189,11 @@ export class EmailBlasts {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.emailBlasts.get("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000")
+     *     await client.emailBlasts.show("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000")
      */
-    public async get(
-        publicationId: string,
-        emailBlastId: string,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
+        emailBlastId: Beehiiv.EmailBlastId,
         request: Beehiiv.EmailBlastsGetRequest = {},
         requestOptions?: EmailBlasts.RequestOptions
     ): Promise<Beehiiv.EmailBlastsGetResponse> {
@@ -206,14 +210,16 @@ export class EmailBlasts {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/email_blasts/${encodeURIComponent(emailBlastId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/email_blasts/${encodeURIComponent(serializers.EmailBlastId.jsonOrThrow(emailBlastId))}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

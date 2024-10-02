@@ -9,23 +9,26 @@ import * as Beehiiv from "../../../../index";
  *     {}
  */
 export interface PostsListRequest {
-    expand?: Beehiiv.PostsListRequestExpandItem | Beehiiv.PostsListRequestExpandItem[];
+    /**
+     * Optionally expand the results by adding additional information. <br>`stats` - Adds statistics about the post(s). <br>`free_web_content` - Adds the web HTML rendered to a free reader. <br>`free_email_content` - Adds the email HTML rendered to a free reader. <br>`free_rss_content` - Adds the RSS feed HTML. <br>`premium_web_content` - Adds the web HTML rendered to a premium reader. <br>`premium_email_content` - Adds the email HTML rendered to a premium reader.
+     */
+    expand?: Beehiiv.PostExpandField[] | Beehiiv.PostExpandField[][];
     /**
      * Optionally filter the results by audience
      */
-    audience?: Beehiiv.PostsListRequestAudience;
+    audience?: Beehiiv.PostAudienceFilter;
     /**
      * Optionally filter the results by platform.<br>`web` - Posts only published to web.<br>`email` - Posts only published to email.<br>`both` - Posts published to email and web.<br>`all` - Does not restrict results by platform.
      */
-    platform?: Beehiiv.PostsListRequestPlatform;
+    platform?: Beehiiv.PostPlatformFilter;
     /**
      * Optionally filter the results by the status of the post.<br>`draft` - not been scheduled.<br>`confirmed` - The post will be active after the `scheduled_at`.<br>`archived` - The post is no longer active.<br>`all` - Does not restrict results by status.
      */
-    status?: Beehiiv.PostsListRequestStatus;
+    status?: Beehiiv.PostStatusFilter;
     /**
      * Optionally filter posts by content_tags. Adding a content tag will return any post with that content tag associated to it.<br>Example: Filtering for `content_tags: ["sales","closing"]` will return results of posts that have _either_ sales or closing content_tags.
      */
-    contentTags?: string | string[];
+    contentTags?: string[];
     /**
      * A limit on the number of objects to be returned. The limit can range between 1 and 100, and the default is 10.
      */
@@ -37,11 +40,11 @@ export interface PostsListRequest {
     /**
      * The field that the results are sorted by. Defaults to created<br> `created` - The time in which the post was first created.<br> `publish_date` - The time the post was set to be published.<br> `displayed_date` - The time displayed in place of the `publish_date`. If no `displayed_date` was set, it will default to the `publish_date`
      */
-    orderBy?: Beehiiv.PostsListRequestOrderBy;
+    orderBy?: Beehiiv.PostOrderBy;
     /**
      * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
      */
-    direction?: Beehiiv.PostsListRequestDirection;
+    direction?: Beehiiv.RequestDirection;
     /**
      * Optionally filter the results by the `hidden_from_feed` attribute of the post.<br>`all` - Does not restrict results by `hidden_from_feed`.<br>`true` - Only return posts hidden from the feed.<br>`false` - Only return posts that are visible on the feed.
      */

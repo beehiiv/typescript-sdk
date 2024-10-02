@@ -24,5 +24,5 @@ export interface GetPublicationsPublicationIdTiersRequest {
     /**
      * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
      */
-    direction?: Beehiiv.GetPublicationsPublicationIdTiersRequestDirection;
+    direction?: Beehiiv.RequestDirection;
 }

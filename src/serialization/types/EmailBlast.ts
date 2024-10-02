@@ -5,13 +5,14 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { EmailBlastId } from "../resources/ids/types/EmailBlastId";
 import { EmailBlastStatus } from "./EmailBlastStatus";
 import { EmailBlastStats } from "./EmailBlastStats";
 import { EmailBlastContent } from "./EmailBlastContent";
 
 export const EmailBlast: core.serialization.ObjectSchema<serializers.EmailBlast.Raw, Beehiiv.EmailBlast> =
     core.serialization.object({
-        id: core.serialization.string(),
+        id: EmailBlastId,
         created: core.serialization.number(),
         lastSent: core.serialization.property("last_sent", core.serialization.number()),
         status: EmailBlastStatus,
@@ -23,7 +24,7 @@ export const EmailBlast: core.serialization.ObjectSchema<serializers.EmailBlast.
 
 export declare namespace EmailBlast {
     interface Raw {
-        id: string;
+        id: EmailBlastId.Raw;
         created: number;
         last_sent: number;
         status: EmailBlastStatus.Raw;

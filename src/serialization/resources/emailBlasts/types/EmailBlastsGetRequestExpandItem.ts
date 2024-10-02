@@ -9,8 +9,8 @@ import * as core from "../../../../core";
 export const EmailBlastsGetRequestExpandItem: core.serialization.Schema<
     serializers.EmailBlastsGetRequestExpandItem.Raw,
     Beehiiv.EmailBlastsGetRequestExpandItem
-> = core.serialization.enum_(["stats", "free_email_content", "premium_email_content"]);
+> = core.serialization.enum_(["stats"]);
 
 export declare namespace EmailBlastsGetRequestExpandItem {
-    type Raw = "stats" | "free_email_content" | "premium_email_content";
+    type Raw = "stats";
 }

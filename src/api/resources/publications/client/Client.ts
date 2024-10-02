@@ -41,11 +41,9 @@ export class Publications {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.publications.list({
-     *         expand: Beehiiv.PublicationsListRequestExpandItem.Stats
-     *     })
+     *     await client.publications.index()
      */
-    public async list(
+    public async index(
         request: Beehiiv.PublicationsListRequest = {},
         requestOptions?: Publications.RequestOptions
     ): Promise<Beehiiv.PublicationsListResponse> {
@@ -53,9 +51,9 @@ export class Publications {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
-                _queryParams["expand[]"] = expand.map((item) => item);
+                _queryParams["expand"] = expand.map((item) => JSON.stringify(item));
             } else {
-                _queryParams["expand[]"] = expand;
+                _queryParams["expand"] = JSON.stringify(expand);
             }
         }
 
@@ -84,8 +82,8 @@ export class Publications {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -174,7 +172,7 @@ export class Publications {
     /**
      * Retrieve a single publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.PublicationsGetRequest} request
      * @param {Publications.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -184,12 +182,10 @@ export class Publications {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.publications.get("pub_ad76629e-4a39-43ad-8055-0ee89dc6db15", {
-     *         expand: Beehiiv.PublicationsGetRequestExpandItem.Stats
-     *     })
+     *     await client.publications.show("pub_ad76629e-4a39-43ad-8055-0ee89dc6db15")
      */
-    public async get(
-        publicationId: string,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.PublicationsGetRequest = {},
         requestOptions?: Publications.RequestOptions
     ): Promise<Beehiiv.PublicationsGetResponse> {
@@ -197,23 +193,23 @@ export class Publications {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
-                _queryParams["expand[]"] = expand.map((item) => item);
+                _queryParams["expand"] = expand.map((item) => JSON.stringify(item));
             } else {
-                _queryParams["expand[]"] = expand;
+                _queryParams["expand"] = JSON.stringify(expand);
             }
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

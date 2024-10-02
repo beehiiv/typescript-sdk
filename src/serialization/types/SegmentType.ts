@@ -7,8 +7,8 @@ import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
 
 export const SegmentType: core.serialization.Schema<serializers.SegmentType.Raw, Beehiiv.SegmentType> =
-    core.serialization.enum_(["dynamic", "static", "manual"]);
+    core.serialization.enum_(["dynamic", "static", "manual", "all"]);
 
 export declare namespace SegmentType {
-    type Raw = "dynamic" | "static" | "manual";
+    type Raw = "dynamic" | "static" | "manual" | "all";
 }

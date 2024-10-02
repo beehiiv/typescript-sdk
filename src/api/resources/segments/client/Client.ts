@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Segments {
@@ -32,7 +32,7 @@ export class Segments {
     /**
      * Retrieve information about all segments belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.SegmentsListRequest} request
      * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -42,10 +42,10 @@ export class Segments {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.segments.list("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.segments.index("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async list(
-        publicationId: string,
+    public async index(
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.SegmentsListRequest = {},
         requestOptions?: Segments.RequestOptions
     ): Promise<Beehiiv.SegmentsListResponse> {
@@ -78,14 +78,14 @@ export class Segments {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/segments`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/segments`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -172,10 +172,116 @@ export class Segments {
     }
 
     /**
+     * Retrieve information about a specific segment belonging to a publication
+     *
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SegmentId} segmentId - The prefixed ID of the segment object
+     * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
+     *
+     * @example
+     *     await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     */
+    public async show(
+        publicationId: Beehiiv.PublicationId,
+        segmentId: Beehiiv.SegmentId,
+        requestOptions?: Segments.RequestOptions
+    ): Promise<Beehiiv.SegmentShowResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/segments/${encodeURIComponent(serializers.SegmentId.jsonOrThrow(segmentId))}`
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SegmentShowResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 404:
+                    throw new Beehiiv.NotFoundError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 429:
+                    throw new Beehiiv.TooManyRequestsError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 500:
+                    throw new Beehiiv.InternalServerError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.BeehiivError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.BeehiivError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.BeehiivTimeoutError();
+            case "unknown":
+                throw new errors.BeehiivError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
      * List the Subscriber Ids from the most recent calculation of a specific publication.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} segmentId - The prefixed ID of the segment object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SegmentId} segmentId - The prefixed ID of the segment object
      * @param {Beehiiv.SegmentsGetRequest} request
      * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -185,11 +291,11 @@ export class Segments {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.segments.get("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     *     await client.segments.expandResults("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
      */
-    public async get(
-        publicationId: string,
-        segmentId: string,
+    public async expandResults(
+        publicationId: Beehiiv.PublicationId,
+        segmentId: Beehiiv.SegmentId,
         request: Beehiiv.SegmentsGetRequest = {},
         requestOptions?: Segments.RequestOptions
     ): Promise<Beehiiv.SegmentsGetResponse> {
@@ -206,14 +312,16 @@ export class Segments {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/segments/${encodeURIComponent(segmentId)}/results`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/segments/${encodeURIComponent(serializers.SegmentId.jsonOrThrow(segmentId))}/results`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -302,8 +410,8 @@ export class Segments {
     /**
      * Delete a segment. Deleting the segment does not effect the subscriptions in the segment.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} segmentId - The prefixed ID of the segment object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SegmentId} segmentId - The prefixed ID of the segment object
      * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.NotFoundError}
@@ -314,21 +422,23 @@ export class Segments {
      *     await client.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
      */
     public async delete(
-        publicationId: string,
-        segmentId: string,
+        publicationId: Beehiiv.PublicationId,
+        segmentId: Beehiiv.SegmentId,
         requestOptions?: Segments.RequestOptions
-    ): Promise<Record<string, unknown>> {
+    ): Promise<Beehiiv.SegmentDeleteResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/segments/${encodeURIComponent(segmentId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/segments/${encodeURIComponent(serializers.SegmentId.jsonOrThrow(segmentId))}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -339,7 +449,7 @@ export class Segments {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.segments.delete.Response.parseOrThrow(_response.body, {
+            return serializers.SegmentDeleteResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

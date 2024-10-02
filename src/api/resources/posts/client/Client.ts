@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Posts {
@@ -32,7 +32,7 @@ export class Posts {
     /**
      * Retrieve all posts belonging to a specific publication
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.PostsListRequest} request
      * @param {Posts.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -42,10 +42,10 @@ export class Posts {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.posts.list("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.posts.index("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async list(
-        publicationId: string,
+    public async index(
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.PostsListRequest = {},
         requestOptions?: Posts.RequestOptions
     ): Promise<Beehiiv.PostsListResponse> {
@@ -54,9 +54,9 @@ export class Posts {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
-                _queryParams["expand[]"] = expand.map((item) => item);
+                _queryParams["expand"] = expand.map((item) => JSON.stringify(item));
             } else {
-                _queryParams["expand[]"] = expand;
+                _queryParams["expand"] = JSON.stringify(expand);
             }
         }
 
@@ -73,11 +73,7 @@ export class Posts {
         }
 
         if (contentTags != null) {
-            if (Array.isArray(contentTags)) {
-                _queryParams["content_tags[]"] = contentTags.map((item) => item);
-            } else {
-                _queryParams["content_tags[]"] = contentTags;
-            }
+            _queryParams["content_tags[]"] = JSON.stringify(contentTags);
         }
 
         if (limit != null) {
@@ -103,14 +99,14 @@ export class Posts {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/posts`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/posts`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -199,8 +195,8 @@ export class Posts {
     /**
      * Retreive a single Post belonging to a specific publication
      *
-     * @param {string} postId - The prefixed ID of the post object
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PostId} postId - The prefixed ID of the post object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.PostsGetRequest} request
      * @param {Posts.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -210,11 +206,11 @@ export class Posts {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.posts.get("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
+     *     await client.posts.show("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
      */
-    public async get(
-        postId: string,
-        publicationId: string,
+    public async show(
+        postId: Beehiiv.PostId,
+        publicationId: Beehiiv.PublicationId,
         request: Beehiiv.PostsGetRequest = {},
         requestOptions?: Posts.RequestOptions
     ): Promise<Beehiiv.PostsGetResponse> {
@@ -222,23 +218,25 @@ export class Posts {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
-                _queryParams["expand[]"] = expand.map((item) => item);
+                _queryParams["expand"] = expand.map((item) => JSON.stringify(item));
             } else {
-                _queryParams["expand[]"] = expand;
+                _queryParams["expand"] = JSON.stringify(expand);
             }
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/posts/${encodeURIComponent(postId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/posts/${encodeURIComponent(serializers.PostId.jsonOrThrow(postId))}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -327,8 +325,8 @@ export class Posts {
     /**
      * Delete or Archive a post. Any post that has been confirmed will have it's status changed to `archived`. Posts in the `draft` status will be permenantly deleted.
      *
-     * @param {string} postId - The prefixed ID of the post object
-     * @param {string} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PostId} postId - The prefixed ID of the post object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Posts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -340,21 +338,23 @@ export class Posts {
      *     await client.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000")
      */
     public async delete(
-        postId: string,
-        publicationId: string,
+        postId: Beehiiv.PostId,
+        publicationId: Beehiiv.PublicationId,
         requestOptions?: Posts.RequestOptions
     ): Promise<Beehiiv.PostsDeleteResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/posts/${encodeURIComponent(postId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/posts/${encodeURIComponent(serializers.PostId.jsonOrThrow(postId))}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

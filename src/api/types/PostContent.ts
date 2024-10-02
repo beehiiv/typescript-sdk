@@ -11,7 +11,7 @@ import * as Beehiiv from "../index";
  */
 export interface PostContent {
     /** The requested free post HTML. This HTML has paywalls enforced. */
-    free?: Beehiiv.PostContentFree;
+    free?: Beehiiv.FreePostContent;
     /** The requested premium post HTML. This HTML does not have paywalls enforced. */
-    premium?: Beehiiv.PostContentPremium;
+    premium?: Beehiiv.PremiumPostContent;
 }

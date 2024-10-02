@@ -5,13 +5,14 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { RewardId } from "../resources/ids/types/RewardId";
 import { MilestoneRewardType } from "./MilestoneRewardType";
 
 export const MilestoneReward: core.serialization.ObjectSchema<
     serializers.MilestoneReward.Raw,
     Beehiiv.MilestoneReward
 > = core.serialization.object({
-    id: core.serialization.string(),
+    id: RewardId,
     name: core.serialization.string(),
     description: core.serialization.string(),
     imageUrl: core.serialization.property("image_url", core.serialization.string()),
@@ -20,7 +21,7 @@ export const MilestoneReward: core.serialization.ObjectSchema<
 
 export declare namespace MilestoneReward {
     interface Raw {
-        id: string;
+        id: RewardId.Raw;
         name: string;
         description: string;
         image_url: string;

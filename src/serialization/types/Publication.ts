@@ -5,11 +5,12 @@
 import * as serializers from "../index";
 import * as Beehiiv from "../../api/index";
 import * as core from "../../core";
+import { PublicationId } from "../resources/ids/types/PublicationId";
 import { PublicationStats } from "./PublicationStats";
 
 export const Publication: core.serialization.ObjectSchema<serializers.Publication.Raw, Beehiiv.Publication> =
     core.serialization.object({
-        id: core.serialization.string(),
+        id: PublicationId,
         name: core.serialization.string(),
         organizationName: core.serialization.property("organization_name", core.serialization.string()),
         referralProgramEnabled: core.serialization.property("referral_program_enabled", core.serialization.boolean()),
@@ -19,7 +20,7 @@ export const Publication: core.serialization.ObjectSchema<serializers.Publicatio
 
 export declare namespace Publication {
     interface Raw {
-        id: string;
+        id: PublicationId.Raw;
         name: string;
         organization_name: string;
         referral_program_enabled: boolean;

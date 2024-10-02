@@ -5,5 +5,5 @@
 import * as Beehiiv from "../../../index";
 
 export interface CustomFieldsPatchResponse {
-    data?: Beehiiv.CustomFieldsPatchResponseData;
+    data?: Beehiiv.CustomFieldInfo;
 }

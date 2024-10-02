@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Beehiiv from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Webhooks {
@@ -30,10 +30,10 @@ export class Webhooks {
     constructor(protected readonly _options: Webhooks.Options) {}
 
     /**
-     * Retrieve all webhooks belonging to a specific publication.
+     * Create a new webhook for a given publication.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {Beehiiv.GetWebhooksRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.PostWebhooksRequest} request
      * @param {Webhooks.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -42,42 +42,43 @@ export class Webhooks {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.webhooks.getWebhooks("pub_00000000-0000-0000-0000-000000000000")
+     *     await client.webhooks.create("pub_00000000-0000-0000-0000-000000000000", {
+     *         url: "https://example.com/webhook",
+     *         eventTypes: ["post.sent"]
+     *     })
      */
-    public async getWebhooks(
-        publicationId: string,
-        request: Beehiiv.GetWebhooksRequest = {},
+    public async create(
+        publicationId: Beehiiv.PublicationId,
+        request: Beehiiv.PostWebhooksRequest,
         requestOptions?: Webhooks.RequestOptions
-    ): Promise<Beehiiv.GetWebhooksResponse> {
-        const { limit } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (limit != null) {
-            _queryParams["limit"] = limit.toString();
-        }
-
+    ): Promise<Beehiiv.WebhookResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/webhooks`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/webhooks`
             ),
-            method: "GET",
+            method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            queryParameters: _queryParams,
             requestType: "json",
+            body: serializers.PostWebhooksRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetWebhooksResponse.parseOrThrow(_response.body, {
+            return serializers.WebhookResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -152,10 +153,10 @@ export class Webhooks {
     }
 
     /**
-     * Create a new webhook for a given publication.
+     * Retrieve all webhooks belonging to a specific publication.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {Beehiiv.PostWebhooksRequest} request
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.GetWebhooksRequest} request
      * @param {Webhooks.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -164,43 +165,42 @@ export class Webhooks {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postWebhooks("pub_00000000-0000-0000-0000-000000000000", {
-     *         url: "https://example.com/webhook",
-     *         eventTypes: [Beehiiv.PostWebhooksRequestEventTypesItem.PostSent]
-     *     })
+     *     await client.webhooks.index("pub_00000000-0000-0000-0000-000000000000")
      */
-    public async postWebhooks(
-        publicationId: string,
-        request: Beehiiv.PostWebhooksRequest,
+    public async index(
+        publicationId: Beehiiv.PublicationId,
+        request: Beehiiv.GetWebhooksRequest = {},
         requestOptions?: Webhooks.RequestOptions
-    ): Promise<Beehiiv.PostWebhooksResponse> {
+    ): Promise<Beehiiv.IndexWebhooksResponse> {
+        const { limit } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/webhooks`
+                `publications/${encodeURIComponent(serializers.PublicationId.jsonOrThrow(publicationId))}/webhooks`
             ),
-            method: "POST",
+            method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.PostWebhooksRequest.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.PostWebhooksResponse.parseOrThrow(_response.body, {
+            return serializers.IndexWebhooksResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -277,34 +277,37 @@ export class Webhooks {
     /**
      * Retrieve a specific webhook belonging to a publication.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} webhookId - The prefixed ID of the webhook object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.EndpointId} endpointId - The prefixed ID of the webhook object
      * @param {Webhooks.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Beehiiv.UnprocessableEntityError}
      * @throws {@link Beehiiv.BadRequestError}
      * @throws {@link Beehiiv.NotFoundError}
      * @throws {@link Beehiiv.TooManyRequestsError}
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.webhooks.getWebhooksWebhookId("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000")
+     *     await client.webhooks.show("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000")
      */
-    public async getWebhooksWebhookId(
-        publicationId: string,
-        webhookId: string,
+    public async show(
+        publicationId: Beehiiv.PublicationId,
+        endpointId: Beehiiv.EndpointId,
         requestOptions?: Webhooks.RequestOptions
-    ): Promise<Beehiiv.GetWebhooksWebhookIdResponse> {
+    ): Promise<Beehiiv.WebhookResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/webhooks/${encodeURIComponent(webhookId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/webhooks/${encodeURIComponent(serializers.EndpointId.jsonOrThrow(endpointId))}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -315,7 +318,7 @@ export class Webhooks {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetWebhooksWebhookIdResponse.parseOrThrow(_response.body, {
+            return serializers.WebhookResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -326,6 +329,16 @@ export class Webhooks {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 422:
+                    throw new Beehiiv.UnprocessableEntityError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 case 400:
                     throw new Beehiiv.BadRequestError(
                         serializers.Error_.parseOrThrow(_response.error.body, {
@@ -392,8 +405,8 @@ export class Webhooks {
     /**
      * Delete a webhook subscription from a publication.
      *
-     * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} webhookId - The prefixed ID of the webhook object
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.EndpointId} endpointId - The prefixed ID of the webhook object
      * @param {Webhooks.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -402,24 +415,26 @@ export class Webhooks {
      * @throws {@link Beehiiv.InternalServerError}
      *
      * @example
-     *     await client.webhooks.deleteWebhooksWebhookId("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000")
+     *     await client.webhooks.delete("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000")
      */
-    public async deleteWebhooksWebhookId(
-        publicationId: string,
-        webhookId: string,
+    public async delete(
+        publicationId: Beehiiv.PublicationId,
+        endpointId: Beehiiv.EndpointId,
         requestOptions?: Webhooks.RequestOptions
-    ): Promise<Record<string, unknown>> {
+    ): Promise<Beehiiv.WebhooksDeleteResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/webhooks/${encodeURIComponent(webhookId)}`
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/webhooks/${encodeURIComponent(serializers.EndpointId.jsonOrThrow(endpointId))}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -430,7 +445,7 @@ export class Webhooks {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.webhooks.deleteWebhooksWebhookId.Response.parseOrThrow(_response.body, {
+            return serializers.WebhooksDeleteResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -508,7 +523,7 @@ export class Webhooks {
      * Send test info to an already set up webhook endpoint.
      *
      * @param {string} publicationId - The prefixed ID of the publication object
-     * @param {string} webhookId - The prefixed ID of the webhook object
+     * @param {Beehiiv.EndpointId} endpointId - The prefixed ID of the webhook object
      * @param {Webhooks.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -519,20 +534,22 @@ export class Webhooks {
      */
     public async test(
         publicationId: string,
-        webhookId: string,
+        endpointId: Beehiiv.EndpointId,
         requestOptions?: Webhooks.RequestOptions
     ): Promise<Beehiiv.GetPublicationsPublicationIdWebhooksWebhookIdTestsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
-                `publications/${encodeURIComponent(publicationId)}/webhooks/${encodeURIComponent(webhookId)}/tests`
+                `publications/${encodeURIComponent(publicationId)}/webhooks/${encodeURIComponent(
+                    serializers.EndpointId.jsonOrThrow(endpointId)
+                )}/tests`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "beehiiv",
-                "X-Fern-SDK-Version": "0.1.3",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.0.244",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

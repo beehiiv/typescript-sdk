@@ -6,10 +6,11 @@ import * as Beehiiv from "../../../../index";
 
 /**
  * @example
- *     {
- *         expand: Beehiiv.PublicationsGetRequestExpandItem.Stats
- *     }
+ *     {}
  */
 export interface PublicationsGetRequest {
-    expand?: Beehiiv.PublicationsGetRequestExpandItem | Beehiiv.PublicationsGetRequestExpandItem[];
+    /**
+     * Optionally expand the results by adding additional information like subscription counts and engagement stats.
+     */
+    expand?: Beehiiv.PublicationsGetRequestExpandItem[] | Beehiiv.PublicationsGetRequestExpandItem[][];
 }

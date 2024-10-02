@@ -25,7 +25,6 @@ import * as Beehiiv from "../../../../index";
  *     }
  */
 export interface SubscriptionsCreateRequest {
-    undefined?: string;
     /** The email address of the subscription. */
     email: string;
     /** Whether or not to reactivate the subscription if they have already unsubscribed. This option should be used only if the subscriber is knowingly resubscribing. */
@@ -44,7 +43,7 @@ export interface SubscriptionsCreateRequest {
     /** The custom fields must already exist for the publication. Any new custom fields here will be discarded. */
     customFields?: Beehiiv.CustomFieldValue[];
     /** Override publication double-opt settings for this subscription. */
-    doubleOptOverride?: Beehiiv.SubscriptionsCreateRequestDoubleOptOverride;
+    doubleOptOverride?: Beehiiv.DoubleOptOverride;
     /** The tier for this subscription. */
     tier?: Beehiiv.SubscriptionsCreateRequestTier;
     /** The names of the premium tiers this subscription is associated with. Ignored if `premium_tier_ids` is given. */

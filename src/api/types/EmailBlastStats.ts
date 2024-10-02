@@ -11,5 +11,5 @@ export interface EmailBlastStats {
     /** Stats scoped only to email recipients. Not relevant for posts published only to web */
     email?: Beehiiv.EmailBlastStatsEmail;
     /** An array of click statistics for each URL in the post */
-    clicks?: Beehiiv.EmailBlastStatsClicksItem[];
+    clicks?: Beehiiv.EmailBlastStatsClicks[];
 }

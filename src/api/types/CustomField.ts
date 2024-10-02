@@ -8,7 +8,7 @@ export interface CustomField {
     /** The name of the existing custom field */
     name?: string;
     /** The type of value being stored in the custom field. */
-    kind?: Beehiiv.CustomFieldKind;
+    kind?: Beehiiv.CustomFieldType;
     /** The value stored for the subscription */
-    value?: string;
+    value?: Beehiiv.CustomFieldDataType;
 }

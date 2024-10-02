@@ -1,6 +1,6 @@
 {
     "name": "@beehiiv/sdk",
-    "version": "0.0.244",
+    "version": "0.0.245",
     "private": false,
     "repository": "https://github.com/beehiiv/typescript-sdk",
     "main": "./index.js",

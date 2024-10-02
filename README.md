@@ -7,7 +7,7 @@ The Beehiiv TypeScript library provides convenient access to the Beehiiv API fro
 
 ## Documentation
 
-API reference documentation is available [here](https://developers.beehiiv.com/docs/v2/o3elujhmkik1d-beehiiv-api).
+API reference documentation is available [here](https://developers.beehiiv.com).
 
 ## Installation
 

@@ -22,4 +22,5 @@ export interface Segment {
     status: Beehiiv.SegmentStatus;
     /** Dynamic segments are marked inactive if they haven't been used in a specific period of time. Inactive segments will not automatically be recalculated. */
     active: boolean;
+    stats?: Beehiiv.SegmentStats;
 }

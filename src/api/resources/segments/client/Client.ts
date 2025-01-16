@@ -49,7 +49,7 @@ export class Segments {
         request: Beehiiv.SegmentsListRequest = {},
         requestOptions?: Segments.RequestOptions
     ): Promise<Beehiiv.SegmentsListResponse> {
-        const { type: type_, status, limit, page, orderBy, direction } = request;
+        const { type: type_, status, limit, page, orderBy, direction, expand } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (type_ != null) {
             _queryParams["type"] = type_;
@@ -75,6 +75,10 @@ export class Segments {
             _queryParams["direction"] = direction;
         }
 
+        if (expand != null) {
+            _queryParams["expand[]"] = JSON.stringify(expand);
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
@@ -85,8 +89,8 @@ export class Segments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -177,6 +181,7 @@ export class Segments {
      *
      * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.SegmentId} segmentId - The prefixed ID of the segment object
+     * @param {Beehiiv.SegmentsShowRequest} request
      * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.NotFoundError}
@@ -189,8 +194,15 @@ export class Segments {
     public async show(
         publicationId: Beehiiv.PublicationId,
         segmentId: Beehiiv.SegmentId,
+        request: Beehiiv.SegmentsShowRequest = {},
         requestOptions?: Segments.RequestOptions
     ): Promise<Beehiiv.SegmentShowResponse> {
+        const { expand } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (expand != null) {
+            _queryParams["expand[]"] = JSON.stringify(expand);
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
@@ -203,12 +215,13 @@ export class Segments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -323,8 +336,8 @@ export class Segments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -441,8 +454,8 @@ export class Segments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

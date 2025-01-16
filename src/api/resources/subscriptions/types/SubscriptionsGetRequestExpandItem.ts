@@ -11,10 +11,14 @@ export type SubscriptionsGetRequestExpandItem =
     | "custom_fields"
     /**
      * Returns an array of subscriptions with limited data - id, email, and status. These are the subscriptions that were referred by this subscription. */
-    | "referrals";
+    | "referrals"
+    /**
+     * Returns an array of tags that have been set on the subscription. */
+    | "tags";
 
 export const SubscriptionsGetRequestExpandItem = {
     Stats: "stats",
     CustomFields: "custom_fields",
     Referrals: "referrals",
+    Tags: "tags",
 } as const;

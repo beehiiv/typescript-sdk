@@ -1453,6 +1453,331 @@ await client.emailBlasts.show("pub_00000000-0000-0000-0000-000000000000", "blast
 
 ## Posts
 
+<details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.PostsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Note title="Currently in beta" icon="b">
+  This feature is currently in beta, the API is subject to change, and available only to Enterprise users.<br/><br/>To inquire about Enterprise pricing,
+  please visit our <a href="https://www.beehiiv.com/enterprise">Enterprise page</a>.
+</Note>
+Create a post for a specific publication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
+    title: "The Kitchen Sink Post (refactored version)",
+    subtitle: "Contains lots of examples of each block type and the various settings you could use",
+    blocks: [
+        {
+            type: "heading",
+            level: "2",
+            textAlignment: "center",
+            text: "This is my block!!!",
+            anchorHeader: false,
+            anchorIncludeInToc: false,
+        },
+        {
+            type: "list",
+            listType: "ordered",
+            items: ["a", "b", "c"],
+        },
+        {
+            type: "list",
+            listType: "ordered",
+            items: ["d", "e", "f"],
+            startNumber: 4,
+        },
+        {
+            type: "list",
+            listType: "unordered",
+            items: ["g", "h", "i"],
+            startNumber: 4,
+        },
+        {
+            type: "table",
+            headerRow: true,
+            headerColumn: true,
+            rows: [
+                [
+                    {
+                        text: "A",
+                    },
+                    {
+                        text: "B",
+                        alignment: "center",
+                    },
+                    {
+                        text: "C",
+                        alignment: "right",
+                    },
+                ],
+                [
+                    {
+                        text: "D",
+                        alignment: "right",
+                    },
+                    {
+                        text: "E",
+                        alignment: "center",
+                    },
+                    {
+                        text: "F",
+                        alignment: "left",
+                    },
+                ],
+            ],
+        },
+        {
+            type: "table",
+            rows: [
+                [
+                    {
+                        text: "A",
+                    },
+                    {
+                        text: "B",
+                    },
+                    {
+                        text: "C",
+                    },
+                ],
+                [
+                    {
+                        text: "D",
+                    },
+                    {
+                        text: "E",
+                    },
+                    {
+                        text: "F",
+                    },
+                ],
+            ],
+        },
+        {
+            type: "table",
+            headerRow: false,
+            rows: [
+                [
+                    {
+                        text: "A",
+                    },
+                    {
+                        text: "B",
+                    },
+                    {
+                        text: "C",
+                    },
+                ],
+                [
+                    {
+                        text: "D",
+                    },
+                    {
+                        text: "E",
+                    },
+                    {
+                        text: "F",
+                    },
+                ],
+            ],
+        },
+        {
+            type: "columns",
+            columns: [
+                {
+                    blocks: [
+                        {
+                            type: "paragraph",
+                            plaintext: "Marble Column 1 {{email}}",
+                        },
+                    ],
+                },
+                {
+                    blocks: [
+                        {
+                            type: "image",
+                            imageUrl: "https://cdn.britannica.com/89/164789-050-D6B5E2C7/Barack-Obama-2012.jpg",
+                            url: "https://www.whitehouse.gov/",
+                            title: "Barry O",
+                            altText: "A picture of Barry Obama",
+                            caption: "One Cool President",
+                            captionAlignment: "center",
+                            imageAlignment: "right",
+                            width: 75,
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            type: "advertisement",
+            opportunityId: "d8dfa6be-24b5-4cad-8350-ae44366dbd4c",
+        },
+        {
+            type: "image",
+            imageUrl: "https://cdn.britannica.com/89/164789-050-D6B5E2C7/Barack-Obama-2012.jpg",
+            url: "https://www.whitehouse.gov/",
+            title: "Barry O",
+            altText: "A picture of Barry Obama",
+            caption: "One Cool President",
+            captionAlignment: "center",
+            imageAlignment: "right",
+            width: 75,
+        },
+        {
+            type: "paragraph",
+            formattedText: [
+                {
+                    text: "This is going to be ",
+                },
+                {
+                    text: "a really, really awesome time ",
+                    styling: ["bold"],
+                },
+                {
+                    text: "Are you ready for this?",
+                    styling: ["italic", "bold"],
+                },
+            ],
+        },
+        {
+            type: "button",
+            href: "/subscribe",
+            target: "_blank",
+            alignment: "center",
+            size: "large",
+            text: "Subscribe",
+        },
+        {
+            type: "button",
+            href: "/signup",
+            target: "_blank",
+            alignment: "right",
+            size: "small",
+            text: "Sign Up",
+        },
+        {
+            type: "button",
+            href: "/",
+            target: "_blank",
+            text: "View Posts",
+        },
+        {
+            type: "heading",
+            level: "4",
+            textAlignment: "right",
+            text: "This is my block!!!",
+            anchorHeader: true,
+            anchorIncludeInToc: true,
+        },
+    ],
+    postTemplateId: "post_template_00000000-0000-0000-0000-000000000000",
+    scheduledAt: "2024-12-25T12:00:00Z",
+    customLinkTrackingEnabled: true,
+    emailCaptureTypeOverride: "none",
+    overrideScheduledAt: "2022-10-26T14:01:16Z",
+    socialShare: "comments_and_likes_only",
+    thumbnailImageUrl:
+        "https://images.squarespace-cdn.com/content/v1/56e4ca0540261d39b90e4b18/1605047208324-PONGEYKEAKTMM1LANHJ5/1ED706BF-A70B-4F26-B3D5-266B449DDA8A_1_105_c.jpeg",
+    emailSettings: {
+        fromAddress: "from_address",
+        customLiveUrl: "https://beehiiv.com",
+        displayTitleInEmail: true,
+        displayBylineInEmail: true,
+        displaySubtitleInEmail: true,
+        emailHeaderEngagementButtons: "email_header_engagement_buttons",
+        emailHeaderSocialShare: "email_header_social_share",
+        emailPreviewText: "email_preview_text",
+        emailSubjectLine: "email_subject_line",
+    },
+    webSettings: {
+        displayThumbnailOnWeb: true,
+        hideFromFeed: true,
+        slug: "and-this-is-gonna-rock",
+    },
+    seoSettings: {
+        defaultDescription: "default_description",
+        defaultTitle: "default_title",
+        ogDescription: "OpenGraph description",
+        ogTitle: "Opengraph Title",
+        twitterDescription: "Twitter Stuff",
+        twitterTitle: "My Twitter Article",
+    },
+    contentTags: ["Obama", "Care", "Rocks", "Healthcare"],
+    recipients: {
+        web: {
+            tierIds: ["premium"],
+        },
+        email: {
+            tierIds: ["premium", "free"],
+            includeSegmentIds: ["seg_6426b403-39f5-42bd-86e9-9533fb0099e7"],
+            excludeSegmentIds: ["seg_e34b4085-aef6-449f-a699-7563f915f852"],
+        },
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.PostsCreateRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Posts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">index</a>(publicationId, { ...params }) -> Beehiiv.PostsListResponse</code></summary>
 <dl>
 <dd>
@@ -1956,7 +2281,7 @@ await client.segments.index("pub_00000000-0000-0000-0000-000000000000");
 </dl>
 </details>
 
-<details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">show</a>(publicationId, segmentId) -> Beehiiv.SegmentShowResponse</code></summary>
+<details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">show</a>(publicationId, segmentId, { ...params }) -> Beehiiv.SegmentShowResponse</code></summary>
 <dl>
 <dd>
 
@@ -2009,6 +2334,14 @@ await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_0000
 <dd>
 
 **segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.SegmentsShowRequest`
 
 </dd>
 </dl>
@@ -2570,6 +2903,80 @@ await client.subscriptions.getBySubscriberId(
 <dd>
 
 **request:** `Beehiiv.SubscriptionsGetBySubscriberIdRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Subscriptions.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.subscriptions.<a href="/src/api/resources/subscriptions/client/Client.ts">getJwtToken</a>(publicationId, subscriptionId) -> Beehiiv.SubscriptionJwtTokenResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a JWT token that can be used to automatically log in subscribers via URL. This token is short lived and should be used immediately.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.subscriptions.getJwtToken(
+    "pub_00000000-0000-0000-0000-000000000000",
+    "sub_00000000-0000-0000-0000-000000000000"
+);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
 
 </dd>
 </dl>

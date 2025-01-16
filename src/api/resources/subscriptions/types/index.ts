@@ -16,4 +16,5 @@ export * from "./SubscriptionsGetResponse";
 export * from "./SubscriptionsPutRequestTier";
 export * from "./SubscriptionsPutRequestCustomFieldsItem";
 export * from "./SubscriptionResponse";
+export * from "./SubscriptionJwtTokenResponse";
 export * from "./SubscriptionDeleteResponse";

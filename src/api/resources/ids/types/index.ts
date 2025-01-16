@@ -10,3 +10,6 @@ export * from "./RewardId";
 export * from "./TierId";
 export * from "./PriceId";
 export * from "./EndpointId";
+export * from "./PostTemplateId";
+export * from "./PaywallId";
+export * from "./ExternalRssFeedId";

@@ -75,8 +75,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -252,8 +252,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -383,8 +383,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -514,8 +514,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -645,8 +645,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -659,6 +659,126 @@ export class Subscriptions {
         });
         if (_response.ok) {
             return serializers.SubscriptionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Beehiiv.BadRequestError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 404:
+                    throw new Beehiiv.NotFoundError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 429:
+                    throw new Beehiiv.TooManyRequestsError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                case 500:
+                    throw new Beehiiv.InternalServerError(
+                        serializers.Error_.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.BeehiivError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.BeehiivError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.BeehiivTimeoutError();
+            case "unknown":
+                throw new errors.BeehiivError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Generate a JWT token that can be used to automatically log in subscribers via URL. This token is short lived and should be used immediately.
+     *
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SubscriptionId} subscriptionId - The prefixed ID of the subscription object
+     * @param {Subscriptions.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
+     *
+     * @example
+     *     await client.subscriptions.getJwtToken("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000")
+     */
+    public async getJwtToken(
+        publicationId: Beehiiv.PublicationId,
+        subscriptionId: Beehiiv.SubscriptionId,
+        requestOptions?: Subscriptions.RequestOptions
+    ): Promise<Beehiiv.SubscriptionJwtTokenResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.BeehiivEnvironment.Default,
+                `publications/${encodeURIComponent(
+                    serializers.PublicationId.jsonOrThrow(publicationId)
+                )}/subscriptions/${encodeURIComponent(
+                    serializers.SubscriptionId.jsonOrThrow(subscriptionId)
+                )}/jwt_token`
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@beehiiv/sdk",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SubscriptionJwtTokenResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -776,8 +896,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -911,8 +1031,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -1034,8 +1154,8 @@ export class Subscriptions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@beehiiv/sdk",
-                "X-Fern-SDK-Version": "0.1.5",
-                "User-Agent": "@beehiiv/sdk/0.1.5",
+                "X-Fern-SDK-Version": "0.1.6",
+                "User-Agent": "@beehiiv/sdk/0.1.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

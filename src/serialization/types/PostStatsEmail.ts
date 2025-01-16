@@ -9,6 +9,7 @@ import * as core from "../../core";
 export const PostStatsEmail: core.serialization.ObjectSchema<serializers.PostStatsEmail.Raw, Beehiiv.PostStatsEmail> =
     core.serialization.object({
         recipients: core.serialization.number().optional(),
+        delivered: core.serialization.number().optional(),
         opens: core.serialization.number().optional(),
         uniqueOpens: core.serialization.property("unique_opens", core.serialization.number().optional()),
         openRate: core.serialization.property("open_rate", core.serialization.number().optional()),
@@ -22,6 +23,7 @@ export const PostStatsEmail: core.serialization.ObjectSchema<serializers.PostSta
 export declare namespace PostStatsEmail {
     interface Raw {
         recipients?: number | null;
+        delivered?: number | null;
         opens?: number | null;
         unique_opens?: number | null;
         open_rate?: number | null;

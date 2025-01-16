@@ -29,6 +29,7 @@ export * from "./webhooks/types";
 export * from "./automationJourneys/client/requests";
 export * from "./bulkSubscriptionUpdates/client/requests";
 export * from "./customFields/client/requests";
+export * from "./posts/client/requests";
 export * from "./subscriptions/client/requests";
 export * from "./subscriptionTags/client/requests";
 export * from "./tiers/client/requests";

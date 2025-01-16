@@ -8,6 +8,7 @@ import * as core from "../../core";
 import { SegmentId } from "../resources/ids/types/SegmentId";
 import { SegmentType } from "./SegmentType";
 import { SegmentStatus } from "./SegmentStatus";
+import { SegmentStats } from "./SegmentStats";
 
 export const Segment: core.serialization.ObjectSchema<serializers.Segment.Raw, Beehiiv.Segment> =
     core.serialization.object({
@@ -18,6 +19,7 @@ export const Segment: core.serialization.ObjectSchema<serializers.Segment.Raw, B
         totalResults: core.serialization.property("total_results", core.serialization.number()),
         status: SegmentStatus,
         active: core.serialization.boolean(),
+        stats: SegmentStats.optional(),
     });
 
 export declare namespace Segment {
@@ -29,5 +31,6 @@ export declare namespace Segment {
         total_results: number;
         status: SegmentStatus.Raw;
         active: boolean;
+        stats?: SegmentStats.Raw | null;
     }
 }

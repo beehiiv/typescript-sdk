@@ -8,6 +8,8 @@
 export interface PostStatsEmail {
     /** Total number of email recipients */
     recipients?: number;
+    /** Total number of emails delivered */
+    delivered?: number;
     /** Total number of email opens */
     opens?: number;
     /** Total number of unique email opens */

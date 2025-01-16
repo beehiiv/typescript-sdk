@@ -33,4 +33,8 @@ export interface SegmentsListRequest {
      * The direction that the results are sorted in. Defaults to asc<br> `asc` - Ascending, sorts from smallest to largest.<br> `desc` - Descending, sorts from largest to smallest.
      */
     direction?: Beehiiv.RequestDirection;
+    /**
+     * Optionally expand the response to include additional data. <br> `stats` - Requests the most recently calculated statistics for a segment. <br> Segment stats are recalculated once daily around 7 a.m. UTC for dynamic segments, but can be manually recalculated at any time in the dashboard. Manual and static segments only calculate once upon upload or creation.
+     */
+    expand?: Beehiiv.SegmentsExpandItems[];
 }

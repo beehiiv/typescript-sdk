@@ -9,8 +9,8 @@ import * as core from "../../../../core";
 export const SubscriptionsGetRequestExpandItem: core.serialization.Schema<
     serializers.SubscriptionsGetRequestExpandItem.Raw,
     Beehiiv.SubscriptionsGetRequestExpandItem
-> = core.serialization.enum_(["stats", "custom_fields", "referrals"]);
+> = core.serialization.enum_(["stats", "custom_fields", "referrals", "tags"]);
 
 export declare namespace SubscriptionsGetRequestExpandItem {
-    type Raw = "stats" | "custom_fields" | "referrals";
+    type Raw = "stats" | "custom_fields" | "referrals" | "tags";
 }

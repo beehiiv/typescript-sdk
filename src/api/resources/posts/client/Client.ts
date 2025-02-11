@@ -369,7 +369,7 @@ export class Posts {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
-                _queryParams["expand"] = expand.map((item) => JSON.stringify(item));
+                _queryParams["expand"] = expand;
             } else {
                 _queryParams["expand"] = JSON.stringify(expand);
             }

@@ -3,7 +3,6 @@
  */
 
 export type TierPriceCurrency = "usd" | "aud" | "cad" | "eur" | "inr" | "brl";
-
 export const TierPriceCurrency = {
     Usd: "usd",
     Aud: "aud",

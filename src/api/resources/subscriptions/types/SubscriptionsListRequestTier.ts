@@ -3,7 +3,6 @@
  */
 
 export type SubscriptionsListRequestTier = "free" | "premium" | "all";
-
 export const SubscriptionsListRequestTier = {
     Free: "free",
     Premium: "premium",

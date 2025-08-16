@@ -6,7 +6,6 @@
  * The layout of the articles from the feed.
  */
 export type RssBlockLayout = "1-col" | "2-col" | "3-col" | "4-col";
-
 export const RssBlockLayout = {
     Col1: "1-col",
     Col2: "2-col",

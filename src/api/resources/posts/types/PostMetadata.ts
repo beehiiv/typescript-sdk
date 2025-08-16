@@ -3,10 +3,10 @@
  */
 
 export interface PostMetadata {
-    defaultDescription?: string;
-    defaultTitle?: string;
-    ogDescription?: string;
-    ogTitle?: string;
-    twitterDescription?: string;
-    twitterTitle?: string;
+    default_description?: string;
+    default_title?: string;
+    og_description?: string;
+    og_title?: string;
+    twitter_description?: string;
+    twitter_title?: string;
 }

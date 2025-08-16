@@ -3,7 +3,6 @@
  */
 
 export type EmailBlastsListRequestOrderBy = "created" | "last_sent";
-
 export const EmailBlastsListRequestOrderBy = {
     Created: "created",
     LastSent: "last_sent",

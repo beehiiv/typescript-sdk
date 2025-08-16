@@ -6,7 +6,6 @@
  * The alignment of the call to action.
  */
 export type RssCtaAlignment = "Left" | "Center" | "Right";
-
 export const RssCtaAlignment = {
     Left: "Left",
     Center: "Center",

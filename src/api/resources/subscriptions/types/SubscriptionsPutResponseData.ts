@@ -4,5 +4,5 @@
 
 export interface SubscriptionsPutResponseData {
     /** The ID of the Subscription Update object responsible for handling the update job */
-    subscriptionUpdateId?: string;
+    subscription_update_id?: string;
 }

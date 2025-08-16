@@ -3,7 +3,6 @@
  */
 
 export type PublicationsListRequestOrderBy = "created" | "name";
-
 export const PublicationsListRequestOrderBy = {
     Created: "created",
     Name: "name",

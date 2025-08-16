@@ -4,19 +4,32 @@
 
 export type WebhookEventType =
     | "post.sent"
+    | "post.updated"
     | "subscription.confirmed"
     | "subscription.created"
     | "subscription.downgraded"
+    | "subscription.paused"
+    | "subscription.resumed"
+    | "subscription.tier.paused"
+    | "subscription.tier.resumed"
     | "subscription.upgraded"
+    | "subscription.tier.created"
+    | "subscription.tier.deleted"
     | "subscription.deleted"
     | "survey.response_submitted";
-
 export const WebhookEventType = {
     PostSent: "post.sent",
+    PostUpdated: "post.updated",
     SubscriptionConfirmed: "subscription.confirmed",
     SubscriptionCreated: "subscription.created",
     SubscriptionDowngraded: "subscription.downgraded",
+    SubscriptionPaused: "subscription.paused",
+    SubscriptionResumed: "subscription.resumed",
+    SubscriptionTierPaused: "subscription.tier.paused",
+    SubscriptionTierResumed: "subscription.tier.resumed",
     SubscriptionUpgraded: "subscription.upgraded",
+    SubscriptionTierCreated: "subscription.tier.created",
+    SubscriptionTierDeleted: "subscription.tier.deleted",
     SubscriptionDeleted: "subscription.deleted",
     SurveyResponseSubmitted: "survey.response_submitted",
 } as const;

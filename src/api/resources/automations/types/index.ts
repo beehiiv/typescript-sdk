@@ -1,2 +1,2 @@
-export * from "./AutomationsListResponse";
-export * from "./AutomationsGetResponse";
+export * from "./AutomationsListResponse.js";
+export * from "./AutomationsGetResponse.js";

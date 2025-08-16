@@ -11,7 +11,6 @@ export type RssThumbnailPosition =
     | "Left of content"
     | "Right of content"
     | "Alternating Horizontally";
-
 export const RssThumbnailPosition = {
     AboveTitle: "Above Title",
     BelowTitle: "Below Title",

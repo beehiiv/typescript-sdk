@@ -13,17 +13,17 @@ export interface PostStatsEmail {
     /** Total number of email opens */
     opens?: number;
     /** Total number of unique email opens */
-    uniqueOpens?: number;
+    unique_opens?: number;
     /** The percentage of emails that have been opened */
-    openRate?: number;
+    open_rate?: number;
     /** Total number of email clicks */
     clicks?: number;
     /** Unique number of email clicks */
-    uniqueClicks?: number;
+    unique_clicks?: number;
     /** The percentage of emails that have been clicked */
-    clickRate?: number;
+    click_rate?: number;
     /** Total number of email unsubscribes */
     unsubscribes?: number;
     /** The number of subscribers that reported this post email as spam */
-    spamReports?: number;
+    spam_reports?: number;
 }

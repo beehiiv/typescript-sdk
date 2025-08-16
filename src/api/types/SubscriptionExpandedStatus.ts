@@ -12,7 +12,6 @@ export type SubscriptionExpandedStatus =
     | "active"
     | "inactive"
     | "needs_attention";
-
 export const SubscriptionExpandedStatus = {
     Validating: "validating",
     Invalid: "invalid",

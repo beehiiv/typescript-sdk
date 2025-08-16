@@ -12,7 +12,6 @@ export type SubscriptionsListRequestExpandItem =
     /**
      * Returns an array of subscriptions with limited data - id, email, and status. These are the subscriptions that were referred by this subscription. */
     | "referrals";
-
 export const SubscriptionsListRequestExpandItem = {
     Stats: "stats",
     CustomFields: "custom_fields",

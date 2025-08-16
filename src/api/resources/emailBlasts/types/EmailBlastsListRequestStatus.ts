@@ -3,7 +3,6 @@
  */
 
 export type EmailBlastsListRequestStatus = "active" | "inactive";
-
 export const EmailBlastsListRequestStatus = {
     Active: "active",
     Inactive: "inactive",

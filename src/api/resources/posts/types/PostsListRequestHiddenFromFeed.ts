@@ -3,7 +3,6 @@
  */
 
 export type PostsListRequestHiddenFromFeed = "all" | "true" | "false";
-
 export const PostsListRequestHiddenFromFeed = {
     All: "all",
     True: "true",

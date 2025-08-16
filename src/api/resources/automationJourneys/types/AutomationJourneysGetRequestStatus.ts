@@ -3,7 +3,6 @@
  */
 
 export type AutomationJourneysGetRequestStatus = "in_progress" | "completed" | "exited_early" | "all";
-
 export const AutomationJourneysGetRequestStatus = {
     InProgress: "in_progress",
     Completed: "completed",

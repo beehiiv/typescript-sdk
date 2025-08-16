@@ -6,7 +6,6 @@
  * The direction of the request. Defaults to `asc`.
  */
 export type RequestDirection = "asc" | "desc";
-
 export const RequestDirection = {
     Asc: "asc",
     Desc: "desc",

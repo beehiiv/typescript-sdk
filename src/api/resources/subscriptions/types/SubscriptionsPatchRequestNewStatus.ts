@@ -6,7 +6,6 @@
  * The new status value to apply to these subscription IDs
  */
 export type SubscriptionsPatchRequestNewStatus = "active" | "inactive";
-
 export const SubscriptionsPatchRequestNewStatus = {
     Active: "active",
     Inactive: "inactive",

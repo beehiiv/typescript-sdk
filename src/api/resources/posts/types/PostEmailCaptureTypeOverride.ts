@@ -3,7 +3,6 @@
  */
 
 export type PostEmailCaptureTypeOverride = "none" | "gated" | "popup";
-
 export const PostEmailCaptureTypeOverride = {
     None: "none",
     Gated: "gated",

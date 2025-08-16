@@ -1,1 +1,1 @@
-export { type AutomationsListRequest } from "./AutomationsListRequest";
+export { type AutomationsListRequest } from "./AutomationsListRequest.js";

@@ -6,7 +6,6 @@
  * The level of the header.
  */
 export type HeadingLevel = "1" | "2" | "3" | "4" | "5" | "6";
-
 export const HeadingLevel = {
     HeadingOne: "1",
     HeadingTwo: "2",

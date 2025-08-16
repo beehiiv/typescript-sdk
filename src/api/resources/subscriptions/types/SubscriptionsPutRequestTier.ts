@@ -6,7 +6,6 @@
  * Optional parameter to set the tier for this subscription.
  */
 export type SubscriptionsPutRequestTier = "free" | "premium";
-
 export const SubscriptionsPutRequestTier = {
     Free: "free",
     Premium: "premium",

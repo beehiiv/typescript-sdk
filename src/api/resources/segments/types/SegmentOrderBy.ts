@@ -3,7 +3,6 @@
  */
 
 export type SegmentOrderBy = "created" | "last_calculated";
-
 export const SegmentOrderBy = {
     Created: "created",
     LastCalculated: "last_calculated",

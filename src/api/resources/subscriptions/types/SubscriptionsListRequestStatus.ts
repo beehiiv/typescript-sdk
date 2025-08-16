@@ -3,7 +3,6 @@
  */
 
 export type SubscriptionsListRequestStatus = "validating" | "invalid" | "pending" | "active" | "inactive" | "all";
-
 export const SubscriptionsListRequestStatus = {
     Validating: "validating",
     Invalid: "invalid",

@@ -3,7 +3,6 @@
  */
 
 export type PostSocialShare = "comments_and_likes_only" | "with_comments_and_likes" | "top" | "none";
-
 export const PostSocialShare = {
     CommentsAndLikesOnly: "comments_and_likes_only",
     WithCommentsAndLikes: "with_comments_and_likes",

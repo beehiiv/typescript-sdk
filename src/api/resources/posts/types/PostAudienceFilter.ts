@@ -3,7 +3,6 @@
  */
 
 export type PostAudienceFilter = "free" | "premium" | "all";
-
 export const PostAudienceFilter = {
     Free: "free",
     Premium: "premium",

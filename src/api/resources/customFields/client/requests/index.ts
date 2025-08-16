@@ -1,3 +1,3 @@
-export { type CustomFieldsCreateRequest } from "./CustomFieldsCreateRequest";
-export { type CustomFieldsPutRequest } from "./CustomFieldsPutRequest";
-export { type CustomFieldsPatchRequest } from "./CustomFieldsPatchRequest";
+export { type CustomFieldsCreateRequest } from "./CustomFieldsCreateRequest.js";
+export { type CustomFieldsPutRequest } from "./CustomFieldsPutRequest.js";
+export { type CustomFieldsPatchRequest } from "./CustomFieldsPatchRequest.js";

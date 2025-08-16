@@ -6,7 +6,6 @@
  * The sizes of the button.
  */
 export type Sizes = "small" | "normal" | "large";
-
 export const Sizes = {
     Small: "small",
     Normal: "normal",

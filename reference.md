@@ -36,8 +36,8 @@ await client.automationJourneys.create(
     "aut_00000000-0000-0000-0000-000000000000",
     {
         email: "test@example.com",
-        doubleOptOverride: "on",
-    }
+        double_opt_override: "on",
+    },
 );
 ```
 
@@ -119,7 +119,7 @@ Retrieve a list of automation journeys that have occurred within a specific auto
 ```typescript
 await client.automationJourneys.index(
     "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000"
+    "aut_00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -194,7 +194,7 @@ Retrieve a single automation journey by ID.
 await client.automationJourneys.show(
     "pub_00000000-0000-0000-0000-000000000000",
     "aut_00000000-0000-0000-0000-000000000000",
-    "aj_00000000-0000-0000-0000-000000000000"
+    "aj_00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -350,6 +350,104 @@ await client.automations.show("pub_00000000-0000-0000-0000-000000000000", "aut_0
 <dd>
 
 **requestOptions:** `Automations.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Bulk Subscriptions
+
+<details><summary><code>client.bulkSubscriptions.<a href="/src/api/resources/bulkSubscriptions/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.BulkSubscriptionCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create new subscriptions for a publication.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.bulkSubscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
+    subscriptions: [
+        {
+            email: "bruce.wayne@wayneenterprise.com",
+            reactivate_existing: false,
+            send_welcome_email: false,
+            custom_fields: [
+                {
+                    name: "Favorite Color",
+                    value: "Red",
+                },
+            ],
+        },
+        {
+            email: "lucius.fox@wayneenterprise.com",
+            reactivate_existing: false,
+            send_welcome_email: false,
+            custom_fields: [
+                {
+                    name: "Favorite Color",
+                    value: "Blue",
+                },
+            ],
+        },
+    ],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.BulkSubscriptionsCreateRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BulkSubscriptions.RequestOptions`
 
 </dd>
 </dl>
@@ -527,11 +625,11 @@ Bulk update multiple subscriptions fields, including status, custom fields, and 
 await client.bulkSubscriptionUpdates.put("publicationId", {
     subscriptions: [
         {
-            subscriptionId: "sub_1234-5678-9012-3456-7890",
+            subscription_id: "sub_1234-5678-9012-3456-7890",
             tier: "premium",
-            stripeCustomerId: "cus_1234567890",
+            stripe_customer_id: "cus_1234567890",
             unsubscribe: false,
-            customFields: [
+            custom_fields: [
                 {
                     name: "custom_field_name",
                     value: "custom_field_value",
@@ -543,11 +641,11 @@ await client.bulkSubscriptionUpdates.put("publicationId", {
             ],
         },
         {
-            subscriptionId: "sub_9876-5432-1098-7654-3210",
+            subscription_id: "sub_9876-5432-1098-7654-3210",
             tier: "free",
-            stripeCustomerId: "cus_1234567890",
+            stripe_customer_id: "cus_1234567890",
             unsubscribe: true,
-            customFields: [
+            custom_fields: [
                 {
                     name: "custom_field_name_3",
                     value: "custom_field_value_3",
@@ -633,11 +731,11 @@ Bulk update multiple subscriptions fields, including status, custom fields, and 
 await client.bulkSubscriptionUpdates.patch("publicationId", {
     subscriptions: [
         {
-            subscriptionId: "sub_1234-5678-9012-3456-7890",
+            subscription_id: "sub_1234-5678-9012-3456-7890",
             tier: "premium",
-            stripeCustomerId: "cus_1234567890",
+            stripe_customer_id: "cus_1234567890",
             unsubscribe: false,
-            customFields: [
+            custom_fields: [
                 {
                     name: "custom_field_name",
                     value: "custom_field_value",
@@ -649,11 +747,11 @@ await client.bulkSubscriptionUpdates.patch("publicationId", {
             ],
         },
         {
-            subscriptionId: "sub_9876-5432-1098-7654-3210",
+            subscription_id: "sub_9876-5432-1098-7654-3210",
             tier: "free",
-            stripeCustomerId: "cus_1234567890",
+            stripe_customer_id: "cus_1234567890",
             unsubscribe: true,
-            customFields: [
+            custom_fields: [
                 {
                     name: "custom_field_name_3",
                     value: "custom_field_value_3",
@@ -737,8 +835,8 @@ Bulk update subscriptions' status.
 
 ```typescript
 await client.bulkSubscriptionUpdates.putStatus("publicationId", {
-    subscriptionIds: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
-    newStatus: "active",
+    subscription_ids: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
+    new_status: "active",
 });
 ```
 
@@ -811,8 +909,8 @@ Bulk update subscriptions' status.
 
 ```typescript
 await client.bulkSubscriptionUpdates.patchStatus("publicationId", {
-    subscriptionIds: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
-    newStatus: "active",
+    subscription_ids: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
+    new_status: "active",
 });
 ```
 
@@ -1620,7 +1718,7 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
                             imageUrl: "https://cdn.britannica.com/89/164789-050-D6B5E2C7/Barack-Obama-2012.jpg",
                             url: "https://www.whitehouse.gov/",
                             title: "Barry O",
-                            altText: "A picture of Barry Obama",
+                            alt_text: "A picture of Barry Obama",
                             caption: "One Cool President",
                             captionAlignment: "center",
                             imageAlignment: "right",
@@ -1632,14 +1730,14 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
         },
         {
             type: "advertisement",
-            opportunityId: "d8dfa6be-24b5-4cad-8350-ae44366dbd4c",
+            opportunity_id: "d8dfa6be-24b5-4cad-8350-ae44366dbd4c",
         },
         {
             type: "image",
             imageUrl: "https://cdn.britannica.com/89/164789-050-D6B5E2C7/Barack-Obama-2012.jpg",
             url: "https://www.whitehouse.gov/",
             title: "Barry O",
-            altText: "A picture of Barry Obama",
+            alt_text: "A picture of Barry Obama",
             caption: "One Cool President",
             captionAlignment: "center",
             imageAlignment: "right",
@@ -1692,47 +1790,47 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
             anchorIncludeInToc: true,
         },
     ],
-    postTemplateId: "post_template_00000000-0000-0000-0000-000000000000",
-    scheduledAt: "2024-12-25T12:00:00Z",
-    customLinkTrackingEnabled: true,
-    emailCaptureTypeOverride: "none",
-    overrideScheduledAt: "2022-10-26T14:01:16Z",
-    socialShare: "comments_and_likes_only",
-    thumbnailImageUrl:
+    post_template_id: "post_template_00000000-0000-0000-0000-000000000000",
+    scheduled_at: "2024-12-25T12:00:00Z",
+    custom_link_tracking_enabled: true,
+    email_capture_type_override: "none",
+    override_scheduled_at: "2022-10-26T14:01:16Z",
+    social_share: "comments_and_likes_only",
+    thumbnail_image_url:
         "https://images.squarespace-cdn.com/content/v1/56e4ca0540261d39b90e4b18/1605047208324-PONGEYKEAKTMM1LANHJ5/1ED706BF-A70B-4F26-B3D5-266B449DDA8A_1_105_c.jpeg",
-    emailSettings: {
-        fromAddress: "from_address",
-        customLiveUrl: "https://beehiiv.com",
-        displayTitleInEmail: true,
-        displayBylineInEmail: true,
-        displaySubtitleInEmail: true,
-        emailHeaderEngagementButtons: "email_header_engagement_buttons",
-        emailHeaderSocialShare: "email_header_social_share",
-        emailPreviewText: "email_preview_text",
-        emailSubjectLine: "email_subject_line",
+    email_settings: {
+        from_address: "from_address",
+        custom_live_url: "https://beehiiv.com",
+        display_title_in_email: true,
+        display_byline_in_email: true,
+        display_subtitle_in_email: true,
+        email_header_engagement_buttons: "email_header_engagement_buttons",
+        email_header_social_share: "email_header_social_share",
+        email_preview_text: "email_preview_text",
+        email_subject_line: "email_subject_line",
     },
-    webSettings: {
-        displayThumbnailOnWeb: true,
-        hideFromFeed: true,
+    web_settings: {
+        display_thumbnail_on_web: true,
+        hide_from_feed: true,
         slug: "and-this-is-gonna-rock",
     },
-    seoSettings: {
-        defaultDescription: "default_description",
-        defaultTitle: "default_title",
-        ogDescription: "OpenGraph description",
-        ogTitle: "Opengraph Title",
-        twitterDescription: "Twitter Stuff",
-        twitterTitle: "My Twitter Article",
+    seo_settings: {
+        default_description: "default_description",
+        default_title: "default_title",
+        og_description: "OpenGraph description",
+        og_title: "Opengraph Title",
+        twitter_description: "Twitter Stuff",
+        twitter_title: "My Twitter Article",
     },
-    contentTags: ["Obama", "Care", "Rocks", "Healthcare"],
+    content_tags: ["Obama", "Care", "Rocks", "Healthcare"],
     recipients: {
         web: {
-            tierIds: ["premium"],
+            tier_ids: ["premium"],
         },
         email: {
-            tierIds: ["premium", "free"],
-            includeSegmentIds: ["seg_6426b403-39f5-42bd-86e9-9533fb0099e7"],
-            excludeSegmentIds: ["seg_e34b4085-aef6-449f-a699-7563f915f852"],
+            tier_ids: ["premium", "free"],
+            include_segment_ids: ["seg_6426b403-39f5-42bd-86e9-9533fb0099e7"],
+            exclude_segment_ids: ["seg_e34b4085-aef6-449f-a699-7563f915f852"],
         },
     },
 });
@@ -1831,6 +1929,77 @@ await client.posts.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **request:** `Beehiiv.PostsListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Posts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">aggregateStats</a>(publicationId, { ...params }) -> Beehiiv.PostsAggregateStatsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve aggregate stats for all posts
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.posts.aggregateStats("pub_00000000-0000-0000-0000-000000000000");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.PostsAggregateStatsRequest`
 
 </dd>
 </dl>
@@ -1989,6 +2158,79 @@ await client.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_0000
 <dd>
 
 **requestOptions:** `Posts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Post Templates
+
+<details><summary><code>client.postTemplates.<a href="/src/api/resources/postTemplates/client/Client.ts">index</a>(publicationId, { ...params }) -> Beehiiv.PostTemplatesGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of post templates available for the publication.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.postTemplates.index("pub_00000000-0000-0000-0000-000000000000");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.PostTemplatesGetRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PostTemplates.RequestOptions`
 
 </dd>
 </dl>
@@ -2360,6 +2602,80 @@ await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_0000
 </dl>
 </details>
 
+<details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">recalculate</a>(publicationId, segmentId) -> Beehiiv.SegmentRecalculateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Recalculates a specific segment belonging to a publication
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.segments.recalculate(
+    "pub_00000000-0000-0000-0000-000000000000",
+    "seg_00000000-0000-0000-0000-000000000000",
+);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Segments.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">expandResults</a>(publicationId, segmentId, { ...params }) -> Beehiiv.SegmentsGetResponse</code></summary>
 <dl>
 <dd>
@@ -2390,7 +2706,7 @@ List the Subscriber Ids from the most recent calculation of a specific publicati
 ```typescript
 await client.segments.expandResults(
     "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000"
+    "seg_00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -2545,13 +2861,13 @@ Create new subscriptions for a publication.
 ```typescript
 await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
     email: "bruce.wayne@wayneenterprise.com",
-    reactivateExisting: false,
-    sendWelcomeEmail: false,
-    utmSource: "WayneEnterprise",
-    utmMedium: "organic",
-    utmCampaign: "fall_2022_promotion",
-    referringSite: "www.wayneenterprise.com/blog",
-    customFields: [
+    reactivate_existing: false,
+    send_welcome_email: false,
+    utm_source: "WayneEnterprise",
+    utm_medium: "organic",
+    utm_campaign: "fall_2022_promotion",
+    referring_site: "www.wayneenterprise.com/blog",
+    custom_fields: [
         {
             name: "First Name",
             value: "Bruce",
@@ -2561,7 +2877,7 @@ await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
             value: "Wayne",
         },
     ],
-    stripeCustomerId: "stripe_customer_id",
+    stripe_customer_id: "cus_12345abcde",
 });
 ```
 
@@ -2586,7 +2902,7 @@ await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsCreateRequest`
+**request:** `Beehiiv.SubscriptionRequest`
 
 </dd>
 </dl>
@@ -2617,7 +2933,9 @@ await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
 <dl>
 <dd>
 
-Retrieve all subscriptions belonging to a specific publication
+Retrieve all subscriptions belonging to a specific publication.
+<Info> **New**: This endpoint now supports cursor-based pagination for better performance and consistency. Use the `cursor` parameter instead of `page` for new integrations. </Info>
+<Warning> **Deprecation Notice**: Offset-based pagination (using `page` parameter) is deprecated and limited to 100 pages maximum. Please migrate to cursor-based pagination. See our [Pagination Guide](/welcome/pagination) for details. </Warning>
 
 </dd>
 </dl>
@@ -2634,7 +2952,7 @@ Retrieve all subscriptions belonging to a specific publication
 
 ```typescript
 await client.subscriptions.index("pub_00000000-0000-0000-0000-000000000000", {
-    email: "clark@dailyplanet.com",
+    limit: 10,
 });
 ```
 
@@ -2787,7 +3105,7 @@ await client.subscriptions.getByEmail("pub_00000000-0000-0000-0000-000000000000"
 ```typescript
 await client.subscriptions.getById(
     "pub_00000000-0000-0000-0000-000000000000",
-    "sub_00000000-0000-0000-0000-000000000000"
+    "sub_00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -2869,7 +3187,7 @@ Retrieve a single subscription belonging to a specific publication via the subsc
 ```typescript
 await client.subscriptions.getBySubscriberId(
     "pub_00000000-0000-0000-0000-000000000000",
-    "00000000-0000-0000-0000-000000000000"
+    "00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -2951,7 +3269,7 @@ Generate a JWT token that can be used to automatically log in subscribers via UR
 ```typescript
 await client.subscriptions.getJwtToken(
     "pub_00000000-0000-0000-0000-000000000000",
-    "sub_00000000-0000-0000-0000-000000000000"
+    "sub_00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -3025,8 +3343,8 @@ Update a single subscription.
 ```typescript
 await client.subscriptions.put("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000", {
     tier: "premium",
-    stripeCustomerId: "cus_12345abcde",
-    customFields: [
+    stripe_customer_id: "cus_12345abcde",
+    custom_fields: [
         {
             name: "First Name",
             value: "Bruce",
@@ -3120,8 +3438,8 @@ await client.subscriptions.patch(
     "sub_00000000-0000-0000-0000-000000000000",
     {
         tier: "premium",
-        stripeCustomerId: "cus_12345abcde",
-        customFields: [
+        stripe_customer_id: "cus_12345abcde",
+        custom_fields: [
             {
                 name: "First Name",
                 value: "Bruce",
@@ -3131,7 +3449,7 @@ await client.subscriptions.patch(
                 value: "Wayne",
             },
         ],
-    }
+    },
 );
 ```
 
@@ -3183,6 +3501,98 @@ await client.subscriptions.patch(
 </dl>
 </details>
 
+<details><summary><code>client.subscriptions.<a href="/src/api/resources/subscriptions/client/Client.ts">updateByEmail</a>(publicationId, email, { ...params }) -> Beehiiv.SubscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a single subscription by email.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.subscriptions.updateByEmail("pub_00000000-0000-0000-0000-000000000000", "example@example.com", {
+    tier: "premium",
+    stripe_customer_id: "cus_12345abcde",
+    custom_fields: [
+        {
+            name: "First Name",
+            value: "Bruce",
+        },
+        {
+            name: "Last Name",
+            value: "Wayne",
+        },
+    ],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `string` — The email of the subscription object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.SubscriptionsUpdateByEmailRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Subscriptions.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.subscriptions.<a href="/src/api/resources/subscriptions/client/Client.ts">delete</a>(subscriptionId, publicationId) -> Beehiiv.SubscriptionDeleteResponse</code></summary>
 <dl>
 <dd>
@@ -3213,7 +3623,7 @@ await client.subscriptions.patch(
 ```typescript
 await client.subscriptions.delete(
     "sub_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000"
+    "pub_00000000-0000-0000-0000-000000000000",
 );
 ```
 
@@ -3287,7 +3697,9 @@ Adds tags to a subscription. If the tag does not exist on the publication, it wi
 <dd>
 
 ```typescript
-await client.subscriptionTags.create("publicationId", "subscriptionId");
+await client.subscriptionTags.create("publicationId", "subscriptionId", {
+    tags: ["Premium", "Basic"],
+});
 ```
 
 </dd>
@@ -3371,13 +3783,13 @@ Create a new tier for a publication.
 await client.tiers.create("pub_00000000-0000-0000-0000-000000000000", {
     name: "Gold Tier",
     description: "Our premium tier with exclusive benefits",
-    pricesAttributes: [
+    prices_attributes: [
         {
             currency: "usd",
-            amountCents: 500,
+            amount_cents: 500,
             enabled: true,
             interval: "month",
-            intervalDisplay: "Monthly",
+            interval_display: "Monthly",
             cta: "Subscribe Now",
             features: ["Exclusive content", "Ad-free experience", "Priority support"],
         },
@@ -3606,13 +4018,13 @@ Update an existing tier belonging to a specific publication
 await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000", {
     name: "Gold",
     description: "Our premium tier with exclusive benefits",
-    pricesAttributes: [
+    prices_attributes: [
         {
             id: "price_00000000-0000-0000-0000-000000000000",
             currency: "usd",
-            amountCents: 500,
+            amount_cents: 500,
             interval: "month",
-            intervalDisplay: "Monthly",
+            interval_display: "Monthly",
             cta: "Subscribe Now",
             features: ["Exclusive content"],
             delete: true,
@@ -3700,13 +4112,13 @@ Update an existing tier belonging to a specific publication
 await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000", {
     name: "Gold",
     description: "Our premium tier with exclusive benefits",
-    pricesAttributes: [
+    prices_attributes: [
         {
             id: "price_00000000-0000-0000-0000-000000000000",
             currency: "usd",
-            amountCents: 500,
+            amount_cents: 500,
             interval: "month",
-            intervalDisplay: "Monthly",
+            interval_display: "Monthly",
             cta: "Subscribe Now",
             features: ["Exclusive content"],
             delete: true,
@@ -3795,7 +4207,7 @@ Create a new webhook for a given publication.
 ```typescript
 await client.webhooks.create("pub_00000000-0000-0000-0000-000000000000", {
     url: "https://example.com/webhook",
-    eventTypes: ["post.sent"],
+    event_types: ["post.sent"],
 });
 ```
 

@@ -6,7 +6,6 @@
  * The current tier of the subscription.
  */
 export type SubscriptionExpandedTagsSubscriptionTier = "free" | "premium";
-
 export const SubscriptionExpandedTagsSubscriptionTier = {
     Free: "free",
     Premium: "premium",

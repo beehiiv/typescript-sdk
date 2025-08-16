@@ -1,1 +1,0 @@
-export { PostWebhooksRequest } from "./PostWebhooksRequest";

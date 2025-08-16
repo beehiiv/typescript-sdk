@@ -6,9 +6,9 @@ export interface GetPublicationsPublicationIdWebhooksWebhookIdTestsResponse {
     /** The test event. */
     data: Record<string, unknown>;
     /** The timestamp of the test event. */
-    eventTimestamp: number;
+    event_timestamp: number;
     /** The type of webhook events that the endpoint is set up to receive. */
-    eventType: string;
+    event_type: string;
     /** The unique identifier for the test event. */
     uid: string;
 }

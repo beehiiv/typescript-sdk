@@ -3,7 +3,6 @@
  */
 
 export type SegmentRequestStatus = "pending" | "processing" | "completed" | "failed" | "all";
-
 export const SegmentRequestStatus = {
     Pending: "pending",
     Processing: "processing",

@@ -1,1 +1,0 @@
-export { PostsCreateRequest } from "./PostsCreateRequest";

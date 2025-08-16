@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         tags: ["Premium", "Basic"]
+ *     }
  */
 export interface SubscriptionTagsCreateRequest {
     /** Tags that can be used to group subscribers */

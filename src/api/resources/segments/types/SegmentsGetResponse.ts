@@ -10,7 +10,7 @@ export interface SegmentsGetResponse {
     /** The page number the results are from. If no page was specified in the request, this defaults to page 1. */
     page: number;
     /** The total number of results from all pages. */
-    totalResults: number;
+    total_results: number;
     /** The total number of pages. */
-    totalPages: number;
+    total_pages: number;
 }

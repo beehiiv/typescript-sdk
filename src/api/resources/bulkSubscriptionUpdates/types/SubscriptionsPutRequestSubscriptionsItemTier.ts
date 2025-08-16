@@ -6,7 +6,6 @@
  * The Tier of the Subscription (not required)
  */
 export type SubscriptionsPutRequestSubscriptionsItemTier = "free" | "premium";
-
 export const SubscriptionsPutRequestSubscriptionsItemTier = {
     Free: "free",
     Premium: "premium",

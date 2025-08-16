@@ -30,7 +30,6 @@ export type PublicationsGetRequestExpandItem =
     /**
      * The total number of links clicked from emails. */
     | "stat_total_clicked";
-
 export const PublicationsGetRequestExpandItem = {
     Stats: "stats",
     StatActiveSubscriptions: "stat_active_subscriptions",

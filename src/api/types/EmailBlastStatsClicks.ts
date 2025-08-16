@@ -5,8 +5,8 @@
 export interface EmailBlastStatsClicks {
     /** The URL the stats are for */
     url?: string;
-    totalClicks?: number;
-    totalUniqueClicks?: number;
+    total_clicks?: number;
+    total_unique_clicks?: number;
     /** The percentage of clicks on the URL compared to the total number of recipients and web views */
-    totalClickThroughRate?: number;
+    total_click_through_rate?: number;
 }

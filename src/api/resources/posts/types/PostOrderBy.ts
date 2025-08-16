@@ -3,7 +3,6 @@
  */
 
 export type PostOrderBy = "created" | "publish_date" | "displayed_date";
-
 export const PostOrderBy = {
     Created: "created",
     PublishDate: "publish_date",

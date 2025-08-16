@@ -6,7 +6,6 @@ export type EmailBlastsGetRequestExpandItem =
     /**
      * Returns statistics about the email blast. */
     "stats";
-
 export const EmailBlastsGetRequestExpandItem = {
     Stats: "stats",
 } as const;

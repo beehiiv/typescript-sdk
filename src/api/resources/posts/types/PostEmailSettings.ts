@@ -3,13 +3,13 @@
  */
 
 export interface PostEmailSettings {
-    fromAddress?: string;
-    customLiveUrl?: string;
-    displayTitleInEmail?: boolean;
-    displayBylineInEmail?: boolean;
-    displaySubtitleInEmail?: boolean;
-    emailHeaderEngagementButtons?: string;
-    emailHeaderSocialShare?: string;
-    emailPreviewText?: string;
-    emailSubjectLine?: string;
+    from_address?: string;
+    custom_live_url?: string;
+    display_title_in_email?: boolean;
+    display_byline_in_email?: boolean;
+    display_subtitle_in_email?: boolean;
+    email_header_engagement_buttons?: string;
+    email_header_social_share?: string;
+    email_preview_text?: string;
+    email_subject_line?: string;
 }

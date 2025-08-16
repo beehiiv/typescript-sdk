@@ -10,5 +10,5 @@ export interface GetPublicationsPublicationIdTiersTierIdRequest {
     /**
      * Optional list of expandable objects.<br>`stats` - Returns statistics about the tier(s).<br>`prices` - Returns prices for the tier(s).
      */
-    expand?: string | string[];
+    "expand[]"?: string | string[];
 }

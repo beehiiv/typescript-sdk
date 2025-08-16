@@ -1,2 +1,2 @@
-export { type EmailBlastsListRequest } from "./EmailBlastsListRequest";
-export { type EmailBlastsGetRequest } from "./EmailBlastsGetRequest";
+export { type EmailBlastsListRequest } from "./EmailBlastsListRequest.js";
+export { type EmailBlastsGetRequest } from "./EmailBlastsGetRequest.js";

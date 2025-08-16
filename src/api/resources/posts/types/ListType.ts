@@ -6,7 +6,6 @@
  * The type of list (e.g., ordered, unordered).
  */
 export type ListType = "ordered" | "unordered";
-
 export const ListType = {
     Ordered: "ordered",
     Unordered: "unordered",

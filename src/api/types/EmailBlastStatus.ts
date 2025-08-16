@@ -6,7 +6,6 @@
  * The status of the blast.<br>`inactive` - not been scheduled.<br>`active` - The blast is scheduled to send.
  */
 export type EmailBlastStatus = "active" | "inactive";
-
 export const EmailBlastStatus = {
     Active: "active",
     Inactive: "inactive",

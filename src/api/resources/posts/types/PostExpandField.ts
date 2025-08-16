@@ -21,7 +21,6 @@ export type PostExpandField =
     /**
      * Returns the email HTML rendered to a premium reader. */
     | "premium_email_content";
-
 export const PostExpandField = {
     Stats: "stats",
     FreeWebContent: "free_web_content",

@@ -12,7 +12,6 @@ export type SubscriptionStatusWithTags =
     | "active"
     | "inactive"
     | "needs_attention";
-
 export const SubscriptionStatusWithTags = {
     Validating: "validating",
     Invalid: "invalid",

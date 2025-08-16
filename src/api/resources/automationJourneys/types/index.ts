@@ -1,3 +1,3 @@
-export * from "./AutomationJourneysGetRequestStatus";
-export * from "./AutomationJourneysResponse";
-export * from "./AutomationJourneysIndexResponse";
+export * from "./AutomationJourneysGetRequestStatus.js";
+export * from "./AutomationJourneysResponse.js";
+export * from "./AutomationJourneysIndexResponse.js";

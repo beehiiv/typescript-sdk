@@ -5,8 +5,7 @@
 /**
  * The type of value being stored in the custom field.
  */
-export type CustomFieldType = "string" | "integer" | "boolean" | "date" | "datetime" | "list";
-
+export type CustomFieldType = "string" | "integer" | "boolean" | "date" | "datetime" | "list" | "double";
 export const CustomFieldType = {
     String: "string",
     Integer: "integer",
@@ -14,4 +13,5 @@ export const CustomFieldType = {
     Date: "date",
     Datetime: "datetime",
     List: "list",
+    Double: "double",
 } as const;

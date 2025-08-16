@@ -16,8 +16,8 @@ export type SubscriptionAcquisitionChannel =
     | "magic_link"
     | "boost"
     | "boost_send"
-    | "boost_direct_link";
-
+    | "boost_direct_link"
+    | "integration";
 export const SubscriptionAcquisitionChannel = {
     Empty: "",
     Website: "website",
@@ -30,4 +30,5 @@ export const SubscriptionAcquisitionChannel = {
     Boost: "boost",
     BoostSend: "boost_send",
     BoostDirectLink: "boost_direct_link",
+    Integration: "integration",
 } as const;

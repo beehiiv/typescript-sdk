@@ -1,1 +1,1 @@
-export * from "./SubscriptionTagsCreateResponse";
+export * from "./SubscriptionTagsCreateResponse.js";

@@ -6,7 +6,6 @@
  * Returns whether or not the tier has any active prices.
  */
 export type TierStatus = "active" | "archived";
-
 export const TierStatus = {
     Active: "active",
     Archived: "archived",

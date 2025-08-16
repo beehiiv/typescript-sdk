@@ -3,7 +3,6 @@
  */
 
 export type PostStatusFilter = "draft" | "confirmed" | "archived" | "all";
-
 export const PostStatusFilter = {
     Draft: "draft",
     Confirmed: "confirmed",

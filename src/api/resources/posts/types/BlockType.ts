@@ -6,7 +6,6 @@
  * The type of block in the post.
  */
 export type BlockType = "image" | "paragraph" | "button" | "heading" | "rss";
-
 export const BlockType = {
     Image: "image",
     Paragraph: "paragraph",

@@ -4,31 +4,31 @@
 
 export interface SegmentStats {
     /** The average open rate of the subscribers in the segment. */
-    openRate: number;
+    open_rate: number;
     /** The total number of emails sent to the subscribers in the segment. */
-    totalSent: number;
+    total_sent: number;
     /** The percentage of subscribers in this segment who are premium in any tier. */
-    percentagePremiumSubscribers: number;
+    percentage_premium_subscribers: number;
     /** The percentage of subscribers in this segment who have referred at least one other subscriber. */
-    percentageSubscribersWithReferrals: number;
+    percentage_subscribers_with_referrals: number;
     /** The total number of unique emails clicked by subscribers in the segment. */
-    uniqueEmailsClicked: number;
+    unique_emails_clicked: number;
     /** The total number of emails delivered to subscribers in the segment. */
-    totalDelivered: number;
+    total_delivered: number;
     /** The total number of referrals from subscribers in the segment. */
-    totalReferrals: number;
+    total_referrals: number;
     /** The percentage of subscribers in this segment who have unsubscribed. */
-    unsubscribedRate: number;
+    unsubscribed_rate: number;
     /** The total number of subscribers in the segment. */
-    totalSubscribers: number;
+    total_subscribers: number;
     /** The average clickthrough rate of the subscribers in the segment. */
-    clickthroughRate: number;
+    clickthrough_rate: number;
     /** The total number of subscribers in the segment who are unsubscribed. */
-    unsubscribedCount: number;
+    unsubscribed_count: number;
     /** The total number of unique emails opened by subscribers in the segment. */
-    uniqueEmailsOpened: number;
+    unique_emails_opened: number;
     /** The total number of premium subscribers in the segment. */
-    premiumSubscribers: number;
+    premium_subscribers: number;
     /** The average number of referrals per subscriber in the segment. */
-    averageReferralsPerSubscriber: number;
+    average_referrals_per_subscriber: number;
 }

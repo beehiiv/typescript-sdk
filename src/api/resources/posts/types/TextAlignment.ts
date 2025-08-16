@@ -6,7 +6,6 @@
  * The text alignment of the header.
  */
 export type TextAlignment = "left" | "center" | "right";
-
 export const TextAlignment = {
     Left: "left",
     Center: "center",

@@ -7,5 +7,5 @@
  */
 export interface SubscriptionJwtToken {
     /** The JWT token */
-    jwtToken: string;
+    jwt_token: string;
 }

@@ -14,7 +14,6 @@ export type AutomationTriggerEvent =
     | "signup"
     | "unengaged"
     | "upgrade";
-
 export const AutomationTriggerEvent = {
     Api: "api",
     Downgrade: "downgrade",

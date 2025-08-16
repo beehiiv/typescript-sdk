@@ -7,9 +7,9 @@
  */
 export interface SubscriptionStats {
     /** The total number of emails that have been sent to this subscriber */
-    emailsReceived?: number;
+    emails_received?: number;
     /** The percentage of emails that the subscriber has opened */
-    openRate?: number;
+    open_rate?: number;
     /** The percentage of emails that the subscriber has clicked a link in */
-    clickThroughRate?: number;
+    click_through_rate?: number;
 }

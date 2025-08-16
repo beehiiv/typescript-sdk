@@ -5,13 +5,13 @@
 /**
  * @example
  *     {
- *         subscriptionIds: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
- *         newStatus: "active"
+ *         subscription_ids: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
+ *         new_status: "active"
  *     }
  */
 export interface BulkSubscriptionsStatusPutRequest {
     /** An array of subscription IDs to be updated */
-    subscriptionIds: string[];
+    subscription_ids: string[];
     /** The new status to set for the subscriptions */
-    newStatus: string;
+    new_status: string;
 }

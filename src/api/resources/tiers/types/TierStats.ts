@@ -7,5 +7,5 @@
  */
 export interface TierStats {
     /** Total number of active subscriptions belonging to this tier. */
-    activeSubscriptions: number;
+    active_subscriptions: number;
 }

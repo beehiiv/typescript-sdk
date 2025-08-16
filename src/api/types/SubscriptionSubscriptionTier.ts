@@ -6,7 +6,6 @@
  * The current tier of the subscription.
  */
 export type SubscriptionSubscriptionTier = "free" | "premium";
-
 export const SubscriptionSubscriptionTier = {
     Free: "free",
     Premium: "premium",

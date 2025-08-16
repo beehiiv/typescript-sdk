@@ -6,7 +6,6 @@
  * The type of update (status or bulk)
  */
 export type BulkSubscriptionUpdatesGetResponseDataType = "bulk" | "status";
-
 export const BulkSubscriptionUpdatesGetResponseDataType = {
     Bulk: "bulk",
     Status: "status",

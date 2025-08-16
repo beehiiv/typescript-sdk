@@ -7,7 +7,7 @@
  */
 export interface PostClickStatsEmail {
     clicks?: number;
-    uniqueClicks?: number;
+    unique_clicks?: number;
     /** The percentage of email clicks on the URL compared to the total number of recipients */
-    clickThroughRate?: number;
+    click_through_rate?: number;
 }

@@ -3,7 +3,6 @@
  */
 
 export type AutomationStatus = "running" | "finishing" | "inactive";
-
 export const AutomationStatus = {
     Running: "running",
     Finishing: "finishing",

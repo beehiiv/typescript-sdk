@@ -7,7 +7,7 @@
  */
 export interface PostClickStatsWeb {
     clicks?: number;
-    uniqueClicks?: number;
+    unique_clicks?: number;
     /** The percentage of clicks on the URL compared to the total number of web views */
-    clickThroughRate?: number;
+    click_through_rate?: number;
 }

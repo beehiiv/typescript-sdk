@@ -15,7 +15,6 @@ export type SubscriptionsGetRequestExpandItem =
     /**
      * Returns an array of tags that have been set on the subscription. */
     | "tags";
-
 export const SubscriptionsGetRequestExpandItem = {
     Stats: "stats",
     CustomFields: "custom_fields",

@@ -1,1 +1,1 @@
-export * from "./ReferralProgramGetResponse";
+export * from "./ReferralProgramGetResponse.js";

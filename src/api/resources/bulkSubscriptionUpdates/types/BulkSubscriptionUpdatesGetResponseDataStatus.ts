@@ -6,7 +6,6 @@
  * The status of the update
  */
 export type BulkSubscriptionUpdatesGetResponseDataStatus = "pending" | "processing" | "complete" | "failed";
-
 export const BulkSubscriptionUpdatesGetResponseDataStatus = {
     Pending: "pending",
     Processing: "processing",

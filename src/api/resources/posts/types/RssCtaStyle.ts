@@ -11,7 +11,6 @@ export type RssCtaStyle =
     | "Title as link"
     | "Thumbnail as link"
     | "Title and thumbnail as link";
-
 export const RssCtaStyle = {
     CtaButton: "CTA button",
     CtaLink: "CTA link",

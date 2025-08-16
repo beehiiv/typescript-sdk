@@ -1,3 +1,3 @@
-export { type SegmentsListRequest } from "./SegmentsListRequest";
-export { type SegmentsShowRequest } from "./SegmentsShowRequest";
-export { type SegmentsGetRequest } from "./SegmentsGetRequest";
+export { type SegmentsListRequest } from "./SegmentsListRequest.js";
+export { type SegmentsShowRequest } from "./SegmentsShowRequest.js";
+export { type SegmentsGetRequest } from "./SegmentsGetRequest.js";

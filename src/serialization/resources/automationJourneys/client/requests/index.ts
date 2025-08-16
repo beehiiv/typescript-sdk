@@ -1,1 +1,0 @@
-export { AutomationJourneysCreateRequest } from "./AutomationJourneysCreateRequest";

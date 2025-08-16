@@ -3,7 +3,6 @@
  */
 
 export type PostPlatformFilter = "web" | "email" | "both" | "all";
-
 export const PostPlatformFilter = {
     Web: "web",
     Email: "email",

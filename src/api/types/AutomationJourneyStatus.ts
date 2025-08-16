@@ -3,7 +3,6 @@
  */
 
 export type AutomationJourneyStatus = "initiated" | "running" | "in_progress" | "completed" | "failed";
-
 export const AutomationJourneyStatus = {
     Initiated: "initiated",
     Running: "running",

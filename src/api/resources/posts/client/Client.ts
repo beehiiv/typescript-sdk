@@ -369,6 +369,8 @@ export class Posts {
             platform,
             status,
             "content_tags[]": contentTags,
+            "slugs[]": slugs,
+            premium_tiers: premiumTiers,
             limit,
             page,
             order_by: orderBy,
@@ -398,6 +400,14 @@ export class Posts {
 
         if (contentTags != null) {
             _queryParams["content_tags[]"] = toJson(contentTags);
+        }
+
+        if (slugs != null) {
+            _queryParams["slugs[]"] = toJson(slugs);
+        }
+
+        if (premiumTiers != null) {
+            _queryParams["premium_tiers"] = toJson(premiumTiers);
         }
 
         if (limit != null) {
@@ -633,7 +643,7 @@ export class Posts {
         request: Beehiiv.PostsGetRequest = {},
         requestOptions?: Posts.RequestOptions,
     ): Promise<core.WithRawResponse<Beehiiv.PostsGetResponse>> {
-        const { expand } = request;
+        const { expand, premium_tiers: premiumTiers } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (expand != null) {
             if (Array.isArray(expand)) {
@@ -641,6 +651,10 @@ export class Posts {
             } else {
                 _queryParams["expand"] = toJson(expand);
             }
+        }
+
+        if (premiumTiers != null) {
+            _queryParams["premium_tiers"] = toJson(premiumTiers);
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({

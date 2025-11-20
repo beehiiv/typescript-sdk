@@ -17,7 +17,8 @@ export type SubscriptionExpandedTagsUtmChannel =
     | "boost"
     | "boost_send"
     | "boost_direct_link"
-    | "integration";
+    | "integration"
+    | "product";
 export const SubscriptionExpandedTagsUtmChannel = {
     Empty: "",
     Website: "website",
@@ -31,4 +32,5 @@ export const SubscriptionExpandedTagsUtmChannel = {
     BoostSend: "boost_send",
     BoostDirectLink: "boost_direct_link",
     Integration: "integration",
+    Product: "product",
 } as const;

@@ -35,6 +35,6 @@ import * as Beehiiv from "../../../../index.js";
  *     }
  */
 export interface BulkSubscriptionsPutRequest {
-    /** An array of objects representing the subscriptions to be updated */
+    /** An array of objects representing the subscriptions to be updated (max 1000). */
     subscriptions?: Beehiiv.SubscriptionsPatchRequestSubscriptionsItem[];
 }

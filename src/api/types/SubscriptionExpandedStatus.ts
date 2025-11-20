@@ -3,7 +3,7 @@
  */
 
 /**
- * The status of the subscription.<br>`validating` - The email address is being validated.<br>`invalid` - The email address is invalid.<br>`pending` - The email address is valid, but the subscription is pending double opt-in.<br>`active` - The email was valid and the subscription is active.<br>`inactive` - The subscription was made inactive, possibly due to an unsubscribe.<br>`needs_attention` - The subscription requires approval or denial.
+ * The status of the subscription.<br>`validating` - The email address is being validated.<br>`invalid` - The email address is invalid.<br>`pending` - The email address is valid, but the subscription is pending double opt-in.<br>`active` - The email was valid and the subscription is active.<br>`inactive` - The subscription was made inactive, possibly due to an unsubscribe.<br>`needs_attention` - The subscription requires approval or denial.<br>`paused` - The subscriber has paused their subscription.
  */
 export type SubscriptionExpandedStatus =
     | "validating"
@@ -11,7 +11,8 @@ export type SubscriptionExpandedStatus =
     | "pending"
     | "active"
     | "inactive"
-    | "needs_attention";
+    | "needs_attention"
+    | "paused";
 export const SubscriptionExpandedStatus = {
     Validating: "validating",
     Invalid: "invalid",
@@ -19,4 +20,5 @@ export const SubscriptionExpandedStatus = {
     Active: "active",
     Inactive: "inactive",
     NeedsAttention: "needs_attention",
+    Paused: "paused",
 } as const;

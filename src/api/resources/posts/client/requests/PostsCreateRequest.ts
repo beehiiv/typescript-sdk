@@ -199,9 +199,9 @@ import * as Beehiiv from "../../../../index.js";
  *     }
  */
 export interface PostsCreateRequest {
-    /** The content of the post. This is the raw HTML content that will be rendered in the email and web views. */
+    /** The content of the post as raw HTML. Either this field OR the blocks field must be provided. */
     body_content?: string;
-    /** The blocks that make up the post's contents. */
+    /** The structured content blocks that make up the post. Either this field OR the body_content field must be provided. */
     blocks?: Beehiiv.Block[];
     /** The title of the post. */
     title: string;

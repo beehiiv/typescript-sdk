@@ -122,6 +122,52 @@ describe("Webhooks", () => {
         });
     });
 
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new BeehiivClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            event_types: ["post.sent", "subscription.confirmed"],
+            description: "A webhook to receive new posts data and new subscription confirmations.",
+        };
+        const rawResponseBody = {
+            data: {
+                id: "ep_0ca1a8505a64924059c391744d0",
+                url: "https://example.com/webhook",
+                created: 1666800076,
+                updated: 1666800076,
+                event_types: ["post.sent", "subscription.confirmed"],
+                description: "A webhook to receive new posts data and new subscription confirmations.",
+            },
+        };
+        server
+            .mockEndpoint()
+            .patch("/publications/pub_00000000-0000-0000-0000-000000000000/webhooks/ep_0000000000000000000000000000")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.webhooks.update(
+            "pub_00000000-0000-0000-0000-000000000000",
+            "ep_0000000000000000000000000000",
+            {
+                event_types: ["post.sent", "subscription.confirmed"],
+                description: "A webhook to receive new posts data and new subscription confirmations.",
+            },
+        );
+        expect(response).toEqual({
+            data: {
+                id: "ep_0ca1a8505a64924059c391744d0",
+                url: "https://example.com/webhook",
+                created: 1666800076,
+                updated: 1666800076,
+                event_types: ["post.sent", "subscription.confirmed"],
+                description: "A webhook to receive new posts data and new subscription confirmations.",
+            },
+        });
+    });
+
     test("delete", async () => {
         const server = mockServerPool.createServer();
         const client = new BeehiivClient({ token: "test", environment: server.baseUrl });

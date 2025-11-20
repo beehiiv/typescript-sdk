@@ -26,9 +26,17 @@ export interface PostsListRequest {
      */
     status?: Beehiiv.PostStatusFilter;
     /**
-     * Optionally filter posts by content_tags. Adding a content tag will return any post with that content tag associated to it.<br>Example: Filtering for `content_tags: ["sales","closing"]` will return results of posts that have *either* sales or closing content_tags.
+     * Optionally filter posts by content_tags. Adding a content tag will return any post with that content tag associated to it.<br><br><b>Example</b>: Filtering for `content_tags: ["sales","closing"]` will return results of posts that have *either* `sales` or `closing` content_tags.
      */
     "content_tags[]"?: string[];
+    /**
+     * Optionally filter posts by their slugs. Adding a slug will return any post with that exact slug associated to it.<br><br><b>Example:</b> Filtering for `slugs: ["my-first-post","another-post"]` will return results of posts that have *either* `my-first-post` or `another-post` as their slug.
+     */
+    "slugs[]"?: string[];
+    /**
+     * Optionally filter posts by audience based on premium tiers.<br> This takes in an array of Display Names of the premium tiers.<br> It will also scope any expanded content output to the specified premium tiers.<br> Note: This is case insensitive.
+     */
+    premium_tiers?: string[];
     /**
      * A limit on the number of objects to be returned. The limit can range between 1 and 100, and the default is 10.
      */

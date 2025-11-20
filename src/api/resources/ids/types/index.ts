@@ -14,4 +14,5 @@ export * from "./EndpointId.js";
 export * from "./PostTemplateId.js";
 export * from "./PaywallId.js";
 export * from "./ExternalRssFeedId.js";
+export * from "./WorkspaceId.js";
 export * from "./OptionalStripeCustomerId.js";

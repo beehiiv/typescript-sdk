@@ -30,6 +30,8 @@ export * as tiers from "./tiers/index.js";
 export * from "./tiers/types/index.js";
 export * as webhooks from "./webhooks/index.js";
 export * from "./webhooks/types/index.js";
+export * as workspaces from "./workspaces/index.js";
+export * from "./workspaces/types/index.js";
 export * from "./automationJourneys/client/requests/index.js";
 export * from "./automations/client/requests/index.js";
 export * from "./bulkSubscriptions/client/requests/index.js";

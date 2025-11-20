@@ -12,10 +12,21 @@ import * as Beehiiv from "../../../index.js";
  *         display: "Display",
  *         created: 1672531200
  *     }
+ *
+ * @example
+ *     {
+ *         id: "00000000-0000-0000-0000-000000000000",
+ *         kind: Beehiiv.CustomFieldType.List,
+ *         display: "Dropdown Field",
+ *         created: 1672531200,
+ *         options: ["Option 1", "Option 2", "Option 3"]
+ *     }
  */
 export interface CustomFieldInfo {
     id?: string;
     kind?: Beehiiv.CustomFieldType;
     display?: string;
     created?: number;
+    /** Array of option values. Only included when kind is "list". */
+    options?: string[];
 }

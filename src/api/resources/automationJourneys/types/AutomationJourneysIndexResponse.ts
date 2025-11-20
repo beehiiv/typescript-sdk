@@ -12,7 +12,7 @@ import * as Beehiiv from "../../../index.js";
  *                 automation_id: "aut_00000000-0000-0000-0000-000000000000",
  *                 subscription_id: "sub_00000000-0000-0000-0000-000000000000",
  *                 email: "test@example.com",
- *                 status: Beehiiv.AutomationJourneyStatus.Initiated,
+ *                 status: Beehiiv.AutomationJourneyStatus.InProgress,
  *                 started_at: 1714857600,
  *                 completed_at: 1714861200
  *             }, {
@@ -20,7 +20,7 @@ import * as Beehiiv from "../../../index.js";
  *                 automation_id: "aut_00000000-0000-0000-0000-000000000000",
  *                 subscription_id: "sub_00000000-0000-0000-0000-000000000000",
  *                 email: "test@example.com",
- *                 status: Beehiiv.AutomationJourneyStatus.Initiated,
+ *                 status: Beehiiv.AutomationJourneyStatus.InProgress,
  *                 started_at: 1714857600,
  *                 completed_at: 1714861200
  *             }],

@@ -6,3 +6,5 @@ export * from "./SegmentShowResponse.js";
 export * from "./SegmentRecalculateResponse.js";
 export * from "./SegmentDeleteResponse.js";
 export * from "./SegmentsExpandItems.js";
+export * from "./SegmentMembersExpandItems.js";
+export * from "./SegmentMembersResponse.js";

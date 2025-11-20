@@ -14,9 +14,10 @@ import * as Beehiiv from "../../../index.js";
  *                 created: 1672531200
  *             }, {
  *                 id: "00000000-0000-0000-0000-000000000000",
- *                 kind: Beehiiv.CustomFieldType.String,
- *                 display: "Display",
- *                 created: 1672531200
+ *                 kind: Beehiiv.CustomFieldType.List,
+ *                 display: "Dropdown Field",
+ *                 created: 1672531200,
+ *                 options: ["Option 1", "Option 2", "Option 3"]
  *             }],
  *         limit: 10,
  *         page: 1,

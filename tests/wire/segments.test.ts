@@ -183,6 +183,70 @@ describe("Segments", () => {
         expect(response).toEqual({});
     });
 
+    test("list_members", async () => {
+        const server = mockServerPool.createServer();
+        const client = new BeehiivClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    id: "sub_00000000-0000-0000-0000-000000000000",
+                    email: "subscriber@example.com",
+                    status: "active",
+                    created: 1666800076,
+                    subscription_tier: "free",
+                    subscription_premium_tier_names: [],
+                    utm_source: "twitter",
+                    utm_medium: "social",
+                    utm_channel: "website",
+                    utm_campaign: "spring_2023",
+                    referring_site: "https://twitter.com",
+                    referral_code: "ABC123",
+                },
+            ],
+            limit: 10,
+            page: 1,
+            total_results: 1,
+            total_pages: 1,
+        };
+        server
+            .mockEndpoint()
+            .get(
+                "/publications/pub_00000000-0000-0000-0000-000000000000/segments/seg_00000000-0000-0000-0000-000000000000/members",
+            )
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.segments.listMembers(
+            "pub_00000000-0000-0000-0000-000000000000",
+            "seg_00000000-0000-0000-0000-000000000000",
+        );
+        expect(response).toEqual({
+            data: [
+                {
+                    id: "sub_00000000-0000-0000-0000-000000000000",
+                    email: "subscriber@example.com",
+                    status: "active",
+                    created: 1666800076,
+                    subscription_tier: "free",
+                    subscription_premium_tier_names: [],
+                    utm_source: "twitter",
+                    utm_medium: "social",
+                    utm_channel: "website",
+                    utm_campaign: "spring_2023",
+                    referring_site: "https://twitter.com",
+                    referral_code: "ABC123",
+                },
+            ],
+            limit: 10,
+            page: 1,
+            total_results: 1,
+            total_pages: 1,
+        });
+    });
+
     test("expand_results", async () => {
         const server = mockServerPool.createServer();
         const client = new BeehiivClient({ token: "test", environment: server.baseUrl });

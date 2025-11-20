@@ -360,7 +360,120 @@ export class Segments {
     }
 
     /**
-     * List the Subscriber Ids from the most recent calculation of a specific publication.
+     * List all members in a segment with full subscription data. Each member is returned as a subscription  object containing complete subscriber information and their subscription details.  Supports optional expansions for stats, custom fields, tags, referrals, and premium tiers. <br><br> **Use this endpoint when you need detailed subscriber information.** If you only need subscriber IDs, use `/segments/{segmentId}/results` for a lighter-weight response.
+     *
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.SegmentId} segmentId - The prefixed ID of the segment object
+     * @param {Beehiiv.SegmentMembersRequest} request
+     * @param {Segments.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
+     *
+     * @example
+     *     await client.segments.listMembers("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000")
+     */
+    public listMembers(
+        publicationId: Beehiiv.PublicationId,
+        segmentId: Beehiiv.SegmentId,
+        request: Beehiiv.SegmentMembersRequest = {},
+        requestOptions?: Segments.RequestOptions,
+    ): core.HttpResponsePromise<Beehiiv.SegmentMembersResponse> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__listMembers(publicationId, segmentId, request, requestOptions),
+        );
+    }
+
+    private async __listMembers(
+        publicationId: Beehiiv.PublicationId,
+        segmentId: Beehiiv.SegmentId,
+        request: Beehiiv.SegmentMembersRequest = {},
+        requestOptions?: Segments.RequestOptions,
+    ): Promise<core.WithRawResponse<Beehiiv.SegmentMembersResponse>> {
+        const { limit, page, "expand[]": expand } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
+        if (page != null) {
+            _queryParams["page"] = page.toString();
+        }
+
+        if (expand != null) {
+            _queryParams["expand[]"] = toJson(expand);
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.BeehiivEnvironment.Default,
+                `publications/${encodeURIComponent(publicationId)}/segments/${encodeURIComponent(segmentId)}/members`,
+            ),
+            method: "GET",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+                requestOptions?.headers,
+            ),
+            queryParameters: _queryParams,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Beehiiv.SegmentMembersResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Beehiiv.BadRequestError(_response.error.body as Beehiiv.Error_, _response.rawResponse);
+                case 404:
+                    throw new Beehiiv.NotFoundError(_response.error.body as Beehiiv.Error_, _response.rawResponse);
+                case 429:
+                    throw new Beehiiv.TooManyRequestsError(
+                        _response.error.body as Beehiiv.Error_,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new Beehiiv.InternalServerError(
+                        _response.error.body as Beehiiv.Error_,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.BeehiivError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.BeehiivError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.BeehiivTimeoutError(
+                    "Timeout exceeded when calling GET /publications/{publicationId}/segments/{segmentId}/members.",
+                );
+            case "unknown":
+                throw new errors.BeehiivError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * List subscriber IDs for a segment. Returns a lightweight array of subscription IDs only, without additional subscriber details. <br><br> **Use this endpoint when you only need subscriber IDs** (e.g., for counting, ID-based lookups, or  integrations with external systems). If you need full subscriber details (email, status, custom fields, etc.), use `/segments/{segmentId}/members` instead.
      *
      * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.SegmentId} segmentId - The prefixed ID of the segment object

@@ -3,7 +3,28 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fbeehiiv%2Ftypescript-sdk)
 [![npm shield](https://img.shields.io/npm/v/@beehiiv/sdk)](https://www.npmjs.com/package/@beehiiv/sdk)
 
-The Beehiiv TypeScript library provides convenient access to the Beehiiv API from TypeScript.
+The Beehiiv TypeScript library provides convenient access to the Beehiiv APIs from TypeScript.
+
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Installation](#installation)
+- [Reference](#reference)
+- [Usage](#usage)
+- [Request and Response Types](#request-and-response-types)
+- [Exception Handling](#exception-handling)
+- [Advanced](#advanced)
+    - [Additional Headers](#additional-headers)
+    - [Retries](#retries)
+    - [Timeouts](#timeouts)
+    - [Aborting Requests](#aborting-requests)
+    - [Access Raw Response Data](#access-raw-response-data)
+    - [Runtime Compatibility](#runtime-compatibility)
+- [Retries](#retries)
+- [Timeouts](#timeouts)
+- [Runtime Compatiblity](#runtime-compatiblity)
+- [Beta Status](#beta-status)
+- [Contributing](#contributing)
 
 ## Documentation
 
@@ -37,7 +58,7 @@ await client.automationJourneys.create(
 );
 ```
 
-## Request And Response Types
+## Request and Response Types
 
 The SDK exports all request and response types as TypeScript interfaces. Simply import them with the
 following namespace:

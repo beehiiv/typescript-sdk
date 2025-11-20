@@ -148,6 +148,7 @@ export class AutomationJourneys {
      *
      * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
      * @param {Beehiiv.AutomationId} automationId - The prefixed ID of the automation object
+     * @param {Beehiiv.AutomationJourneysIndexRequest} request
      * @param {AutomationJourneys.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Beehiiv.BadRequestError}
@@ -161,16 +162,32 @@ export class AutomationJourneys {
     public index(
         publicationId: Beehiiv.PublicationId,
         automationId: Beehiiv.AutomationId,
+        request: Beehiiv.AutomationJourneysIndexRequest = {},
         requestOptions?: AutomationJourneys.RequestOptions,
     ): core.HttpResponsePromise<Beehiiv.AutomationJourneysIndexResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__index(publicationId, automationId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__index(publicationId, automationId, request, requestOptions));
     }
 
     private async __index(
         publicationId: Beehiiv.PublicationId,
         automationId: Beehiiv.AutomationId,
+        request: Beehiiv.AutomationJourneysIndexRequest = {},
         requestOptions?: AutomationJourneys.RequestOptions,
     ): Promise<core.WithRawResponse<Beehiiv.AutomationJourneysIndexResponse>> {
+        const { status, limit, page } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (status != null) {
+            _queryParams["status"] = status;
+        }
+
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
+        if (page != null) {
+            _queryParams["page"] = page.toString();
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -184,6 +201,7 @@ export class AutomationJourneys {
                 mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
                 requestOptions?.headers,
             ),
+            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

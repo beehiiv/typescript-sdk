@@ -337,6 +337,108 @@ export class Webhooks {
     }
 
     /**
+     * Update a webhook subscription for a publication.
+     *
+     * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object
+     * @param {Beehiiv.EndpointId} endpointId - The prefixed ID of the webhook object
+     * @param {Beehiiv.UpdateWebhookRequest} request
+     * @param {Webhooks.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Beehiiv.BadRequestError}
+     * @throws {@link Beehiiv.NotFoundError}
+     * @throws {@link Beehiiv.TooManyRequestsError}
+     * @throws {@link Beehiiv.InternalServerError}
+     *
+     * @example
+     *     await client.webhooks.update("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000", {
+     *         event_types: ["post.sent", "subscription.confirmed"],
+     *         description: "A webhook to receive new posts data and new subscription confirmations."
+     *     })
+     */
+    public update(
+        publicationId: Beehiiv.PublicationId,
+        endpointId: Beehiiv.EndpointId,
+        request: Beehiiv.UpdateWebhookRequest = {},
+        requestOptions?: Webhooks.RequestOptions,
+    ): core.HttpResponsePromise<Beehiiv.WebhookResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(publicationId, endpointId, request, requestOptions));
+    }
+
+    private async __update(
+        publicationId: Beehiiv.PublicationId,
+        endpointId: Beehiiv.EndpointId,
+        request: Beehiiv.UpdateWebhookRequest = {},
+        requestOptions?: Webhooks.RequestOptions,
+    ): Promise<core.WithRawResponse<Beehiiv.WebhookResponse>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.BeehiivEnvironment.Default,
+                `publications/${encodeURIComponent(publicationId)}/webhooks/${encodeURIComponent(endpointId)}`,
+            ),
+            method: "PATCH",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+                requestOptions?.headers,
+            ),
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Beehiiv.WebhookResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Beehiiv.BadRequestError(_response.error.body as Beehiiv.Error_, _response.rawResponse);
+                case 404:
+                    throw new Beehiiv.NotFoundError(_response.error.body as Beehiiv.Error_, _response.rawResponse);
+                case 429:
+                    throw new Beehiiv.TooManyRequestsError(
+                        _response.error.body as Beehiiv.Error_,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new Beehiiv.InternalServerError(
+                        _response.error.body as Beehiiv.Error_,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.BeehiivError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.BeehiivError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.BeehiivTimeoutError(
+                    "Timeout exceeded when calling PATCH /publications/{publicationId}/webhooks/{endpointId}.",
+                );
+            case "unknown":
+                throw new errors.BeehiivError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * Delete a webhook subscription from a publication.
      *
      * @param {Beehiiv.PublicationId} publicationId - The prefixed ID of the publication object

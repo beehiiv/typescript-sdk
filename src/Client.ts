@@ -20,6 +20,7 @@ import { Subscriptions } from "./api/resources/subscriptions/client/Client.js";
 import { SubscriptionTags } from "./api/resources/subscriptionTags/client/Client.js";
 import { Tiers } from "./api/resources/tiers/client/Client.js";
 import { Webhooks } from "./api/resources/webhooks/client/Client.js";
+import { Workspaces } from "./api/resources/workspaces/client/Client.js";
 
 export declare namespace BeehiivClient {
     export interface Options {
@@ -61,6 +62,7 @@ export class BeehiivClient {
     protected _subscriptionTags: SubscriptionTags | undefined;
     protected _tiers: Tiers | undefined;
     protected _webhooks: Webhooks | undefined;
+    protected _workspaces: Workspaces | undefined;
 
     constructor(_options: BeehiivClient.Options) {
         this._options = {
@@ -69,8 +71,8 @@ export class BeehiivClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@beehiiv/sdk",
-                    "X-Fern-SDK-Version": "0.1.7",
-                    "User-Agent": "@beehiiv/sdk/0.1.7",
+                    "X-Fern-SDK-Version": "0.1.8",
+                    "User-Agent": "@beehiiv/sdk/AUTO",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -137,5 +139,9 @@ export class BeehiivClient {
 
     public get webhooks(): Webhooks {
         return (this._webhooks ??= new Webhooks(this._options));
+    }
+
+    public get workspaces(): Workspaces {
+        return (this._workspaces ??= new Workspaces(this._options));
     }
 }

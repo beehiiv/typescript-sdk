@@ -89,7 +89,7 @@ await client.automationJourneys.create(
 </dl>
 </details>
 
-<details><summary><code>client.automationJourneys.<a href="/src/api/resources/automationJourneys/client/Client.ts">index</a>(publicationId, automationId) -> Beehiiv.AutomationJourneysIndexResponse</code></summary>
+<details><summary><code>client.automationJourneys.<a href="/src/api/resources/automationJourneys/client/Client.ts">index</a>(publicationId, automationId, { ...params }) -> Beehiiv.AutomationJourneysIndexResponse</code></summary>
 <dl>
 <dd>
 
@@ -145,6 +145,14 @@ await client.automationJourneys.index(
 <dd>
 
 **automationId:** `Beehiiv.AutomationId` — The prefixed ID of the automation object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.AutomationJourneysIndexRequest`
 
 </dd>
 </dl>
@@ -2676,6 +2684,88 @@ await client.segments.recalculate(
 </dl>
 </details>
 
+<details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">listMembers</a>(publicationId, segmentId, { ...params }) -> Beehiiv.SegmentMembersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all members in a segment with full subscription data. Each member is returned as a subscription object containing complete subscriber information and their subscription details. Supports optional expansions for stats, custom fields, tags, referrals, and premium tiers. <br><br> **Use this endpoint when you need detailed subscriber information.** If you only need subscriber IDs, use `/segments/{segmentId}/results` for a lighter-weight response.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.segments.listMembers(
+    "pub_00000000-0000-0000-0000-000000000000",
+    "seg_00000000-0000-0000-0000-000000000000",
+);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.SegmentMembersRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Segments.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">expandResults</a>(publicationId, segmentId, { ...params }) -> Beehiiv.SegmentsGetResponse</code></summary>
 <dl>
 <dd>
@@ -2688,7 +2778,7 @@ await client.segments.recalculate(
 <dl>
 <dd>
 
-List the Subscriber Ids from the most recent calculation of a specific publication.
+List subscriber IDs for a segment. Returns a lightweight array of subscription IDs only, without additional subscriber details. <br><br> **Use this endpoint when you only need subscriber IDs** (e.g., for counting, ID-based lookups, or integrations with external systems). If you need full subscriber details (email, status, custom fields, etc.), use `/segments/{segmentId}/members` instead.
 
 </dd>
 </dl>
@@ -4393,6 +4483,88 @@ await client.webhooks.show("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 </dl>
 </details>
 
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">update</a>(publicationId, endpointId, { ...params }) -> Beehiiv.WebhookResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a webhook subscription for a publication.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.webhooks.update("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000", {
+    event_types: ["post.sent", "subscription.confirmed"],
+    description: "A webhook to receive new posts data and new subscription confirmations.",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**endpointId:** `Beehiiv.EndpointId` — The prefixed ID of the webhook object
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Beehiiv.UpdateWebhookRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Webhooks.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">delete</a>(publicationId, endpointId) -> Beehiiv.WebhooksDeleteResponse</code></summary>
 <dl>
 <dd>
@@ -4525,6 +4697,63 @@ await client.webhooks.test("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 **requestOptions:** `Webhooks.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Workspaces
+
+<details><summary><code>client.workspaces.<a href="/src/api/resources/workspaces/client/Client.ts">identify</a>() -> Beehiiv.WorkspaceIdentifyResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve information about the workspace the OAuth or API token is associated with.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspaces.identify();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspaces.RequestOptions`
 
 </dd>
 </dl>

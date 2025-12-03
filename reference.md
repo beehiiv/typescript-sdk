@@ -1,7 +1,5 @@
 # Reference
-
 ## Automation Journeys
-
 <details><summary><code>client.automationJourneys.<a href="/src/api/resources/automationJourneys/client/Client.ts">create</a>(publicationId, automationId, { ...params }) -> Beehiiv.AutomationJourneysResponse</code></summary>
 <dl>
 <dd>
@@ -14,9 +12,8 @@
 <dl>
 <dd>
 
-Add an existing subscription to an automation flow. Requires the automation to have an active _Add by API_ trigger. The specified `email` or `subscription_id` will be matched against your existing subscribers. If an existing subscriber is found, they will be enrolled immediately.<br><br>
+Add an existing subscription to an automation flow. Requires the automation to have an active *Add by API* trigger. The specified `email` or `subscription_id` will be matched against your existing subscribers. If an existing subscriber is found, they will be enrolled immediately.<br><br>
 Looking to enroll new subscribers? Use the **[Create Subscription](/api-reference/subscriptions/create)** endpoint instead and specify the `automation_ids` param.
-
 </dd>
 </dl>
 </dd>
@@ -31,16 +28,12 @@ Looking to enroll new subscribers? Use the **[Create Subscription](/api-referenc
 <dd>
 
 ```typescript
-await client.automationJourneys.create(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000",
-    {
-        email: "test@example.com",
-        double_opt_override: "on",
-    },
-);
-```
+await client.automationJourneys.create("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", {
+    email: "test@example.com",
+    double_opt_override: "on"
+});
 
+```
 </dd>
 </dl>
 </dd>
@@ -55,7 +48,7 @@ await client.automationJourneys.create(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -63,27 +56,28 @@ await client.automationJourneys.create(
 <dd>
 
 **automationId:** `Beehiiv.AutomationId` — The prefixed ID of the automation object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.AutomationJourneysCreateRequest`
-
+**request:** `Beehiiv.AutomationJourneysCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `AutomationJourneys.RequestOptions`
+**requestOptions:** `AutomationJourneysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -102,7 +96,6 @@ await client.automationJourneys.create(
 <dd>
 
 Retrieve a list of automation journeys that have occurred within a specific automation.
-
 </dd>
 </dl>
 </dd>
@@ -117,12 +110,9 @@ Retrieve a list of automation journeys that have occurred within a specific auto
 <dd>
 
 ```typescript
-await client.automationJourneys.index(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.automationJourneys.index("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -137,7 +127,7 @@ await client.automationJourneys.index(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -145,27 +135,28 @@ await client.automationJourneys.index(
 <dd>
 
 **automationId:** `Beehiiv.AutomationId` — The prefixed ID of the automation object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.AutomationJourneysIndexRequest`
-
+**request:** `Beehiiv.AutomationJourneysIndexRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `AutomationJourneys.RequestOptions`
+**requestOptions:** `AutomationJourneysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -184,7 +175,6 @@ await client.automationJourneys.index(
 <dd>
 
 Retrieve a single automation journey by ID.
-
 </dd>
 </dl>
 </dd>
@@ -199,13 +189,9 @@ Retrieve a single automation journey by ID.
 <dd>
 
 ```typescript
-await client.automationJourneys.show(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "aut_00000000-0000-0000-0000-000000000000",
-    "aj_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.automationJourneys.show("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000", "aj_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -220,7 +206,7 @@ await client.automationJourneys.show(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -228,7 +214,7 @@ await client.automationJourneys.show(
 <dd>
 
 **automationId:** `Beehiiv.AutomationId` — The prefixed ID of the automation object
-
+    
 </dd>
 </dl>
 
@@ -236,26 +222,26 @@ await client.automationJourneys.show(
 <dd>
 
 **automationJourneyId:** `Beehiiv.AutomationJourneyId` — The prefixed automation journey id
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `AutomationJourneys.RequestOptions`
+**requestOptions:** `AutomationJourneysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Automations
-
 <details><summary><code>client.automations.<a href="/src/api/resources/automations/client/Client.ts">index</a>(publicationId, { ...params }) -> Beehiiv.AutomationsListResponse</code></summary>
 <dl>
 <dd>
@@ -270,8 +256,8 @@ await client.automationJourneys.show(
 
 ```typescript
 await client.automations.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -286,27 +272,28 @@ await client.automations.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.AutomationsListRequest`
-
+**request:** `Beehiiv.AutomationsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Automations.RequestOptions`
+**requestOptions:** `AutomationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -326,8 +313,8 @@ await client.automations.index("pub_00000000-0000-0000-0000-000000000000");
 
 ```typescript
 await client.automations.show("pub_00000000-0000-0000-0000-000000000000", "aut_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -342,7 +329,7 @@ await client.automations.show("pub_00000000-0000-0000-0000-000000000000", "aut_0
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -350,26 +337,26 @@ await client.automations.show("pub_00000000-0000-0000-0000-000000000000", "aut_0
 <dd>
 
 **automationId:** `Beehiiv.AutomationId` — The prefixed ID of the automation object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Automations.RequestOptions`
+**requestOptions:** `AutomationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Bulk Subscriptions
-
 <details><summary><code>client.bulkSubscriptions.<a href="/src/api/resources/bulkSubscriptions/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.BulkSubscriptionCreateResponse</code></summary>
 <dl>
 <dd>
@@ -383,7 +370,6 @@ await client.automations.show("pub_00000000-0000-0000-0000-000000000000", "aut_0
 <dd>
 
 Create new subscriptions for a publication.
-
 </dd>
 </dl>
 </dd>
@@ -399,33 +385,26 @@ Create new subscriptions for a publication.
 
 ```typescript
 await client.bulkSubscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
-    subscriptions: [
-        {
+    subscriptions: [{
             email: "bruce.wayne@wayneenterprise.com",
             reactivate_existing: false,
             send_welcome_email: false,
-            custom_fields: [
-                {
+            custom_fields: [{
                     name: "Favorite Color",
-                    value: "Red",
-                },
-            ],
-        },
-        {
+                    value: "Red"
+                }]
+        }, {
             email: "lucius.fox@wayneenterprise.com",
             reactivate_existing: false,
             send_welcome_email: false,
-            custom_fields: [
-                {
+            custom_fields: [{
                     name: "Favorite Color",
-                    value: "Blue",
-                },
-            ],
-        },
-    ],
+                    value: "Blue"
+                }]
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -440,34 +419,34 @@ await client.bulkSubscriptions.create("pub_00000000-0000-0000-0000-000000000000"
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.BulkSubscriptionsCreateRequest`
-
+**request:** `Beehiiv.BulkSubscriptionsCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptions.RequestOptions`
+**requestOptions:** `BulkSubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Bulk Subscription Updates
-
 <details><summary><code>client.bulkSubscriptionUpdates.<a href="/src/api/resources/bulkSubscriptionUpdates/client/Client.ts">index</a>(publicationId) -> Beehiiv.BulkSubscriptionUpdatesListResponse</code></summary>
 <dl>
 <dd>
@@ -481,7 +460,6 @@ await client.bulkSubscriptions.create("pub_00000000-0000-0000-0000-000000000000"
 <dd>
 
 Returns a list of Subscription Update objects for a publication.
-
 </dd>
 </dl>
 </dd>
@@ -497,8 +475,8 @@ Returns a list of Subscription Update objects for a publication.
 
 ```typescript
 await client.bulkSubscriptionUpdates.index("publicationId");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -513,19 +491,20 @@ await client.bulkSubscriptionUpdates.index("publicationId");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptionUpdates.RequestOptions`
+**requestOptions:** `BulkSubscriptionUpdatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -544,7 +523,6 @@ await client.bulkSubscriptionUpdates.index("publicationId");
 <dd>
 
 Returns a single Subscription Update object for a publication.
-
 </dd>
 </dl>
 </dd>
@@ -560,8 +538,8 @@ Returns a single Subscription Update object for a publication.
 
 ```typescript
 await client.bulkSubscriptionUpdates.show("publicationId", "id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -576,7 +554,7 @@ await client.bulkSubscriptionUpdates.show("publicationId", "id");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -584,19 +562,20 @@ await client.bulkSubscriptionUpdates.show("publicationId", "id");
 <dd>
 
 **id:** `string` — The ID of the Subscription Update object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptionUpdates.RequestOptions`
+**requestOptions:** `BulkSubscriptionUpdatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -615,7 +594,6 @@ await client.bulkSubscriptionUpdates.show("publicationId", "id");
 <dd>
 
 Bulk update multiple subscriptions fields, including status, custom fields, and tiers.
-
 </dd>
 </dl>
 </dd>
@@ -631,43 +609,34 @@ Bulk update multiple subscriptions fields, including status, custom fields, and 
 
 ```typescript
 await client.bulkSubscriptionUpdates.put("publicationId", {
-    subscriptions: [
-        {
+    subscriptions: [{
             subscription_id: "sub_1234-5678-9012-3456-7890",
             tier: "premium",
             stripe_customer_id: "cus_1234567890",
             unsubscribe: false,
-            custom_fields: [
-                {
+            custom_fields: [{
                     name: "custom_field_name",
-                    value: "custom_field_value",
-                },
-                {
+                    value: "custom_field_value"
+                }, {
                     name: "custom_field_name_2",
-                    value: "custom_field_value_2",
-                },
-            ],
-        },
-        {
+                    value: "custom_field_value_2"
+                }]
+        }, {
             subscription_id: "sub_9876-5432-1098-7654-3210",
             tier: "free",
             stripe_customer_id: "cus_1234567890",
             unsubscribe: true,
-            custom_fields: [
-                {
+            custom_fields: [{
                     name: "custom_field_name_3",
-                    value: "custom_field_value_3",
-                },
-                {
+                    value: "custom_field_value_3"
+                }, {
                     name: "custom_field_name_4",
-                    value: "custom_field_value_4",
-                },
-            ],
-        },
-    ],
+                    value: "custom_field_value_4"
+                }]
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -682,27 +651,28 @@ await client.bulkSubscriptionUpdates.put("publicationId", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.BulkSubscriptionsPutRequest`
-
+**request:** `Beehiiv.BulkSubscriptionsPutRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptionUpdates.RequestOptions`
+**requestOptions:** `BulkSubscriptionUpdatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -721,7 +691,6 @@ await client.bulkSubscriptionUpdates.put("publicationId", {
 <dd>
 
 Bulk update multiple subscriptions fields, including status, custom fields, and tiers.
-
 </dd>
 </dl>
 </dd>
@@ -737,43 +706,34 @@ Bulk update multiple subscriptions fields, including status, custom fields, and 
 
 ```typescript
 await client.bulkSubscriptionUpdates.patch("publicationId", {
-    subscriptions: [
-        {
+    subscriptions: [{
             subscription_id: "sub_1234-5678-9012-3456-7890",
             tier: "premium",
             stripe_customer_id: "cus_1234567890",
             unsubscribe: false,
-            custom_fields: [
-                {
+            custom_fields: [{
                     name: "custom_field_name",
-                    value: "custom_field_value",
-                },
-                {
+                    value: "custom_field_value"
+                }, {
                     name: "custom_field_name_2",
-                    value: "custom_field_value_2",
-                },
-            ],
-        },
-        {
+                    value: "custom_field_value_2"
+                }]
+        }, {
             subscription_id: "sub_9876-5432-1098-7654-3210",
             tier: "free",
             stripe_customer_id: "cus_1234567890",
             unsubscribe: true,
-            custom_fields: [
-                {
+            custom_fields: [{
                     name: "custom_field_name_3",
-                    value: "custom_field_value_3",
-                },
-                {
+                    value: "custom_field_value_3"
+                }, {
                     name: "custom_field_name_4",
-                    value: "custom_field_value_4",
-                },
-            ],
-        },
-    ],
+                    value: "custom_field_value_4"
+                }]
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -788,27 +748,28 @@ await client.bulkSubscriptionUpdates.patch("publicationId", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.BulkSubscriptionsPatchRequest`
-
+**request:** `Beehiiv.BulkSubscriptionsPatchRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptionUpdates.RequestOptions`
+**requestOptions:** `BulkSubscriptionUpdatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -827,7 +788,6 @@ await client.bulkSubscriptionUpdates.patch("publicationId", {
 <dd>
 
 Bulk update subscriptions' status.
-
 </dd>
 </dl>
 </dd>
@@ -844,10 +804,10 @@ Bulk update subscriptions' status.
 ```typescript
 await client.bulkSubscriptionUpdates.putStatus("publicationId", {
     subscription_ids: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
-    new_status: "active",
+    new_status: "active"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -862,27 +822,28 @@ await client.bulkSubscriptionUpdates.putStatus("publicationId", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.BulkSubscriptionsStatusPutRequest`
-
+**request:** `Beehiiv.BulkSubscriptionsStatusPutRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptionUpdates.RequestOptions`
+**requestOptions:** `BulkSubscriptionUpdatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -901,7 +862,6 @@ await client.bulkSubscriptionUpdates.putStatus("publicationId", {
 <dd>
 
 Bulk update subscriptions' status.
-
 </dd>
 </dl>
 </dd>
@@ -918,10 +878,10 @@ Bulk update subscriptions' status.
 ```typescript
 await client.bulkSubscriptionUpdates.patchStatus("publicationId", {
     subscription_ids: ["sub_1234-5678-9012-3456-7890", "sub_9876-5432-1098-7654-3210"],
-    new_status: "active",
+    new_status: "active"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -936,34 +896,34 @@ await client.bulkSubscriptionUpdates.patchStatus("publicationId", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.BulkSubscriptionsStatusPatchRequest`
-
+**request:** `Beehiiv.BulkSubscriptionsStatusPatchRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `BulkSubscriptionUpdates.RequestOptions`
+**requestOptions:** `BulkSubscriptionUpdatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Custom Fields
-
 <details><summary><code>client.customFields.<a href="/src/api/resources/customFields/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.CustomFieldResponse</code></summary>
 <dl>
 <dd>
@@ -977,7 +937,6 @@ await client.bulkSubscriptionUpdates.patchStatus("publicationId", {
 <dd>
 
 Create a custom field on a publication, for use in subscriptions
-
 </dd>
 </dl>
 </dd>
@@ -994,10 +953,10 @@ Create a custom field on a publication, for use in subscriptions
 ```typescript
 await client.customFields.create("publicationId", {
     kind: "string",
-    display: "Display",
+    display: "Display"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1012,27 +971,28 @@ await client.customFields.create("publicationId", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.CustomFieldsCreateRequest`
-
+**request:** `Beehiiv.CustomFieldsCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `CustomFields.RequestOptions`
+**requestOptions:** `CustomFieldsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1051,7 +1011,6 @@ await client.customFields.create("publicationId", {
 <dd>
 
 View a specific custom field on a publication
-
 </dd>
 </dl>
 </dd>
@@ -1067,8 +1026,8 @@ View a specific custom field on a publication
 
 ```typescript
 await client.customFields.show("publicationId", "id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1083,7 +1042,7 @@ await client.customFields.show("publicationId", "id");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -1091,19 +1050,20 @@ await client.customFields.show("publicationId", "id");
 <dd>
 
 **id:** `string` — The ID of the Custom Fields object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `CustomFields.RequestOptions`
+**requestOptions:** `CustomFieldsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1122,7 +1082,6 @@ await client.customFields.show("publicationId", "id");
 <dd>
 
 List all custom fields on a publication
-
 </dd>
 </dl>
 </dd>
@@ -1138,8 +1097,8 @@ List all custom fields on a publication
 
 ```typescript
 await client.customFields.index("publicationId");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1154,19 +1113,20 @@ await client.customFields.index("publicationId");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `CustomFields.RequestOptions`
+**requestOptions:** `CustomFieldsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1185,7 +1145,6 @@ await client.customFields.index("publicationId");
 <dd>
 
 Update a custom field on a publication
-
 </dd>
 </dl>
 </dd>
@@ -1201,10 +1160,10 @@ Update a custom field on a publication
 
 ```typescript
 await client.customFields.put("publicationId", "id", {
-    display: "New Display",
+    display: "New Display"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1219,7 +1178,7 @@ await client.customFields.put("publicationId", "id", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -1227,27 +1186,28 @@ await client.customFields.put("publicationId", "id", {
 <dd>
 
 **id:** `string` — The ID of the Custom Fields object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.CustomFieldsPutRequest`
-
+**request:** `Beehiiv.CustomFieldsPutRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `CustomFields.RequestOptions`
+**requestOptions:** `CustomFieldsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1266,7 +1226,6 @@ await client.customFields.put("publicationId", "id", {
 <dd>
 
 Update a custom field on a publication
-
 </dd>
 </dl>
 </dd>
@@ -1282,10 +1241,10 @@ Update a custom field on a publication
 
 ```typescript
 await client.customFields.patch("publicationId", "id", {
-    display: "New Display",
+    display: "New Display"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1300,7 +1259,7 @@ await client.customFields.patch("publicationId", "id", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -1308,27 +1267,28 @@ await client.customFields.patch("publicationId", "id", {
 <dd>
 
 **id:** `string` — The ID of the Custom Fields object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.CustomFieldsPatchRequest`
-
+**request:** `Beehiiv.CustomFieldsPatchRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `CustomFields.RequestOptions`
+**requestOptions:** `CustomFieldsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1347,7 +1307,6 @@ await client.customFields.patch("publicationId", "id", {
 <dd>
 
 Delete a custom field from a publication
-
 </dd>
 </dl>
 </dd>
@@ -1363,8 +1322,8 @@ Delete a custom field from a publication
 
 ```typescript
 await client.customFields.delete("publicationId", "id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1379,7 +1338,7 @@ await client.customFields.delete("publicationId", "id");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -1387,26 +1346,26 @@ await client.customFields.delete("publicationId", "id");
 <dd>
 
 **id:** `string` — The ID of the Custom Fields object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `CustomFields.RequestOptions`
+**requestOptions:** `CustomFieldsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Email Blasts
-
 <details><summary><code>client.emailBlasts.<a href="/src/api/resources/emailBlasts/client/Client.ts">index</a>(publicationId, { ...params }) -> Beehiiv.EmailBlastsListResponse</code></summary>
 <dl>
 <dd>
@@ -1420,7 +1379,6 @@ await client.customFields.delete("publicationId", "id");
 <dd>
 
 Retrieve all email blasts belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -1436,8 +1394,8 @@ Retrieve all email blasts belonging to a specific publication
 
 ```typescript
 await client.emailBlasts.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1452,27 +1410,28 @@ await client.emailBlasts.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.EmailBlastsListRequest`
-
+**request:** `Beehiiv.EmailBlastsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `EmailBlasts.RequestOptions`
+**requestOptions:** `EmailBlastsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1491,7 +1450,6 @@ await client.emailBlasts.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve a single email blast belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -1507,8 +1465,8 @@ Retrieve a single email blast belonging to a specific publication
 
 ```typescript
 await client.emailBlasts.show("pub_00000000-0000-0000-0000-000000000000", "blast_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1523,7 +1481,7 @@ await client.emailBlasts.show("pub_00000000-0000-0000-0000-000000000000", "blast
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -1531,34 +1489,34 @@ await client.emailBlasts.show("pub_00000000-0000-0000-0000-000000000000", "blast
 <dd>
 
 **emailBlastId:** `Beehiiv.EmailBlastId` — The prefixed ID of the email blast object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.EmailBlastsGetRequest`
-
+**request:** `Beehiiv.EmailBlastsGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `EmailBlasts.RequestOptions`
+**requestOptions:** `EmailBlastsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Posts
-
 <details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.PostsCreateResponse</code></summary>
 <dl>
 <dd>
@@ -1593,135 +1551,89 @@ Create a post for a specific publication.
 await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
     title: "The Kitchen Sink Post (refactored version)",
     subtitle: "Contains lots of examples of each block type and the various settings you could use",
-    blocks: [
-        {
+    blocks: [{
             type: "heading",
             level: "2",
             textAlignment: "center",
             text: "This is my block!!!",
             anchorHeader: false,
-            anchorIncludeInToc: false,
-        },
-        {
+            anchorIncludeInToc: false
+        }, {
             type: "list",
             listType: "ordered",
-            items: ["a", "b", "c"],
-        },
-        {
+            items: ["a", "b", "c"]
+        }, {
             type: "list",
             listType: "ordered",
             items: ["d", "e", "f"],
-            startNumber: 4,
-        },
-        {
+            startNumber: 4
+        }, {
             type: "list",
             listType: "unordered",
             items: ["g", "h", "i"],
-            startNumber: 4,
-        },
-        {
+            startNumber: 4
+        }, {
             type: "table",
             headerRow: true,
             headerColumn: true,
-            rows: [
-                [
-                    {
-                        text: "A",
-                    },
-                    {
+            rows: [[{
+                        text: "A"
+                    }, {
                         text: "B",
-                        alignment: "center",
-                    },
-                    {
+                        alignment: "center"
+                    }, {
                         text: "C",
-                        alignment: "right",
-                    },
-                ],
-                [
-                    {
+                        alignment: "right"
+                    }], [{
                         text: "D",
-                        alignment: "right",
-                    },
-                    {
+                        alignment: "right"
+                    }, {
                         text: "E",
-                        alignment: "center",
-                    },
-                    {
+                        alignment: "center"
+                    }, {
                         text: "F",
-                        alignment: "left",
-                    },
-                ],
-            ],
-        },
-        {
+                        alignment: "left"
+                    }]]
+        }, {
             type: "table",
-            rows: [
-                [
-                    {
-                        text: "A",
-                    },
-                    {
-                        text: "B",
-                    },
-                    {
-                        text: "C",
-                    },
-                ],
-                [
-                    {
-                        text: "D",
-                    },
-                    {
-                        text: "E",
-                    },
-                    {
-                        text: "F",
-                    },
-                ],
-            ],
-        },
-        {
+            rows: [[{
+                        text: "A"
+                    }, {
+                        text: "B"
+                    }, {
+                        text: "C"
+                    }], [{
+                        text: "D"
+                    }, {
+                        text: "E"
+                    }, {
+                        text: "F"
+                    }]]
+        }, {
             type: "table",
             headerRow: false,
-            rows: [
-                [
-                    {
-                        text: "A",
-                    },
-                    {
-                        text: "B",
-                    },
-                    {
-                        text: "C",
-                    },
-                ],
-                [
-                    {
-                        text: "D",
-                    },
-                    {
-                        text: "E",
-                    },
-                    {
-                        text: "F",
-                    },
-                ],
-            ],
-        },
-        {
+            rows: [[{
+                        text: "A"
+                    }, {
+                        text: "B"
+                    }, {
+                        text: "C"
+                    }], [{
+                        text: "D"
+                    }, {
+                        text: "E"
+                    }, {
+                        text: "F"
+                    }]]
+        }, {
             type: "columns",
-            columns: [
-                {
-                    blocks: [
-                        {
+            columns: [{
+                    blocks: [{
                             type: "paragraph",
-                            plaintext: "Marble Column 1 {{email}}",
-                        },
-                    ],
-                },
-                {
-                    blocks: [
-                        {
+                            plaintext: "Marble Column 1 {{email}}"
+                        }]
+                }, {
+                    blocks: [{
                             type: "image",
                             imageUrl: "https://cdn.britannica.com/89/164789-050-D6B5E2C7/Barack-Obama-2012.jpg",
                             url: "https://www.whitehouse.gov/",
@@ -1730,17 +1642,13 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
                             caption: "One Cool President",
                             captionAlignment: "center",
                             imageAlignment: "right",
-                            width: 75,
-                        },
-                    ],
-                },
-            ],
-        },
-        {
+                            width: 75
+                        }]
+                }]
+        }, {
             type: "advertisement",
-            opportunity_id: "d8dfa6be-24b5-4cad-8350-ae44366dbd4c",
-        },
-        {
+            opportunity_id: "d8dfa6be-24b5-4cad-8350-ae44366dbd4c"
+        }, {
             type: "image",
             imageUrl: "https://cdn.britannica.com/89/164789-050-D6B5E2C7/Barack-Obama-2012.jpg",
             url: "https://www.whitehouse.gov/",
@@ -1749,63 +1657,52 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
             caption: "One Cool President",
             captionAlignment: "center",
             imageAlignment: "right",
-            width: 75,
-        },
-        {
+            width: 75
+        }, {
             type: "paragraph",
-            formattedText: [
-                {
-                    text: "This is going to be ",
-                },
-                {
+            formattedText: [{
+                    text: "This is going to be "
+                }, {
                     text: "a really, really awesome time ",
-                    styling: ["bold"],
-                },
-                {
+                    styling: ["bold"]
+                }, {
                     text: "Are you ready for this?",
-                    styling: ["italic", "bold"],
-                },
-            ],
-        },
-        {
+                    styling: ["italic", "bold"]
+                }]
+        }, {
             type: "button",
             href: "/subscribe",
             target: "_blank",
             alignment: "center",
             size: "large",
-            text: "Subscribe",
-        },
-        {
+            text: "Subscribe"
+        }, {
             type: "button",
             href: "/signup",
             target: "_blank",
             alignment: "right",
             size: "small",
-            text: "Sign Up",
-        },
-        {
+            text: "Sign Up"
+        }, {
             type: "button",
             href: "/",
             target: "_blank",
-            text: "View Posts",
-        },
-        {
+            text: "View Posts"
+        }, {
             type: "heading",
             level: "4",
             textAlignment: "right",
             text: "This is my block!!!",
             anchorHeader: true,
-            anchorIncludeInToc: true,
-        },
-    ],
+            anchorIncludeInToc: true
+        }],
     post_template_id: "post_template_00000000-0000-0000-0000-000000000000",
     scheduled_at: "2024-12-25T12:00:00Z",
     custom_link_tracking_enabled: true,
     email_capture_type_override: "none",
     override_scheduled_at: "2022-10-26T14:01:16Z",
     social_share: "comments_and_likes_only",
-    thumbnail_image_url:
-        "https://images.squarespace-cdn.com/content/v1/56e4ca0540261d39b90e4b18/1605047208324-PONGEYKEAKTMM1LANHJ5/1ED706BF-A70B-4F26-B3D5-266B449DDA8A_1_105_c.jpeg",
+    thumbnail_image_url: "https://images.squarespace-cdn.com/content/v1/56e4ca0540261d39b90e4b18/1605047208324-PONGEYKEAKTMM1LANHJ5/1ED706BF-A70B-4F26-B3D5-266B449DDA8A_1_105_c.jpeg",
     email_settings: {
         from_address: "from_address",
         custom_live_url: "https://beehiiv.com",
@@ -1815,12 +1712,12 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
         email_header_engagement_buttons: "email_header_engagement_buttons",
         email_header_social_share: "email_header_social_share",
         email_preview_text: "email_preview_text",
-        email_subject_line: "email_subject_line",
+        email_subject_line: "email_subject_line"
     },
     web_settings: {
         display_thumbnail_on_web: true,
         hide_from_feed: true,
-        slug: "and-this-is-gonna-rock",
+        slug: "and-this-is-gonna-rock"
     },
     seo_settings: {
         default_description: "default_description",
@@ -1828,22 +1725,22 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
         og_description: "OpenGraph description",
         og_title: "Opengraph Title",
         twitter_description: "Twitter Stuff",
-        twitter_title: "My Twitter Article",
+        twitter_title: "My Twitter Article"
     },
     content_tags: ["Obama", "Care", "Rocks", "Healthcare"],
     recipients: {
         web: {
-            tier_ids: ["premium"],
+            tier_ids: ["premium"]
         },
         email: {
             tier_ids: ["premium", "free"],
             include_segment_ids: ["seg_6426b403-39f5-42bd-86e9-9533fb0099e7"],
-            exclude_segment_ids: ["seg_e34b4085-aef6-449f-a699-7563f915f852"],
-        },
-    },
+            exclude_segment_ids: ["seg_e34b4085-aef6-449f-a699-7563f915f852"]
+        }
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1858,27 +1755,28 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostsCreateRequest`
-
+**request:** `Beehiiv.PostsCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Posts.RequestOptions`
+**requestOptions:** `PostsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1897,7 +1795,6 @@ await client.posts.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 Retrieve all posts belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -1913,8 +1810,8 @@ Retrieve all posts belonging to a specific publication
 
 ```typescript
 await client.posts.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1929,27 +1826,28 @@ await client.posts.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostsListRequest`
-
+**request:** `Beehiiv.PostsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Posts.RequestOptions`
+**requestOptions:** `PostsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1968,7 +1866,6 @@ await client.posts.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve aggregate stats for all posts
-
 </dd>
 </dl>
 </dd>
@@ -1984,8 +1881,8 @@ Retrieve aggregate stats for all posts
 
 ```typescript
 await client.posts.aggregateStats("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2000,33 +1897,34 @@ await client.posts.aggregateStats("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostsAggregateStatsRequest`
-
+**request:** `Beehiiv.PostsAggregateStatsRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Posts.RequestOptions`
+**requestOptions:** `PostsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">show</a>(postId, publicationId, { ...params }) -> Beehiiv.PostsGetResponse</code></summary>
+<details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">show</a>(publicationId, postId, { ...params }) -> Beehiiv.PostsGetResponse</code></summary>
 <dl>
 <dd>
 
@@ -2039,7 +1937,6 @@ await client.posts.aggregateStats("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retreive a single Post belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -2054,9 +1951,9 @@ Retreive a single Post belonging to a specific publication
 <dd>
 
 ```typescript
-await client.posts.show("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000");
-```
+await client.posts.show("pub_00000000-0000-0000-0000-000000000000", "post_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -2070,42 +1967,43 @@ await client.posts.show("post_00000000-0000-0000-0000-000000000000", "pub_000000
 <dl>
 <dd>
 
-**postId:** `Beehiiv.PostId` — The prefixed ID of the post object
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostsGetRequest`
-
+**postId:** `Beehiiv.PostId` — The prefixed ID of the post object
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Posts.RequestOptions`
+**request:** `Beehiiv.PostsGetRequest` 
+    
+</dd>
+</dl>
 
+<dl>
+<dd>
+
+**requestOptions:** `PostsClient.RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">delete</a>(postId, publicationId) -> Beehiiv.PostsDeleteResponse</code></summary>
+<details><summary><code>client.posts.<a href="/src/api/resources/posts/client/Client.ts">delete</a>(publicationId, postId) -> Beehiiv.PostsDeleteResponse</code></summary>
 <dl>
 <dd>
 
@@ -2117,8 +2015,7 @@ await client.posts.show("post_00000000-0000-0000-0000-000000000000", "pub_000000
 <dl>
 <dd>
 
-Delete or Archive a post. Any post that has been confirmed will have it's status changed to `archived`. Posts in the `draft` status will be permenantly deleted.
-
+Delete or Archive a post. Any post that has been confirmed will have it's status changed to `archived`. Posts in the `draft` status will be permanently deleted.
 </dd>
 </dl>
 </dd>
@@ -2133,9 +2030,9 @@ Delete or Archive a post. Any post that has been confirmed will have it's status
 <dd>
 
 ```typescript
-await client.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_00000000-0000-0000-0000-000000000000");
-```
+await client.posts.delete("pub_00000000-0000-0000-0000-000000000000", "post_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -2149,35 +2046,35 @@ await client.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_0000
 <dl>
 <dd>
 
-**postId:** `Beehiiv.PostId` — The prefixed ID of the post object
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Posts.RequestOptions`
+**postId:** `Beehiiv.PostId` — The prefixed ID of the post object
+    
+</dd>
+</dl>
 
+<dl>
+<dd>
+
+**requestOptions:** `PostsClient.RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
 ## Post Templates
-
 <details><summary><code>client.postTemplates.<a href="/src/api/resources/postTemplates/client/Client.ts">index</a>(publicationId, { ...params }) -> Beehiiv.PostTemplatesGetResponse</code></summary>
 <dl>
 <dd>
@@ -2191,7 +2088,6 @@ await client.posts.delete("post_00000000-0000-0000-0000-000000000000", "pub_0000
 <dd>
 
 Retrieve a list of post templates available for the publication.
-
 </dd>
 </dl>
 </dd>
@@ -2207,8 +2103,8 @@ Retrieve a list of post templates available for the publication.
 
 ```typescript
 await client.postTemplates.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2223,34 +2119,34 @@ await client.postTemplates.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostTemplatesGetRequest`
-
+**request:** `Beehiiv.PostTemplatesGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `PostTemplates.RequestOptions`
+**requestOptions:** `PostTemplatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Publications
-
 <details><summary><code>client.publications.<a href="/src/api/resources/publications/client/Client.ts">index</a>({ ...params }) -> Beehiiv.PublicationsListResponse</code></summary>
 <dl>
 <dd>
@@ -2264,7 +2160,6 @@ await client.postTemplates.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve all publications associated with your API key.
-
 </dd>
 </dl>
 </dd>
@@ -2280,8 +2175,8 @@ Retrieve all publications associated with your API key.
 
 ```typescript
 await client.publications.index();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2295,20 +2190,21 @@ await client.publications.index();
 <dl>
 <dd>
 
-**request:** `Beehiiv.PublicationsListRequest`
-
+**request:** `Beehiiv.PublicationsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Publications.RequestOptions`
+**requestOptions:** `PublicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2327,7 +2223,6 @@ await client.publications.index();
 <dd>
 
 Retrieve a single publication
-
 </dd>
 </dl>
 </dd>
@@ -2343,8 +2238,8 @@ Retrieve a single publication
 
 ```typescript
 await client.publications.show("pub_ad76629e-4a39-43ad-8055-0ee89dc6db15");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2359,34 +2254,34 @@ await client.publications.show("pub_ad76629e-4a39-43ad-8055-0ee89dc6db15");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PublicationsGetRequest`
-
+**request:** `Beehiiv.PublicationsGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Publications.RequestOptions`
+**requestOptions:** `PublicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Referral Program
-
 <details><summary><code>client.referralProgram.<a href="/src/api/resources/referralProgram/client/Client.ts">show</a>(publicationId, { ...params }) -> Beehiiv.ReferralProgramGetResponse</code></summary>
 <dl>
 <dd>
@@ -2400,7 +2295,6 @@ await client.publications.show("pub_ad76629e-4a39-43ad-8055-0ee89dc6db15");
 <dd>
 
 Retrieve details about the publication's referral program, including milestones and rewards.
-
 </dd>
 </dl>
 </dd>
@@ -2416,8 +2310,8 @@ Retrieve details about the publication's referral program, including milestones 
 
 ```typescript
 await client.referralProgram.show("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2432,34 +2326,34 @@ await client.referralProgram.show("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.ReferralProgramGetRequest`
-
+**request:** `Beehiiv.ReferralProgramGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `ReferralProgram.RequestOptions`
+**requestOptions:** `ReferralProgramClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Segments
-
 <details><summary><code>client.segments.<a href="/src/api/resources/segments/client/Client.ts">index</a>(publicationId, { ...params }) -> Beehiiv.SegmentsListResponse</code></summary>
 <dl>
 <dd>
@@ -2473,7 +2367,6 @@ await client.referralProgram.show("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve information about all segments belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -2489,8 +2382,8 @@ Retrieve information about all segments belonging to a specific publication
 
 ```typescript
 await client.segments.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2505,27 +2398,28 @@ await client.segments.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SegmentsListRequest`
-
+**request:** `Beehiiv.SegmentsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Segments.RequestOptions`
+**requestOptions:** `SegmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2544,7 +2438,6 @@ await client.segments.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve information about a specific segment belonging to a publication
-
 </dd>
 </dl>
 </dd>
@@ -2560,8 +2453,8 @@ Retrieve information about a specific segment belonging to a publication
 
 ```typescript
 await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2576,7 +2469,7 @@ await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_0000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -2584,27 +2477,28 @@ await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_0000
 <dd>
 
 **segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SegmentsShowRequest`
-
+**request:** `Beehiiv.SegmentsShowRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Segments.RequestOptions`
+**requestOptions:** `SegmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2623,7 +2517,6 @@ await client.segments.show("pub_00000000-0000-0000-0000-000000000000", "seg_0000
 <dd>
 
 Recalculates a specific segment belonging to a publication
-
 </dd>
 </dl>
 </dd>
@@ -2638,12 +2531,9 @@ Recalculates a specific segment belonging to a publication
 <dd>
 
 ```typescript
-await client.segments.recalculate(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.segments.recalculate("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -2658,7 +2548,7 @@ await client.segments.recalculate(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -2666,19 +2556,20 @@ await client.segments.recalculate(
 <dd>
 
 **segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Segments.RequestOptions`
+**requestOptions:** `SegmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2696,8 +2587,7 @@ await client.segments.recalculate(
 <dl>
 <dd>
 
-List all members in a segment with full subscription data. Each member is returned as a subscription object containing complete subscriber information and their subscription details. Supports optional expansions for stats, custom fields, tags, referrals, and premium tiers. <br><br> **Use this endpoint when you need detailed subscriber information.** If you only need subscriber IDs, use `/segments/{segmentId}/results` for a lighter-weight response.
-
+List all members in a segment with full subscription data. Each member is returned as a subscription  object containing complete subscriber information and their subscription details.  Supports optional expansions for stats, custom fields, tags, referrals, and premium tiers. <br><br> **Use this endpoint when you need detailed subscriber information.** If you only need subscriber IDs, use `/segments/{segmentId}/results` for a lighter-weight response.
 </dd>
 </dl>
 </dd>
@@ -2712,12 +2602,9 @@ List all members in a segment with full subscription data. Each member is return
 <dd>
 
 ```typescript
-await client.segments.listMembers(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.segments.listMembers("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -2732,7 +2619,7 @@ await client.segments.listMembers(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -2740,27 +2627,28 @@ await client.segments.listMembers(
 <dd>
 
 **segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SegmentMembersRequest`
-
+**request:** `Beehiiv.SegmentMembersRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Segments.RequestOptions`
+**requestOptions:** `SegmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2778,8 +2666,7 @@ await client.segments.listMembers(
 <dl>
 <dd>
 
-List subscriber IDs for a segment. Returns a lightweight array of subscription IDs only, without additional subscriber details. <br><br> **Use this endpoint when you only need subscriber IDs** (e.g., for counting, ID-based lookups, or integrations with external systems). If you need full subscriber details (email, status, custom fields, etc.), use `/segments/{segmentId}/members` instead.
-
+List subscriber IDs for a segment. Returns a lightweight array of subscription IDs only, without additional subscriber details. <br><br> **Use this endpoint when you only need subscriber IDs** (e.g., for counting, ID-based lookups, or  integrations with external systems). If you need full subscriber details (email, status, custom fields, etc.), use `/segments/{segmentId}/members` instead.
 </dd>
 </dl>
 </dd>
@@ -2794,12 +2681,9 @@ List subscriber IDs for a segment. Returns a lightweight array of subscription I
 <dd>
 
 ```typescript
-await client.segments.expandResults(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "seg_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.segments.expandResults("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -2814,7 +2698,7 @@ await client.segments.expandResults(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -2822,27 +2706,28 @@ await client.segments.expandResults(
 <dd>
 
 **segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SegmentsGetRequest`
-
+**request:** `Beehiiv.SegmentsGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Segments.RequestOptions`
+**requestOptions:** `SegmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2861,7 +2746,6 @@ await client.segments.expandResults(
 <dd>
 
 Delete a segment. Deleting the segment does not effect the subscriptions in the segment.
-
 </dd>
 </dl>
 </dd>
@@ -2877,8 +2761,8 @@ Delete a segment. Deleting the segment does not effect the subscriptions in the 
 
 ```typescript
 await client.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2893,7 +2777,7 @@ await client.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -2901,26 +2785,26 @@ await client.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00
 <dd>
 
 **segmentId:** `Beehiiv.SegmentId` — The prefixed ID of the segment object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Segments.RequestOptions`
+**requestOptions:** `SegmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Subscriptions
-
 <details><summary><code>client.subscriptions.<a href="/src/api/resources/subscriptions/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.SubscriptionResponse</code></summary>
 <dl>
 <dd>
@@ -2934,7 +2818,6 @@ await client.segments.delete("pub_00000000-0000-0000-0000-000000000000", "seg_00
 <dd>
 
 Create new subscriptions for a publication.
-
 </dd>
 </dl>
 </dd>
@@ -2957,20 +2840,17 @@ await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
     utm_medium: "organic",
     utm_campaign: "fall_2022_promotion",
     referring_site: "www.wayneenterprise.com/blog",
-    custom_fields: [
-        {
+    custom_fields: [{
             name: "First Name",
-            value: "Bruce",
-        },
-        {
+            value: "Bruce"
+        }, {
             name: "Last Name",
-            value: "Wayne",
-        },
-    ],
-    stripe_customer_id: "cus_12345abcde",
+            value: "Wayne"
+        }],
+    stripe_customer_id: "cus_12345abcde"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2985,27 +2865,28 @@ await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionRequest`
-
+**request:** `Beehiiv.SubscriptionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3026,7 +2907,6 @@ await client.subscriptions.create("pub_00000000-0000-0000-0000-000000000000", {
 Retrieve all subscriptions belonging to a specific publication.
 <Info> **New**: This endpoint now supports cursor-based pagination for better performance and consistency. Use the `cursor` parameter instead of `page` for new integrations. </Info>
 <Warning> **Deprecation Notice**: Offset-based pagination (using `page` parameter) is deprecated and limited to 100 pages maximum. Please migrate to cursor-based pagination. See our [Pagination Guide](/welcome/pagination) for details. </Warning>
-
 </dd>
 </dl>
 </dd>
@@ -3042,10 +2922,10 @@ Retrieve all subscriptions belonging to a specific publication.
 
 ```typescript
 await client.subscriptions.index("pub_00000000-0000-0000-0000-000000000000", {
-    limit: 10,
+    limit: 10
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3060,27 +2940,28 @@ await client.subscriptions.index("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsListRequest`
-
+**request:** `Beehiiv.SubscriptionsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3099,7 +2980,6 @@ await client.subscriptions.index("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 <Info>Please note that this endpoint requires the email to be URL encoded. Please reference your language's documentation for the correct method of encoding.</Info> Retrieve a single subscription belonging to a specific email address in a specific publication.
-
 </dd>
 </dl>
 </dd>
@@ -3115,8 +2995,8 @@ await client.subscriptions.index("pub_00000000-0000-0000-0000-000000000000", {
 
 ```typescript
 await client.subscriptions.getByEmail("pub_00000000-0000-0000-0000-000000000000", "work@example.com");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3131,7 +3011,7 @@ await client.subscriptions.getByEmail("pub_00000000-0000-0000-0000-000000000000"
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3139,27 +3019,28 @@ await client.subscriptions.getByEmail("pub_00000000-0000-0000-0000-000000000000"
 <dd>
 
 **email:** `string` — The ID of the subscriber object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsGetRequest`
-
+**request:** `Beehiiv.SubscriptionsGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3178,7 +3059,6 @@ await client.subscriptions.getByEmail("pub_00000000-0000-0000-0000-000000000000"
 <dd>
 
 <Info>In previous versions of the API, another endpoint existed to retrieve a subscription by the subscriber ID. This endpoint is now deprecated and will be removed in a future version of the API. Please use this endpoint instead. The subscription ID can be found by exporting a list of subscriptions either via the `Settings > Publications > Export Data` or by exporting a CSV in a segment.</Info> Retrieve a single subscription belonging to a specific publication.
-
 </dd>
 </dl>
 </dd>
@@ -3193,12 +3073,9 @@ await client.subscriptions.getByEmail("pub_00000000-0000-0000-0000-000000000000"
 <dd>
 
 ```typescript
-await client.subscriptions.getById(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "sub_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.subscriptions.getById("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -3213,7 +3090,7 @@ await client.subscriptions.getById(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3221,27 +3098,28 @@ await client.subscriptions.getById(
 <dd>
 
 **subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsGetByIdRequest`
-
+**request:** `Beehiiv.SubscriptionsGetByIdRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3260,7 +3138,6 @@ await client.subscriptions.getById(
 <dd>
 
 Retrieve a single subscription belonging to a specific publication via the subscriber ID.
-
 </dd>
 </dl>
 </dd>
@@ -3275,12 +3152,9 @@ Retrieve a single subscription belonging to a specific publication via the subsc
 <dd>
 
 ```typescript
-await client.subscriptions.getBySubscriberId(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "00000000-0000-0000-0000-000000000000",
-);
-```
+await client.subscriptions.getBySubscriberId("pub_00000000-0000-0000-0000-000000000000", "00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -3295,7 +3169,7 @@ await client.subscriptions.getBySubscriberId(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3303,27 +3177,28 @@ await client.subscriptions.getBySubscriberId(
 <dd>
 
 **subscriberId:** `string` — The ID of the subscriber object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsGetBySubscriberIdRequest`
-
+**request:** `Beehiiv.SubscriptionsGetBySubscriberIdRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3342,7 +3217,6 @@ await client.subscriptions.getBySubscriberId(
 <dd>
 
 Generate a JWT token that can be used to automatically log in subscribers via URL. This token is short lived and should be used immediately.
-
 </dd>
 </dl>
 </dd>
@@ -3357,12 +3231,9 @@ Generate a JWT token that can be used to automatically log in subscribers via UR
 <dd>
 
 ```typescript
-await client.subscriptions.getJwtToken(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "sub_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.subscriptions.getJwtToken("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -3377,7 +3248,7 @@ await client.subscriptions.getJwtToken(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3385,19 +3256,20 @@ await client.subscriptions.getJwtToken(
 <dd>
 
 **subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3416,7 +3288,6 @@ await client.subscriptions.getJwtToken(
 <dd>
 
 Update a single subscription.
-
 </dd>
 </dl>
 </dd>
@@ -3434,19 +3305,16 @@ Update a single subscription.
 await client.subscriptions.put("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000", {
     tier: "premium",
     stripe_customer_id: "cus_12345abcde",
-    custom_fields: [
-        {
+    custom_fields: [{
             name: "First Name",
-            value: "Bruce",
-        },
-        {
+            value: "Bruce"
+        }, {
             name: "Last Name",
-            value: "Wayne",
-        },
-    ],
+            value: "Wayne"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3461,7 +3329,7 @@ await client.subscriptions.put("pub_00000000-0000-0000-0000-000000000000", "sub_
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3469,27 +3337,28 @@ await client.subscriptions.put("pub_00000000-0000-0000-0000-000000000000", "sub_
 <dd>
 
 **subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsUpdateRequest`
-
+**request:** `Beehiiv.SubscriptionsUpdateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3508,7 +3377,6 @@ await client.subscriptions.put("pub_00000000-0000-0000-0000-000000000000", "sub_
 <dd>
 
 Update a single subscription.
-
 </dd>
 </dl>
 </dd>
@@ -3523,26 +3391,19 @@ Update a single subscription.
 <dd>
 
 ```typescript
-await client.subscriptions.patch(
-    "pub_00000000-0000-0000-0000-000000000000",
-    "sub_00000000-0000-0000-0000-000000000000",
-    {
-        tier: "premium",
-        stripe_customer_id: "cus_12345abcde",
-        custom_fields: [
-            {
-                name: "First Name",
-                value: "Bruce",
-            },
-            {
-                name: "Last Name",
-                value: "Wayne",
-            },
-        ],
-    },
-);
-```
+await client.subscriptions.patch("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000", {
+    tier: "premium",
+    stripe_customer_id: "cus_12345abcde",
+    custom_fields: [{
+            name: "First Name",
+            value: "Bruce"
+        }, {
+            name: "Last Name",
+            value: "Wayne"
+        }]
+});
 
+```
 </dd>
 </dl>
 </dd>
@@ -3557,7 +3418,7 @@ await client.subscriptions.patch(
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3565,27 +3426,28 @@ await client.subscriptions.patch(
 <dd>
 
 **subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsPatchSingleRequest`
-
+**request:** `Beehiiv.SubscriptionsPatchSingleRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3604,7 +3466,6 @@ await client.subscriptions.patch(
 <dd>
 
 Update a single subscription by email.
-
 </dd>
 </dl>
 </dd>
@@ -3622,19 +3483,16 @@ Update a single subscription by email.
 await client.subscriptions.updateByEmail("pub_00000000-0000-0000-0000-000000000000", "example@example.com", {
     tier: "premium",
     stripe_customer_id: "cus_12345abcde",
-    custom_fields: [
-        {
+    custom_fields: [{
             name: "First Name",
-            value: "Bruce",
-        },
-        {
+            value: "Bruce"
+        }, {
             name: "Last Name",
-            value: "Wayne",
-        },
-    ],
+            value: "Wayne"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3649,7 +3507,7 @@ await client.subscriptions.updateByEmail("pub_00000000-0000-0000-0000-0000000000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -3657,33 +3515,34 @@ await client.subscriptions.updateByEmail("pub_00000000-0000-0000-0000-0000000000
 <dd>
 
 **email:** `string` — The email of the subscription object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionsUpdateByEmailRequest`
-
+**request:** `Beehiiv.SubscriptionsUpdateByEmailRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.subscriptions.<a href="/src/api/resources/subscriptions/client/Client.ts">delete</a>(subscriptionId, publicationId) -> Beehiiv.SubscriptionDeleteResponse</code></summary>
+<details><summary><code>client.subscriptions.<a href="/src/api/resources/subscriptions/client/Client.ts">delete</a>(publicationId, subscriptionId) -> Beehiiv.SubscriptionDeleteResponse</code></summary>
 <dl>
 <dd>
 
@@ -3696,7 +3555,6 @@ await client.subscriptions.updateByEmail("pub_00000000-0000-0000-0000-0000000000
 <dd>
 
 <Warning>This cannot be undone. All data associated with the subscription will also be deleted. We recommend unsubscribing when possible instead of deleting.<br><br>If a premium subscription is deleted they will no longer be billed.</Warning> Deletes a subscription.
-
 </dd>
 </dl>
 </dd>
@@ -3711,12 +3569,9 @@ await client.subscriptions.updateByEmail("pub_00000000-0000-0000-0000-0000000000
 <dd>
 
 ```typescript
-await client.subscriptions.delete(
-    "sub_00000000-0000-0000-0000-000000000000",
-    "pub_00000000-0000-0000-0000-000000000000",
-);
-```
+await client.subscriptions.delete("pub_00000000-0000-0000-0000-000000000000", "sub_00000000-0000-0000-0000-000000000000");
 
+```
 </dd>
 </dl>
 </dd>
@@ -3730,35 +3585,35 @@ await client.subscriptions.delete(
 <dl>
 <dd>
 
-**subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Subscriptions.RequestOptions`
+**subscriptionId:** `Beehiiv.SubscriptionId` — The prefixed ID of the subscription object
+    
+</dd>
+</dl>
 
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
 ## Subscription Tags
-
 <details><summary><code>client.subscriptionTags.<a href="/src/api/resources/subscriptionTags/client/Client.ts">create</a>(publicationId, subscriptionId, { ...params }) -> Beehiiv.SubscriptionTagsCreateResponse</code></summary>
 <dl>
 <dd>
@@ -3772,7 +3627,6 @@ await client.subscriptions.delete(
 <dd>
 
 Adds tags to a subscription. If the tag does not exist on the publication, it will be created automatically.
-
 </dd>
 </dl>
 </dd>
@@ -3788,10 +3642,10 @@ Adds tags to a subscription. If the tag does not exist on the publication, it wi
 
 ```typescript
 await client.subscriptionTags.create("publicationId", "subscriptionId", {
-    tags: ["Premium", "Basic"],
+    tags: ["Premium", "Basic"]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3805,43 +3659,43 @@ await client.subscriptionTags.create("publicationId", "subscriptionId", {
 <dl>
 <dd>
 
-**publicationId:** `Beehiiv.PublicationId`
-
+**publicationId:** `Beehiiv.PublicationId` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**subscriptionId:** `Beehiiv.SubscriptionId`
-
+**subscriptionId:** `Beehiiv.SubscriptionId` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.SubscriptionTagsCreateRequest`
-
+**request:** `Beehiiv.SubscriptionTagsCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `SubscriptionTags.RequestOptions`
+**requestOptions:** `SubscriptionTagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Tiers
-
 <details><summary><code>client.tiers.<a href="/src/api/resources/tiers/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.TierResponse</code></summary>
 <dl>
 <dd>
@@ -3855,7 +3709,6 @@ await client.subscriptionTags.create("publicationId", "subscriptionId", {
 <dd>
 
 Create a new tier for a publication.
-
 </dd>
 </dl>
 </dd>
@@ -3873,20 +3726,18 @@ Create a new tier for a publication.
 await client.tiers.create("pub_00000000-0000-0000-0000-000000000000", {
     name: "Gold Tier",
     description: "Our premium tier with exclusive benefits",
-    prices_attributes: [
-        {
+    prices_attributes: [{
             currency: "usd",
             amount_cents: 500,
             enabled: true,
             interval: "month",
             interval_display: "Monthly",
             cta: "Subscribe Now",
-            features: ["Exclusive content", "Ad-free experience", "Priority support"],
-        },
-    ],
+            features: ["Exclusive content", "Ad-free experience", "Priority support"]
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3901,27 +3752,28 @@ await client.tiers.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostPublicationsPublicationIdTiersRequest`
-
+**request:** `Beehiiv.PostPublicationsPublicationIdTiersRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tiers.RequestOptions`
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3940,7 +3792,6 @@ await client.tiers.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 Retrieve all tiers belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -3956,8 +3807,8 @@ Retrieve all tiers belonging to a specific publication
 
 ```typescript
 await client.tiers.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3972,27 +3823,28 @@ await client.tiers.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.GetPublicationsPublicationIdTiersRequest`
-
+**request:** `Beehiiv.GetPublicationsPublicationIdTiersRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tiers.RequestOptions`
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4011,7 +3863,6 @@ await client.tiers.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve a single tier belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -4027,8 +3878,8 @@ Retrieve a single tier belonging to a specific publication
 
 ```typescript
 await client.tiers.show("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4043,7 +3894,7 @@ await client.tiers.show("pub_00000000-0000-0000-0000-000000000000", "tier_000000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4051,27 +3902,28 @@ await client.tiers.show("pub_00000000-0000-0000-0000-000000000000", "tier_000000
 <dd>
 
 **tierId:** `Beehiiv.TierId` — The prefixed ID of the tier object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.GetPublicationsPublicationIdTiersTierIdRequest`
-
+**request:** `Beehiiv.GetPublicationsPublicationIdTiersTierIdRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tiers.RequestOptions`
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4090,7 +3942,6 @@ await client.tiers.show("pub_00000000-0000-0000-0000-000000000000", "tier_000000
 <dd>
 
 Update an existing tier belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -4108,8 +3959,7 @@ Update an existing tier belonging to a specific publication
 await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000", {
     name: "Gold",
     description: "Our premium tier with exclusive benefits",
-    prices_attributes: [
-        {
+    prices_attributes: [{
             id: "price_00000000-0000-0000-0000-000000000000",
             currency: "usd",
             amount_cents: 500,
@@ -4117,12 +3967,11 @@ await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_0000000
             interval_display: "Monthly",
             cta: "Subscribe Now",
             features: ["Exclusive content"],
-            delete: true,
-        },
-    ],
+            "delete": true
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4137,7 +3986,7 @@ await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_0000000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4145,27 +3994,28 @@ await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_0000000
 <dd>
 
 **tierId:** `Beehiiv.TierId` — The prefixed ID of the tier object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.UpdatePutTierRequest`
-
+**request:** `Beehiiv.UpdatePutTierRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tiers.RequestOptions`
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4184,7 +4034,6 @@ await client.tiers.put("pub_00000000-0000-0000-0000-000000000000", "tier_0000000
 <dd>
 
 Update an existing tier belonging to a specific publication
-
 </dd>
 </dl>
 </dd>
@@ -4202,8 +4051,7 @@ Update an existing tier belonging to a specific publication
 await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000000-0000-0000-0000-000000000000", {
     name: "Gold",
     description: "Our premium tier with exclusive benefits",
-    prices_attributes: [
-        {
+    prices_attributes: [{
             id: "price_00000000-0000-0000-0000-000000000000",
             currency: "usd",
             amount_cents: 500,
@@ -4211,12 +4059,11 @@ await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000
             interval_display: "Monthly",
             cta: "Subscribe Now",
             features: ["Exclusive content"],
-            delete: true,
-        },
-    ],
+            "delete": true
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4231,7 +4078,7 @@ await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4239,34 +4086,34 @@ await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000
 <dd>
 
 **tierId:** `Beehiiv.TierId` — The prefixed ID of the tier object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.UpdatePatchTierRequest`
-
+**request:** `Beehiiv.UpdatePatchTierRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tiers.RequestOptions`
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Webhooks
-
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">create</a>(publicationId, { ...params }) -> Beehiiv.WebhookResponse</code></summary>
 <dl>
 <dd>
@@ -4280,7 +4127,6 @@ await client.tiers.patch("pub_00000000-0000-0000-0000-000000000000", "tier_00000
 <dd>
 
 Create a new webhook for a given publication.
-
 </dd>
 </dl>
 </dd>
@@ -4297,10 +4143,10 @@ Create a new webhook for a given publication.
 ```typescript
 await client.webhooks.create("pub_00000000-0000-0000-0000-000000000000", {
     url: "https://example.com/webhook",
-    event_types: ["post.sent"],
+    event_types: ["post.sent"]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4315,27 +4161,28 @@ await client.webhooks.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.PostWebhooksRequest`
-
+**request:** `Beehiiv.PostWebhooksRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions`
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4354,7 +4201,6 @@ await client.webhooks.create("pub_00000000-0000-0000-0000-000000000000", {
 <dd>
 
 Retrieve all webhooks belonging to a specific publication.
-
 </dd>
 </dl>
 </dd>
@@ -4370,8 +4216,8 @@ Retrieve all webhooks belonging to a specific publication.
 
 ```typescript
 await client.webhooks.index("pub_00000000-0000-0000-0000-000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4386,27 +4232,28 @@ await client.webhooks.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.GetWebhooksRequest`
-
+**request:** `Beehiiv.GetWebhooksRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions`
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4425,7 +4272,6 @@ await client.webhooks.index("pub_00000000-0000-0000-0000-000000000000");
 <dd>
 
 Retrieve a specific webhook belonging to a publication.
-
 </dd>
 </dl>
 </dd>
@@ -4441,8 +4287,8 @@ Retrieve a specific webhook belonging to a publication.
 
 ```typescript
 await client.webhooks.show("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4457,7 +4303,7 @@ await client.webhooks.show("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4465,19 +4311,20 @@ await client.webhooks.show("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 **endpointId:** `Beehiiv.EndpointId` — The prefixed ID of the webhook object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions`
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4496,7 +4343,6 @@ await client.webhooks.show("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 Update a webhook subscription for a publication.
-
 </dd>
 </dl>
 </dd>
@@ -4513,10 +4359,10 @@ Update a webhook subscription for a publication.
 ```typescript
 await client.webhooks.update("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000", {
     event_types: ["post.sent", "subscription.confirmed"],
-    description: "A webhook to receive new posts data and new subscription confirmations.",
+    description: "A webhook to receive new posts data and new subscription confirmations."
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4531,7 +4377,7 @@ await client.webhooks.update("pub_00000000-0000-0000-0000-000000000000", "ep_000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4539,27 +4385,28 @@ await client.webhooks.update("pub_00000000-0000-0000-0000-000000000000", "ep_000
 <dd>
 
 **endpointId:** `Beehiiv.EndpointId` — The prefixed ID of the webhook object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Beehiiv.UpdateWebhookRequest`
-
+**request:** `Beehiiv.UpdateWebhookRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions`
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4578,7 +4425,6 @@ await client.webhooks.update("pub_00000000-0000-0000-0000-000000000000", "ep_000
 <dd>
 
 Delete a webhook subscription from a publication.
-
 </dd>
 </dl>
 </dd>
@@ -4594,8 +4440,8 @@ Delete a webhook subscription from a publication.
 
 ```typescript
 await client.webhooks.delete("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4610,7 +4456,7 @@ await client.webhooks.delete("pub_00000000-0000-0000-0000-000000000000", "ep_000
 <dd>
 
 **publicationId:** `Beehiiv.PublicationId` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4618,19 +4464,20 @@ await client.webhooks.delete("pub_00000000-0000-0000-0000-000000000000", "ep_000
 <dd>
 
 **endpointId:** `Beehiiv.EndpointId` — The prefixed ID of the webhook object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions`
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -4649,7 +4496,6 @@ await client.webhooks.delete("pub_00000000-0000-0000-0000-000000000000", "ep_000
 <dd>
 
 Send test info to an already set up webhook endpoint.
-
 </dd>
 </dl>
 </dd>
@@ -4665,8 +4511,8 @@ Send test info to an already set up webhook endpoint.
 
 ```typescript
 await client.webhooks.test("pub_00000000-0000-0000-0000-000000000000", "ep_0000000000000000000000000000");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4681,7 +4527,7 @@ await client.webhooks.test("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 **publicationId:** `string` — The prefixed ID of the publication object
-
+    
 </dd>
 </dl>
 
@@ -4689,26 +4535,26 @@ await client.webhooks.test("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 **endpointId:** `Beehiiv.EndpointId` — The prefixed ID of the webhook object
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions`
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Workspaces
-
 <details><summary><code>client.workspaces.<a href="/src/api/resources/workspaces/client/Client.ts">identify</a>() -> Beehiiv.WorkspaceIdentifyResponse</code></summary>
 <dl>
 <dd>
@@ -4722,7 +4568,6 @@ await client.webhooks.test("pub_00000000-0000-0000-0000-000000000000", "ep_00000
 <dd>
 
 Retrieve information about the workspace the OAuth or API token is associated with.
-
 </dd>
 </dl>
 </dd>
@@ -4738,8 +4583,8 @@ Retrieve information about the workspace the OAuth or API token is associated wi
 
 ```typescript
 await client.workspaces.identify();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -4753,12 +4598,13 @@ await client.workspaces.identify();
 <dl>
 <dd>
 
-**requestOptions:** `Workspaces.RequestOptions`
+**requestOptions:** `WorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>

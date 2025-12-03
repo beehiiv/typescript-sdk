@@ -1,1 +1,1 @@
-export { type ReferralProgramGetRequest } from "./ReferralProgramGetRequest.js";
+export type { ReferralProgramGetRequest } from "./ReferralProgramGetRequest.js";

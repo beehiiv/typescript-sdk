@@ -1,1 +1,1 @@
-export { type SubscriptionTagsCreateRequest } from "./SubscriptionTagsCreateRequest.js";
+export type { SubscriptionTagsCreateRequest } from "./SubscriptionTagsCreateRequest.js";

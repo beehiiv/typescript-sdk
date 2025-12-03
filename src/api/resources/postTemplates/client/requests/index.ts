@@ -1,1 +1,1 @@
-export { type PostTemplatesGetRequest } from "./PostTemplatesGetRequest.js";
+export type { PostTemplatesGetRequest } from "./PostTemplatesGetRequest.js";

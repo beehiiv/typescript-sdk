@@ -1,1 +1,1 @@
-export { type BulkSubscriptionsCreateRequest } from "./BulkSubscriptionsCreateRequest.js";
+export type { BulkSubscriptionsCreateRequest } from "./BulkSubscriptionsCreateRequest.js";

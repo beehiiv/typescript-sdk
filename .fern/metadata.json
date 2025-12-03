@@ -1,0 +1,12 @@
+{
+    "cliVersion": "2.17.3",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.35.8",
+    "generatorConfig": {
+        "allowExtraFields": true,
+        "namespaceExport": "Beehiiv",
+        "allowCustomFetcher": true,
+        "skipResponseValidation": true,
+        "includeApiReference": true
+    }
+}

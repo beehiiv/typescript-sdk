@@ -50,8 +50,8 @@ export function normalizeClientOptions<T extends BaseClientOptions>(options: T):
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@beehiiv/sdk",
-            "X-Fern-SDK-Version": "0.1.8",
-            "User-Agent": "@beehiiv/sdk/0.1.8",
+            "X-Fern-SDK-Version": "0.1.9",
+            "User-Agent": "@beehiiv/sdk/0.1.9",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
